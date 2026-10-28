@@ -4,7 +4,8 @@
 
 class Jogador : public Personagem
 {
-private:
+protected:
+    int pontos;
 
 public:
     Jogador();

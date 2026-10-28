@@ -3,7 +3,8 @@
 
 class Personagem : public Entidade
 {
-private:
+protected:
+    int num_vidas;
 
 public:
     Personagem();
