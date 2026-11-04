@@ -1,4 +1,5 @@
-#include "Projetil.h"
+#include "Entidades.h"
+using namespace Entidades;
 
 Projetil::Projetil()
 {

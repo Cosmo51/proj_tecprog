@@ -1,4 +1,6 @@
-#include "Inimigo.h"
+#include "Personagens.h"
+
+using namespace Personagens;
 
 Inimigo::Inimigo(){
 

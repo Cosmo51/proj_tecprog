@@ -1,11 +1,13 @@
-#include "Personagem.h"
+#include "Personagens.h"
+
+using namespace Personagens;
 
 Personagem::Personagem()
 {
 
 }
 
-~Personagem::Personagem()
+Personagem::~Personagem()
 {
 
 }

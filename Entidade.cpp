@@ -1,4 +1,5 @@
-#include "Entidade.h"
+#include "Entidades.h"
+using namespace Entidades;
 
 Entidade::Entidade():
 body(sf::Vector2f(100.f, 100.f))
@@ -6,7 +7,7 @@ body(sf::Vector2f(100.f, 100.f))
 
 }
 
-virtual Entidade::~Entidade()
+Entidade::~Entidade()
 {
 
 }

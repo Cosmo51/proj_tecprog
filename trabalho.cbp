@@ -49,24 +49,21 @@
 		<Unit filename="Ente.cpp" />
 		<Unit filename="Ente.h" />
 		<Unit filename="Entidade.cpp" />
-		<Unit filename="Entidade.h" />
+		<Unit filename="Entidades.h" />
 		<Unit filename="Gerenciador_Colisoes.cpp" />
 		<Unit filename="Gerenciador_Grafico.cpp" />
 		<Unit filename="Gerenciadores.h" />
 		<Unit filename="Inimigo.cpp" />
-		<Unit filename="Inimigo.h" />
 		<Unit filename="Jogador.cpp" />
-		<Unit filename="Jogador.h" />
 		<Unit filename="Jogo.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Jogo.h" />
 		<Unit filename="Obstaculo.cpp" />
-		<Unit filename="Obstaculo.h" />
+		<Unit filename="Obstaculos.h" />
 		<Unit filename="Personagem.cpp" />
-		<Unit filename="Personagem.h" />
+		<Unit filename="Personagens.h" />
 		<Unit filename="Projetil.cpp" />
-		<Unit filename="Projetil.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

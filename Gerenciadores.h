@@ -2,10 +2,12 @@
 #include<SFML/Graphics.hpp>
 #include<vector>
 #include<List>
-#include "Inimigo.h"
 #include "Obstaculo.h"
-#include "Projetil.h"
-#include "Jogador.h"
+#include "Entidades.h"
+#include "Personagens.h"
+
+using namespace Entidades;
+using namespace Personagens;
 
 namespace Gerenciadores
 {
@@ -13,7 +15,7 @@ namespace Gerenciadores
 class Gerenciador_Grafico
 {
 private:
-    BiblioGrafica obj;
+// BiblioGrafica obj;
 
 public:
     Gerenciador_Grafico();
@@ -25,9 +27,9 @@ public:
 class Gerenciador_Colisoes
 {
 private:
-    vector<Inimigo*> LIs;
-    list<Obstaculo*> LOs;
-    set<Projetil*> LPs;
+//    vector<Inimigo*> LIs;
+//    list<Obstaculo*> LOs;
+//    set<Projetil*> LPs;
     Jogador* pJog1;
 
 public:

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1793148827 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\jogo.cpp
+1793735409 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\jogo.cpp
 	"Jogo.h"
 
 1793148827 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\jogo.h
@@ -545,4 +545,74 @@
 	<SFML/System/Export.hpp>
 	<string_view>
 	<cstdint>
+
+1793731626 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\ente.cpp
+	"Ente.h"
+
+1793731556 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\ente.h
+	<SFML/Graphics.hpp>
+
+1793738806 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\projetil.cpp
+	"Entidades.h"
+
+1793148827 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\projetil.h
+	<SFML/Graphics.hpp>
+	"Entidade.h"
+
+1793731647 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\entidade.h
+	<SFML/Graphics.hpp>
+	"Ente.h"
+
+1793738793 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\entidade.cpp
+	"Entidades.h"
+
+1793740045 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\jogador.cpp
+	"Personagens.h"
+
+1793151523 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\jogador.h
+	<SFML/Graphics.hpp>
+	"Personagem.h"
+
+1793739684 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\personagem.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
+
+1793740062 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\inimigo.cpp
+	"Personagens.h"
+
+1793731829 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\inimigo.h
+	<SFML/Graphics.hpp>
+	"Personagem.h"
+
+1793740063 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\personagem.cpp
+	"Personagens.h"
+
+1793152640 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\obstaculo.cpp
+	"Obstaculo.h"
+
+1793738859 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\obstaculo.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
+
+1793148827 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\gerenciador_colisoes.cpp
+	"Gerenciadores.h"
+
+1793740226 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\gerenciadores.h
+	<SFML/Graphics.hpp>
+	<vector>
+	<List>
+	"Obstaculo.h"
+	"Entidades.h"
+	"Personagens.h"
+
+1793732040 source:c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\gerenciador_grafico.cpp
+	"Gerenciadores.h"
+
+1793739660 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\entidades.h
+	<SFML/Graphics.hpp>
+	"Ente.h"
+
+1793739918 c:\codigos\sem_02\tec_prog\proj_tecprog\proj_tecprog-main\personagens.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
 

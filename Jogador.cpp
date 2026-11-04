@@ -1,4 +1,6 @@
-#include "Jogador.h"
+#include "Personagens.h"
+
+using namespace Personagens;
 
 Jogador::Jogador()
 {
