@@ -1,4 +1,6 @@
-#include "Obstaculo.h"
+#include "Obstaculos.h"
+
+using namespace Obstaculos;
 
 Obstaculo::Obstaculo(){
 

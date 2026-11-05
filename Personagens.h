@@ -43,4 +43,42 @@ namespace Personagens{
     //    virtual void danificar (Jogador* p) = 0;
         virtual void salvar() = 0;
     };
+
+    class Inim_Facil : public Inimigo{
+
+    private:
+        float raio;
+
+    public:
+        Inim_Facil();
+        ~Inim_Facil();
+
+        void danificar(Jogador* p);
+        void executar();
+
+    };
+
+    class Inim_Medio : public Inimigo{
+
+    private:
+        int tamanho;
+
+    public:
+        Inim_Medio();
+        ~Inim_Medio();
+        void salvar();
+
+    };
+
+    class Chefao : public Inimigo{
+
+    private:
+        short int forca;
+
+    public:
+        Chefao();
+        ~Chefao();
+        void executar();
+
+    };
 }

@@ -2,10 +2,11 @@
 #include<SFML/Graphics.hpp>
 #include<vector>
 #include<List>
-#include "Obstaculo.h"
+#include "Obstaculos.h"
 #include "Entidades.h"
 #include "Personagens.h"
 
+using namespace Obstaculos;
 using namespace Entidades;
 using namespace Personagens;
 
