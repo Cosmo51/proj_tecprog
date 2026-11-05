@@ -22,7 +22,7 @@ void Lista<TL>::Elemento<TE>::incluir(TE* p){
 
 template<class TL>
 template<class TE>
-Lista<TL>::Elemento<TE>::setProx(Elemento<TE>* pE){
+void Lista<TL>::Elemento<TE>::setProx(Elemento<TE>* pE){
 
 }
 

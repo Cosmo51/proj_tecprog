@@ -23,7 +23,7 @@ namespace Entidades{
         void salvarDataBuffer();
 
     public:
-        virtual void Executar() = 0;
+        virtual void executar() = 0;
         virtual void salvar() = 0;
 
         // parte do tutorial do SFML.

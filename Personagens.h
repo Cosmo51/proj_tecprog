@@ -6,24 +6,38 @@ using namespace Entidades;
 
 namespace Personagens{
 
-    class Personagem : public Entidade
-    {
+    class Personagem : public Entidade{
+
     protected:
         int num_vidas;
 
     public:
         Personagem();
         ~Personagem();
+
+        void salvarDataBuffer();
+        virtual void executar() = 0;
+        virtual void salvar() = 0;
+        virtual void mover() = 0;
+
     };
 
-    class Jogador : public Personagem
-    {
+    class Inimigo;
+
+    class Jogador : public Personagem{
+
     protected:
         int pontos;
 
     public:
         Jogador();
         ~Jogador();
+
+        colidir(Inimigo* pIn);
+        void executar();
+        void salvar();
+        void mover();
+
     };
 
     class Inimigo : public Personagem{
@@ -40,8 +54,9 @@ namespace Personagens{
         void salvarDataBuffer();
 
         virtual void executar() = 0;
-    //    virtual void danificar (Jogador* p) = 0;
+        virtual void danificar (Jogador* p) = 0;
         virtual void salvar() = 0;
+
     };
 
     class Inim_Facil : public Inimigo{

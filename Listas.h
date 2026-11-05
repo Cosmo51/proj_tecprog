@@ -6,7 +6,7 @@ using namespace Entidades;
 
 namespace Listas{
 
-template <class TL>
+template<class TL>
 class Lista{
 
     template<class TE>
@@ -21,7 +21,7 @@ class Lista{
             ~Elemento();
 
             void incluir(TE* p);
-            setProx(Elemento<TE>* pE);
+            void setProx(Elemento<TE>* pE);
             Elemento<TE>* getProximo() const;
     };
 
@@ -41,7 +41,7 @@ public:
 
 };
 
-class ListaEntidades : public Lista<Entidade>{
+class ListaEntidades{
 
 private:
     Lista<Entidade> LEs;
@@ -53,7 +53,5 @@ public:
     void incluir(Entidade* pE);
     void percorrer();
 };
-
-
 
 }

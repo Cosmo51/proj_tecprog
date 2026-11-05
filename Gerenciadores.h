@@ -1,7 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include<vector>
-#include<List>
+#include<list>
 #include "Obstaculos.h"
 #include "Entidades.h"
 #include "Personagens.h"

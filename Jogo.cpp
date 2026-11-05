@@ -5,7 +5,7 @@
 Jogo::Jogo():
 window(sf::VideoMode({400, 400}), "Jogo")
 {
-    Executar();
+    executar();
 }
 
 Jogo::~Jogo()
@@ -13,7 +13,7 @@ Jogo::~Jogo()
 
 }
 
-void Jogo::Executar()
+void Jogo::executar()
 {
     //sf::RenderWindow window(sf::VideoMode({200, 200}), "SFML works!");
     sf::CircleShape shape(100.f);

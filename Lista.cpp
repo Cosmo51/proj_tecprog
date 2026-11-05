@@ -22,5 +22,7 @@ void Lista<TL>::limpar(){
 
 }
 
+template class Lista<Entidade>;
+
 
 
