@@ -21,17 +21,17 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
 }
 
-Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
+void Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
 {
 
 }
 
-Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
+void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
 {
 
 }
 
-Gerenciador_Colisoes::incluirProjetil(Projetil* pj)
+void Gerenciador_Colisoes::incluirProjetil(Projetil* pj)
 {
 
 }

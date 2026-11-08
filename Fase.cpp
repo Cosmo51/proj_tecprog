@@ -14,11 +14,11 @@ void Fase::executar(){
 
 }
 
-Fase::criarInimFaceis(){
+void Fase::criarInimFaceis(){
 
 }
 
-Fase::criarPlataformas(){
+void Fase::criarPlataformas(){
 
 }
 

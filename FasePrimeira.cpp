@@ -10,10 +10,10 @@ FasePrimeira::~FasePrimeira(){
 
 }
 
-FasePrimeira::criarInimMedios(){
+void FasePrimeira::criarInimMedios(){
 
 }
 
-FasePrimeira::criarObstMedios(){
+void FasePrimeira::criarObstMedios(){
 
 }

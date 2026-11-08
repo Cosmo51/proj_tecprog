@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1793898690 c:\users\pedro\downloads\trabalho\personagens.h
+1794172643 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1192,7 +1192,7 @@
 1793898796 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
 	"Gerenciadores.h"
 
-1793898796 c:\users\pedro\downloads\trabalho\gerenciadores.h
+1794172708 c:\users\pedro\downloads\trabalho\gerenciadores.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<list>
@@ -1208,7 +1208,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\gerenciador_grafico.cpp
 	"Gerenciadores.h"
 
-1793890894 source:c:\users\pedro\downloads\trabalho\inim_facil.cpp
+1794172315 source:c:\users\pedro\downloads\trabalho\inim_facil.cpp
 	"Personagens.h"
 
 1793890894 source:c:\users\pedro\downloads\trabalho\inim_medio.cpp
@@ -1217,13 +1217,13 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1793898599 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794171288 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 
-1793898879 source:c:\users\pedro\downloads\trabalho\jogo.cpp
+1794172467 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
 
-1793898879 c:\users\pedro\downloads\trabalho\jogo.h
+1794172395 c:\users\pedro\downloads\trabalho\jogo.h
 	<SFML/Graphics.hpp>
 	"Personagens.h"
 	"Gerenciadores.h"
@@ -1384,5 +1384,13 @@
 	"Personagens.h"
 
 1794114264 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.cpp
+	"Jogo.h"
+
+1793899115 source:c:\users\pedro\downloads\trabalho\menu.cpp
+	"Menu.h"
+
+1793899067 c:\users\pedro\downloads\trabalho\menu.h
+	<SFML/Graphics.hpp>
+	"Ente.h"
 	"Jogo.h"
 

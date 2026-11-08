@@ -21,8 +21,8 @@ public:
     virtual void executar();
 
 protected:
-    criarInimFaceis();
-    criarPlataformas();
+    void criarInimFaceis();
+    void criarPlataformas();
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
     void criarCenario();
@@ -39,8 +39,8 @@ public:
     ~FasePrimeira();
 
 protected:
-    criarInimMedios();
-    criarObstMedios();
+    void criarInimMedios();
+    void criarObstMedios();
 
 };
 
@@ -54,8 +54,8 @@ public:
     ~FaseSegunda();
 
 protected:
-    criarChefoes();
-    criarObstMedios();
+    void criarChefoes();
+    void criarObstMedios();
     void criarProjeteis();
 
 };

@@ -10,11 +10,11 @@ FaseSegunda::~FaseSegunda(){
 
 }
 
-FaseSegunda::criarChefoes(){
+void FaseSegunda::criarChefoes(){
 
 }
 
-FaseSegunda::criarObstMedios(){
+void FaseSegunda::criarObstMedios(){
 
 }
 

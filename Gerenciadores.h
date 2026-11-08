@@ -21,8 +21,7 @@ private:
 public:
     Gerenciador_Grafico();
     ~Gerenciador_Grafico();
-    desenharEnte(Ente* pE); /* ele não colocou tipo para esse método, mas acredito
-                            que deve ser void, por enquanto deixei sem nada mesmo. */
+    void desenharEnte(Ente* pE);
 };
 
 class Gerenciador_Colisoes
@@ -38,9 +37,9 @@ public:
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
     void tratarColisoesJogsProjeteis();
-    incluirInimigo(Inimigo* pi); // novamente ele não colocou tipo.
-    incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.
-    incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.
+    void incluirInimigo(Inimigo* pi); // novamente ele não colocou tipo.
+    void incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.
+    void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.
     void executar();
 };
 

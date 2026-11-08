@@ -33,7 +33,7 @@ namespace Personagens{
         Jogador();
         ~Jogador();
 
-        colidir(Inimigo* pIn);
+        void colidir(Inimigo* pIn);
         void executar();
         void salvar();
         void mover();
@@ -70,7 +70,8 @@ namespace Personagens{
 
         void danificar(Jogador* p);
         void executar();
-
+        void salvar();
+        void mover();
     };
 
     class Inim_Medio : public Inimigo{

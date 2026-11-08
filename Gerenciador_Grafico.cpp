@@ -11,7 +11,7 @@ Gerenciador_Grafico::~Gerenciador_Grafico()
 
 }
 
-Gerenciador_Grafico::desenharEnte(Ente* pE)
+void Gerenciador_Grafico::desenharEnte(Ente* pE)
 {
 
 }
