@@ -11,7 +11,8 @@ class Jogo
 {
 private:
     sf::RenderWindow window;
-    sf::RectangleShape shape;
+    sf::RectangleShape shapeJogador;
+    sf::RectangleShape shapeInimigo;
     Jogador pJog1;
     Gerenciador_Grafico GG;
 

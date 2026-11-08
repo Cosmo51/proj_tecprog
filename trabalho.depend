@@ -1270,3 +1270,119 @@
 1793894660 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
 	"Fases.h"
 
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\chefao.cpp
+	"Personagens.h"
+
+1794114264 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\personagens.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
+
+1794113370 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\entidades.h
+	<SFML/Graphics.hpp>
+	"Ente.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\ente.h
+	<SFML/Graphics.hpp>
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\elemento.cpp
+	"Listas.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\listas.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\ente.cpp
+	"Ente.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\entidade.cpp
+	"Entidades.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\fase.cpp
+	"Fases.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\fases.h
+	<SFML/Graphics.hpp>
+	"Listas.h"
+	"Gerenciadores.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gerenciadores.h
+	<SFML/Graphics.hpp>
+	<vector>
+	<list>
+	"Obstaculos.h"
+	"Entidades.h"
+	"Personagens.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\obstaculos.h
+	<SFML/Graphics.hpp>
+	"Entidades.h"
+	"Personagens.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\faseprimeira.cpp
+	"Fases.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\fasesegunda.cpp
+	"Fases.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gerenciador_colisoes.cpp
+	"Gerenciadores.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gerenciador_grafico.cpp
+	"Gerenciadores.h"
+
+1794114264 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\inim_facil.cpp
+	"Personagens.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\inim_medio.cpp
+	"Personagens.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\inimigo.cpp
+	"Personagens.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\lista.cpp
+	"Listas.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\listaentidades.cpp
+	"Listas.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\main.cpp
+	<SFML/Graphics.hpp>
+	"Jogo.h"
+
+1794114264 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.h
+	<SFML/Graphics.hpp>
+	"Personagens.h"
+	"Gerenciadores.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\menu.cpp
+	"Menu.h"
+
+1794111945 c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\menu.h
+	<SFML/Graphics.hpp>
+	"Ente.h"
+	"Jogo.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\obst_dificil.cpp
+	"Obstaculos.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\obst_medio.cpp
+	"Obstaculos.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\obstaculo.cpp
+	"Obstaculos.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\personagem.cpp
+	"Personagens.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\plataforma.cpp
+	"Obstaculos.h"
+
+1794111945 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\projetil.cpp
+	"Entidades.h"
+
+1794113791 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogador.cpp
+	"Personagens.h"
+
+1794114264 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.cpp
+	"Jogo.h"
+
