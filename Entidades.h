@@ -11,7 +11,6 @@ namespace Entidades{
         int y;
         //ostream buffer; // não sei como isso funciona.
 
-        // parte do tutorial do SFML.
         sf::RectangleShape body;
         sf::RenderWindow* window;
 

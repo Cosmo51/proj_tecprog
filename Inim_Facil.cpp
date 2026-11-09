@@ -6,7 +6,7 @@ Inim_Facil::Inim_Facil(){
 
     body.setSize(sf::Vector2f(25.f, 100.f));
     body.setFillColor(sf::Color::Red);
-    body.setPosition(sf::Vector2f(355.f, 170.f));
+    body.setPosition(sf::Vector2f(355.f, 290.f));
 
 }
 
@@ -26,7 +26,7 @@ void Inim_Facil::salvar(){
 
 }
 
-void Inim_Facil::mover(){
+void Inim_Facil::mover(float deltaTime){
 
 }
 

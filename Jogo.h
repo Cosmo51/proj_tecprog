@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include "Personagens.h"
 #include "Gerenciadores.h"
+#include "Obstaculos.h"
 
 using namespace Personagens;
 using namespace Gerenciadores;
@@ -13,6 +14,8 @@ private:
     sf::RenderWindow window;
     Jogador pJog1;
     Inim_Facil inimFacil;
+    Plataforma plat1;
+    Plataforma plat2;
     Gerenciador_Grafico GG;
 
 public:

@@ -4,97 +4,108 @@
 using namespace Entidades;
 
 
-namespace Personagens{
+namespace Personagens
+{
 
-    class Personagem : public Entidade{
+class Personagem : public Entidade
+{
 
-    protected:
-        int num_vidas;
+protected:
+    int num_vidas;
 
-    public:
-        Personagem();
-        ~Personagem();
+public:
+    Personagem();
+    ~Personagem();
 
-        void salvarDataBuffer();
-        virtual void executar() = 0;
-        virtual void salvar() = 0;
-        virtual void mover() = 0;
+    void salvarDataBuffer();
+    virtual void executar() = 0;
+    virtual void salvar() = 0;
+    virtual void mover(float deltaTime) = 0;//deltaTime para a logica da gravidade a ser implementada
 
-    };
+};
 
-    class Inimigo;
+class Inimigo;
 
-    class Jogador : public Personagem{
+class Jogador : public Personagem
+{
 
-    protected:
-        int pontos;
+private:
 
-    public:
-        Jogador();
-        ~Jogador();
+    float velocidadeY;//implementacao da gravidade
 
-        void colidir(Inimigo* pIn);
-        void executar();
-        void salvar();
-        void mover();
+protected:
+    int pontos;
 
-    };
+public:
+    Jogador();
+    ~Jogador();
 
-    class Inimigo : public Personagem{
+    void colidir(Inimigo* pIn);
+    void executar();
+    void salvar();
+    void mover(float deltaTime);
 
-    protected:
+};
 
-        int nivel_maldade;
+class Inimigo : public Personagem
+{
 
-    public:
+protected:
 
-        Inimigo();
-        ~Inimigo();
+    int nivel_maldade;
 
-        void salvarDataBuffer();
+public:
 
-        virtual void executar() = 0;
-        virtual void danificar (Jogador* p) = 0;
-        virtual void salvar() = 0;
+    Inimigo();
+    ~Inimigo();
 
-    };
+    void salvarDataBuffer();
 
-    class Inim_Facil : public Inimigo{
+    virtual void executar() = 0;
+    virtual void danificar (Jogador* p) = 0;
+    virtual void salvar() = 0;
 
-    private:
-        float raio;
+};
 
-    public:
-        Inim_Facil();
-        ~Inim_Facil();
+class Inim_Facil : public Inimigo
+{
 
-        void danificar(Jogador* p);
-        void executar();
-        void salvar();
-        void mover();
-    };
+private:
+    float raio;
 
-    class Inim_Medio : public Inimigo{
+public:
+    Inim_Facil();
+    ~Inim_Facil();
 
-    private:
-        int tamanho;
+    void danificar(Jogador* p);
+    void executar();
+    void salvar();
+    void mover(float deltaTime);
+};
 
-    public:
-        Inim_Medio();
-        ~Inim_Medio();
-        void salvar();
+class Inim_Medio : public Inimigo
+{
 
-    };
+private:
+    int tamanho;
 
-    class Chefao : public Inimigo{
+public:
+    Inim_Medio();
+    ~Inim_Medio();
+    void salvar();
 
-    private:
-        short int forca;
+};
 
-    public:
-        Chefao();
-        ~Chefao();
-        void executar();
+class Chefao : public Inimigo
+{
 
-    };
+private:
+    short int forca;
+
+public:
+    Chefao();
+    ~Chefao();
+    void executar();
+
+};
 }

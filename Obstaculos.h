@@ -32,10 +32,11 @@ namespace Obstaculos
         int altura;
 
     public:
-        Plataforma();
+        Plataforma(float x, float y, float largura, float altura);
         ~Plataforma();
 
         void executar();
+        void salvar();
         void obstaculizar(Jogador* p);
 
     };
