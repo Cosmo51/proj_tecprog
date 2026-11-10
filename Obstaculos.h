@@ -8,7 +8,7 @@ using namespace Personagens;
 
 namespace Obstaculos
 {
-    class Obstaculo:public Entidade
+    class Obstaculo : public Entidade
     {
 
     protected:
@@ -67,6 +67,19 @@ namespace Obstaculos
 
     void executar();
     void obstaculizar(Jogador* p);
+
+    };
+
+    class LimitesGeograficos : public Entidade{
+
+    public:
+        LimitesGeograficos();
+        ~LimitesGeograficos();
+
+        void executar();
+        void salvar();
+        void direita();
+        void esquerda();
 
     };
 }

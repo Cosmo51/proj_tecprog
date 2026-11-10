@@ -92,8 +92,10 @@ private:
 public:
     Inim_Medio();
     ~Inim_Medio();
+    void danificar(Jogador* p);
+    void executar();
     void salvar();
-
+    void mover(float deltaTime);
 };
 
 class Chefao : public Inimigo

@@ -67,6 +67,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Jogo.h" />
+		<Unit filename="LimitesGeograficos.cpp" />
 		<Unit filename="Lista.cpp" />
 		<Unit filename="ListaEntidades.cpp" />
 		<Unit filename="Listas.h" />

@@ -14,9 +14,12 @@ private:
     sf::RenderWindow window;
     Jogador pJog1;
     Inim_Facil inimFacil;
+    Inim_Medio inimMedio;
     Plataforma plat1;
     Plataforma plat2;
     Gerenciador_Grafico GG;
+    LimitesGeograficos limitedireita;
+    LimitesGeograficos limiteesquerda;
 
 public:
     Jogo();
