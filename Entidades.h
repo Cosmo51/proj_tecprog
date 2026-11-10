@@ -11,8 +11,7 @@ namespace Entidades{
         int y;
         //ostream buffer; // não sei como isso funciona.
 
-        sf::RectangleShape body;
-        sf::RenderWindow* window;
+
 
     public:
         Entidade();
@@ -25,9 +24,6 @@ namespace Entidades{
         virtual void executar() = 0;
         virtual void salvar() = 0;
 
-        // parte do tutorial do SFML.
-        void setWindow(sf::RenderWindow* window);
-        void draw();
     };
 
     class Projetil : public Entidade

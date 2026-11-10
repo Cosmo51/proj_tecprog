@@ -2,7 +2,9 @@
 
 using namespace Personagens;
 
-Jogador::Jogador(): velocidadeY(0.f){
+Jogador::Jogador(){
+
+    inicializa();
 
     body.setSize(sf::Vector2f(25.f, 100.f));
     body.setFillColor(sf::Color::Blue);
@@ -13,6 +15,8 @@ Jogador::Jogador(): velocidadeY(0.f){
 Jogador::~Jogador(){
 
 }
+
+
 
 void Jogador::colidir(Inimigo* pIn){
 
@@ -28,17 +32,25 @@ void Jogador::salvar(){
 
 }
 
-void Jogador::mover(float deltaTime){
+void Jogador::inicializa(){
+    vel = 0.5;
+}
 
-    float velocidade = 0.05f;
+const sf::RectangleShape Jogador::getBody(){
+    return body;
+}
+
+
+
+void Jogador::mover(){
+
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
-        body.move(sf::Vector2(-velocidade, 0.f));
+        body.move(sf::Vector2(-vel, 0.f));
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
-        body.move(sf::Vector2(velocidade, 0.f));
+        body.move(sf::Vector2(vel, 0.f));
     }
 
-    //body.move(sf::Vector2(0.f, velocidadeY * deltaTime));//inicio da logica de gravidade a ser implementada
 }

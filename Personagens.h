@@ -20,7 +20,7 @@ public:
     void salvarDataBuffer();
     virtual void executar() = 0;
     virtual void salvar() = 0;
-    virtual void mover(float deltaTime) = 0;//deltaTime para a logica da gravidade a ser implementada
+    virtual void mover() = 0;//deltaTime para a logica da gravidade a ser implementada
 
 };
 
@@ -31,7 +31,8 @@ class Jogador : public Personagem
 
 private:
 
-    float velocidadeY;//implementacao da gravidade
+    float vel;
+    void inicializa();
 
 protected:
     int pontos;
@@ -43,7 +44,8 @@ public:
     void colidir(Inimigo* pIn);
     void executar();
     void salvar();
-    void mover(float deltaTime);
+    const sf::RectangleShape getBody();
+    void mover();
 
 };
 
@@ -80,7 +82,7 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
-    void mover(float deltaTime);
+    void mover();
 };
 
 class Inim_Medio : public Inimigo
@@ -95,7 +97,7 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
-    void mover(float deltaTime);
+    void mover();
 };
 
 class Chefao : public Inimigo

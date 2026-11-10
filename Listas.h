@@ -51,6 +51,8 @@ public:
     ~ListaEntidades();
 
     void incluir(Entidade* pE);
+    void removerEntidade(Entidade* entidade);
+    void removerEntidade(int pos);
     void percorrer();
 };
 

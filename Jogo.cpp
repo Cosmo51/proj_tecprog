@@ -39,15 +39,16 @@ void Jogo::executar()
 
         window.clear();
 
-        pJog1.mover(0);
 
-        plat1.draw();
-        plat2.draw();
-        pJog1.draw();
-        inimFacil.draw();
-        inimMedio.draw();
-        limitedireita.draw();
-        limiteesquerda.draw();
+        pJog1.mover();
+
+        plat1.desenhar();
+        plat2.desenhar();
+        pJog1.desenhar();
+        inimFacil.desenhar();
+        inimMedio.desenhar();
+        limitedireita.desenhar();
+        limiteesquerda.desenhar();
         window.display();
     }
 }

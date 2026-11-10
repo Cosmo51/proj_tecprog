@@ -26,6 +26,6 @@ void Inim_Medio::executar(){
 
 }
 
-void Inim_Medio::mover(float deltaTime){
+void Inim_Medio::mover(){
 
 }

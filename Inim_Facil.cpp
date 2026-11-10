@@ -26,7 +26,7 @@ void Inim_Facil::salvar(){
 
 }
 
-void Inim_Facil::mover(float deltaTime){
+void Inim_Facil::mover(){
 
 }
 
