@@ -17,8 +17,8 @@ public:
     virtual void executar() = 0;
     void desenhar();
     void setWindow(sf::RenderWindow* window);
-
-
+    const sf::RectangleShape& getBody() const;
+    void setPosicao(float x, float y);
 
 //    static void setGG(Gerenciador_Grafico* pG);
 };

@@ -18,6 +18,7 @@ private:
     Plataforma plat1;
     Plataforma plat2;
     Gerenciador_Grafico GG;
+    Gerenciador_Colisoes GC;
     LimitesGeograficos limitedireita;
     LimitesGeograficos limiteesquerda;
 

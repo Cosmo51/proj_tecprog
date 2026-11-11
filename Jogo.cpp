@@ -1,15 +1,15 @@
 #include "Jogo.h"
-
-
+#include <iostream>
 
 Jogo::Jogo():
-window(sf::VideoMode({400, 400}), "Jogo"),
-plat1(0, 390, 400, 10),
-plat2(120, 250, 50, 10)//(x, y[partindo de cima], largura, altura)
+window(sf::VideoMode({400, 400}), "Jogo")
 {
+    window.setFramerateLimit(240);
     pJog1.setWindow(&window);
     inimFacil.setWindow(&window);
     inimMedio.setWindow(&window);
+    plat1.configurar(0.f, 390.f, 400.f, 10.f);
+    plat2.configurar(120.f, 250.f, 50.f, 10.f);
     plat1.setWindow(&window);
     plat2.setWindow(&window);
     limitedireita.direita();
@@ -39,6 +39,15 @@ void Jogo::executar()
 
         window.clear();
 
+        if (GC.verificarColisao(&pJog1, &plat1))
+        {
+            plat1.obstaculizar(&pJog1);
+        }
+
+        if (GC.verificarColisao(&pJog1, &plat2))
+        {
+            plat2.obstaculizar(&pJog1);
+        }
 
         pJog1.mover();
 

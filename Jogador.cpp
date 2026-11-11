@@ -32,25 +32,52 @@ void Jogador::salvar(){
 
 }
 
-void Jogador::inicializa(){
-    vel = 0.5;
+void Jogador::inicializa()
+{
+    velX = 0.5f;
+    velY = 0.f;
+    noChao = false;
 }
-
-const sf::RectangleShape Jogador::getBody(){
-    return body;
-}
-
-
 
 void Jogador::mover(){
 
+    float gravidade = 0.002f;
+
+    velY += gravidade;
+
+    body.move(sf::Vector2f(0.f, velY));
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
-        body.move(sf::Vector2(-vel, 0.f));
+        body.move(sf::Vector2(-velX, 0.f));
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
-        body.move(sf::Vector2(vel, 0.f));
+        body.move(sf::Vector2(velX, 0.f));
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+    {
+        pular();
+    }
+
+}
+
+void Jogador::pararQueda()
+{
+    velY = 0.f;
+    noChao = true;
+}
+
+float Jogador::getVelY() const
+{
+    return velY;
+}
+
+void Jogador::pular()
+{
+    if(noChao)
+    {
+        velY = -1.2f;
+        noChao = false;
+    }
 }

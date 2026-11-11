@@ -15,7 +15,7 @@ protected:
 
 public:
     Personagem();
-    ~Personagem();
+    virtual ~Personagem();
 
     void salvarDataBuffer();
     virtual void executar() = 0;
@@ -30,8 +30,9 @@ class Jogador : public Personagem
 {
 
 private:
-
-    float vel;
+    float velX;
+    float velY;
+    bool noChao;
     void inicializa();
 
 protected:
@@ -44,8 +45,10 @@ public:
     void colidir(Inimigo* pIn);
     void executar();
     void salvar();
-    const sf::RectangleShape getBody();
     void mover();
+    void pararQueda();
+    float getVelY() const;
+    void pular();
 
 };
 
@@ -59,7 +62,7 @@ protected:
 public:
 
     Inimigo();
-    ~Inimigo();
+    virtual ~Inimigo();
 
     void salvarDataBuffer();
 

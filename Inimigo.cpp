@@ -2,7 +2,8 @@
 
 using namespace Personagens;
 
-Inimigo::Inimigo(){
+Inimigo::Inimigo():nivel_maldade(0)
+{
 
 }
 

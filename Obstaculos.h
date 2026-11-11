@@ -27,18 +27,17 @@ namespace Obstaculos
 
     class Plataforma : public Obstaculo
     {
-
     private:
         int altura;
 
     public:
-        Plataforma(float x, float y, float largura, float altura);
+        Plataforma();
         ~Plataforma();
 
         void executar();
         void salvar();
         void obstaculizar(Jogador* p);
-
+        void configurar(float x, float y, float largura, float altura);
     };
 
     class Obst_Dificil : public Obstaculo{
