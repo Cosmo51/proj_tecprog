@@ -2,15 +2,15 @@
 
 using namespace Personagens;
 
-Chefao::Chefao(){
+Gato::Gato(){
 
 }
 
-Chefao::~Chefao(){
+Gato::~Gato(){
 
 }
 
-void Chefao::executar(){
+void Gato::executar(){
 
 }
 

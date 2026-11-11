@@ -41,12 +41,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="C:/Users/pedro/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/include" />
+			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/Users/pedro/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
+			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
 		</Linker>
-		<Unit filename="Chefao.cpp" />
+		<Unit filename="Aranha.cpp" />
 		<Unit filename="Elemento.cpp" />
 		<Unit filename="Ente.cpp" />
 		<Unit filename="Ente.h" />
@@ -56,11 +56,11 @@
 		<Unit filename="FasePrimeira.cpp" />
 		<Unit filename="FaseSegunda.cpp" />
 		<Unit filename="Fases.h" />
+		<Unit filename="Galinha.cpp" />
+		<Unit filename="Gato.cpp" />
 		<Unit filename="Gerenciador_Colisoes.cpp" />
 		<Unit filename="Gerenciador_Grafico.cpp" />
 		<Unit filename="Gerenciadores.h" />
-		<Unit filename="Inim_Facil.cpp" />
-		<Unit filename="Inim_Medio.cpp" />
 		<Unit filename="Inimigo.cpp" />
 		<Unit filename="Jogador.cpp" />
 		<Unit filename="Jogo.cpp">

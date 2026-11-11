@@ -2,7 +2,7 @@
 
 using namespace Personagens;
 
-Inim_Medio::Inim_Medio(){
+Galinha::Galinha(){
 
     body.setSize(sf::Vector2f(25.f, 100.f));
     body.setFillColor(sf::Color::Yellow);
@@ -10,22 +10,22 @@ Inim_Medio::Inim_Medio(){
 
 }
 
-Inim_Medio::~Inim_Medio(){
+Galinha::~Galinha(){
 
 }
 
-void Inim_Medio::salvar(){
+void Galinha::salvar(){
 
 }
 
-void Inim_Medio::danificar(Jogador* p){
+void Galinha::danificar(Jogador* p){
 
 }
 
-void Inim_Medio::executar(){
+void Galinha::executar(){
 
 }
 
-void Inim_Medio::mover(){
+void Galinha::mover(){
 
 }

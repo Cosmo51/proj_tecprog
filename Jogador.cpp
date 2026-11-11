@@ -41,7 +41,7 @@ void Jogador::inicializa()
 
 void Jogador::mover(){
 
-    float gravidade = 0.002f;
+    float gravidade = 0.01f;
 
     velY += gravidade;
 
@@ -77,7 +77,7 @@ void Jogador::pular()
 {
     if(noChao)
     {
-        velY = -1.2f;
+        velY = -1.8f;
         noChao = false;
     }
 }

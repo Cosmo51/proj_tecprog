@@ -2,7 +2,7 @@
 
 using namespace Personagens;
 
-Inim_Facil::Inim_Facil(){
+Aranha::Aranha(){
 
     body.setSize(sf::Vector2f(25.f, 100.f));
     body.setFillColor(sf::Color::Red);
@@ -10,23 +10,23 @@ Inim_Facil::Inim_Facil(){
 
 }
 
-Inim_Facil::~Inim_Facil(){
+Aranha::~Aranha(){
 
 }
 
-void Inim_Facil::danificar(Jogador* p){
+void Aranha::danificar(Jogador* p){
 
 }
 
-void Inim_Facil::executar(){
+void Aranha::executar(){
 
 }
 
-void Inim_Facil::salvar(){
+void Aranha::salvar(){
 
 }
 
-void Inim_Facil::mover(){
+void Aranha::mover(){
 
 }
 

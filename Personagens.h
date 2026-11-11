@@ -72,15 +72,15 @@ public:
 
 };
 
-class Inim_Facil : public Inimigo
+class Aranha : public Inimigo
 {
 
 private:
     float raio;
 
 public:
-    Inim_Facil();
-    ~Inim_Facil();
+    Aranha();
+    ~Aranha();
 
     void danificar(Jogador* p);
     void executar();
@@ -88,30 +88,30 @@ public:
     void mover();
 };
 
-class Inim_Medio : public Inimigo
+class Galinha : public Inimigo
 {
 
 private:
     int tamanho;
 
 public:
-    Inim_Medio();
-    ~Inim_Medio();
+    Galinha();
+    ~Galinha();
     void danificar(Jogador* p);
     void executar();
     void salvar();
     void mover();
 };
 
-class Chefao : public Inimigo
+class Gato : public Inimigo
 {
 
 private:
     short int forca;
 
 public:
-    Chefao();
-    ~Chefao();
+    Gato();
+    ~Gato();
     void executar();
 
 };
