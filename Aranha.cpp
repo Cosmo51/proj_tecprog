@@ -33,7 +33,7 @@ void Aranha::mover(){
     float gravidade = 0.01f;
 
     velocidadeY += gravidade;
-    //body.move(sf::Vector2f(0.f, velocidadeY));
+    body.move(sf::Vector2f(0.f, velocidadeY));
     body.move(sf::Vector2f(velocidadeX, 0.f));
 
     if(body.getPosition().x <= 200.f){
@@ -47,4 +47,17 @@ void Aranha::mover(){
 
 
 }
+
+void Aranha::pararQueda(){
+
+    velocidadeY = 0.f;
+
+}
+
+
+float Aranha::getVelocidadeY() const
+{
+    return velocidadeY;
+}
+
 

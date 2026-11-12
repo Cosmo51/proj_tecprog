@@ -88,6 +88,8 @@ public:
     void executar();
     void salvar();
     void mover();
+    void pararQueda();
+    float getVelocidadeY() const;
 };
 
 class Galinha : public Inimigo

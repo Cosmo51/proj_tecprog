@@ -1,24 +1,28 @@
+
 #pragma once
-#include<SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "Listas.h"
 #include "Gerenciadores.h"
 
 using namespace Listas;
 using namespace Gerenciadores;
 
-namespace Fases{
+namespace Fases
+{
 
-class Fase : public Ente{
-
+class Fase : public Ente
+{
 protected:
     ListaEntidades lista_ents;
     Gerenciador_Colisoes GC;
+    Jogador* pJogador;
 
 public:
     Fase();
     ~Fase();
 
     virtual void executar();
+    void setJogador(Jogador* pJ);
 
 protected:
     void criarInimFaceis();
@@ -26,26 +30,36 @@ protected:
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
     void criarCenario();
-
 };
 
-class FasePrimeira : public Fase{
-
+class FasePrimeira : public Fase
+{
 private:
-    //const int maxInimMedios;
+    Aranha aranha;
+    Galinha galinha;
+
+    Plataforma plat1;
+    Plataforma plat2;
+
+    LimitesGeograficos limitedireita;
+    LimitesGeograficos limiteesquerda;
 
 public:
     FasePrimeira();
     ~FasePrimeira();
 
+    void executar();
+
 protected:
     void criarInimMedios();
     void criarObstMedios();
 
+    void criarInimgos();
+    void criarObstaculo();
 };
 
-class FaseSegunda : public Fase{
-
+class FaseSegunda : public Fase
+{
 private:
     //const int maxChefoes;
 
@@ -57,7 +71,7 @@ protected:
     void criarChefoes();
     void criarObstMedios();
     void criarProjeteis();
-
 };
 
 }
+

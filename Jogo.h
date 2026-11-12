@@ -1,29 +1,22 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Personagens.h"
-#include "Gerenciadores.h"
-#include "Obstaculos.h"
+#include "Fases.h"
 
 using namespace Personagens;
-using namespace Gerenciadores;
+using namespace Fases;
 
-//Segui o tutorial do SFML.
 class Jogo
 {
 private:
     sf::RenderWindow window;
+
     Jogador pJog1;
-    Aranha Aranha;
-    Galinha Galinha;
-    Plataforma plat1;
-    Plataforma plat2;
-    Gerenciador_Grafico GG;
-    Gerenciador_Colisoes GC;
-    LimitesGeograficos limitedireita;
-    LimitesGeograficos limiteesquerda;
+    FasePrimeira fase1;
 
 public:
     Jogo();
     ~Jogo();
     void executar();
 };
+

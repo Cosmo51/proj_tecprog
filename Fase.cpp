@@ -2,9 +2,10 @@
 
 using namespace Fases;
 
-Fase::Fase(){
-
+Fase::Fase() : pJogador(nullptr)
+{
 }
+
 
 Fase::~Fase(){
 
@@ -25,4 +26,10 @@ void Fase::criarPlataformas(){
 void Fase::criarCenario(){
 
 }
+
+void Fase::setJogador(Jogador* pJ)
+{
+    pJogador = pJ;
+}
+
 
