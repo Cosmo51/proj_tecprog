@@ -6,8 +6,8 @@ window(sf::VideoMode({400, 400}), "Jogo")
 {
     window.setFramerateLimit(240);
     pJog1.setWindow(&window);
-    inimFacil.setWindow(&window);
-    inimMedio.setWindow(&window);
+    Aranha.setWindow(&window);
+    Galinha.setWindow(&window);
     plat1.configurar(0.f, 390.f, 400.f, 10.f);
     plat2.configurar(120.f, 250.f, 50.f, 10.f);
     plat1.setWindow(&window);
@@ -39,6 +39,10 @@ void Jogo::executar()
 
         window.clear();
 
+        pJog1.mover();
+        Aranha.mover();
+        pJog1.saiuDoChao();
+
         if (GC.verificarColisao(&pJog1, &plat1))
         {
             plat1.obstaculizar(&pJog1);
@@ -49,13 +53,11 @@ void Jogo::executar()
             plat2.obstaculizar(&pJog1);
         }
 
-        pJog1.mover();
-
         plat1.desenhar();
         plat2.desenhar();
         pJog1.desenhar();
-        inimFacil.desenhar();
-        inimMedio.desenhar();
+        Aranha.desenhar();
+        Galinha.desenhar();
         limitedireita.desenhar();
         limiteesquerda.desenhar();
         window.display();

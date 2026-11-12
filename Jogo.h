@@ -13,8 +13,8 @@ class Jogo
 private:
     sf::RenderWindow window;
     Jogador pJog1;
-    Aranha inimFacil;
-    Galinha inimMedio;
+    Aranha Aranha;
+    Galinha Galinha;
     Plataforma plat1;
     Plataforma plat2;
     Gerenciador_Grafico GG;

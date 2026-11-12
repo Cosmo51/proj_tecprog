@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1794480292 c:\users\pedro\downloads\trabalho\personagens.h
+1794354893 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1218,14 +1218,14 @@
 1794350570 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794480292 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794354553 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 
 1794354632 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
 	<iostream>
 
-1794480292 c:\users\pedro\downloads\trabalho\jogo.h
+1794352825 c:\users\pedro\downloads\trabalho\jogo.h
 	<SFML/Graphics.hpp>
 	"Personagens.h"
 	"Gerenciadores.h"
@@ -1407,7 +1407,7 @@
 1794368394 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\chefao.cpp
 	"Personagens.h"
 
-1794370667 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\personagens.h
+1794424590 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1474,14 +1474,14 @@
 1794368395 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\inimigo.cpp
 	"Personagens.h"
 
-1794369699 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogador.cpp
+1794422667 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogador.cpp
 	"Personagens.h"
 
-1794368395 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.cpp
+1794423574 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.cpp
 	"Jogo.h"
 	<iostream>
 
-1794370819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.h
+1794423558 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\jogo.h
 	<SFML/Graphics.hpp>
 	"Personagens.h"
 	"Gerenciadores.h"
@@ -2063,21 +2063,12 @@
 	<string_view>
 	<cstdint>
 
-1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\aranha.cpp
+1794424623 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\aranha.cpp
 	"Personagens.h"
 
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\galinha.cpp
 	"Personagens.h"
 
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gato.cpp
-	"Personagens.h"
-
-1794480292 source:c:\users\pedro\downloads\trabalho\aranha.cpp
-	"Personagens.h"
-
-1794480292 source:c:\users\pedro\downloads\trabalho\galinha.cpp
-	"Personagens.h"
-
-1794480292 source:c:\users\pedro\downloads\trabalho\gato.cpp
 	"Personagens.h"
 

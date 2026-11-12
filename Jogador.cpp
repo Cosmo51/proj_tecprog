@@ -39,6 +39,12 @@ void Jogador::inicializa()
     noChao = false;
 }
 
+void Jogador::saiuDoChao(){
+
+    noChao = false;
+
+}
+
 void Jogador::mover(){
 
     float gravidade = 0.01f;
@@ -51,8 +57,17 @@ void Jogador::mover(){
         body.move(sf::Vector2(-velX, 0.f));
     }
 
+    if(body.getPosition().x < 1.f){
+        body.setPosition(sf::Vector2f(1.f, body.getPosition().y));
+
+    }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
         body.move(sf::Vector2(velX, 0.f));
+    }
+
+    if(body.getPosition().x + body.getSize().x > 399.f){
+        body.setPosition(sf::Vector2f(399.f - body.getSize().x, body.getPosition().y));
+
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))

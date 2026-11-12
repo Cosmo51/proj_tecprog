@@ -49,7 +49,7 @@ public:
     void pararQueda();
     float getVelY() const;
     void pular();
-
+    void saiuDoChao();
 };
 
 class Inimigo : public Personagem
@@ -77,6 +77,8 @@ class Aranha : public Inimigo
 
 private:
     float raio;
+    float velocidadeX;
+    float velocidadeY;
 
 public:
     Aranha();
