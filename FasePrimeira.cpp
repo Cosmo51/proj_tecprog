@@ -9,10 +9,21 @@ FasePrimeira::FasePrimeira()
     plat1.configurar(0.f, 390.f, 400.f, 10.f);
     plat2.configurar(120.f, 250.f, 50.f, 10.f);
 
-    // Configuracao das paredes
+    // Configuracao dos limites geograficos
     limitedireita.direita();
     limiteesquerda.esquerda();
+
+    // Inclusao dos objetos na lista da fase
+    lista_ents.incluir(&aranha);
+    lista_ents.incluir(&galinha);
+
+    lista_ents.incluir(&plat1);
+    lista_ents.incluir(&plat2);
+
+    lista_ents.incluir(&limitedireita);
+    lista_ents.incluir(&limiteesquerda);
 }
+
 
 FasePrimeira::~FasePrimeira()
 {
@@ -21,7 +32,7 @@ FasePrimeira::~FasePrimeira()
 void FasePrimeira::executar()
 {
     // Movimentacao da aranha
-    aranha.mover();
+    lista_ents.percorrer();
 
     // Colisoes do jogador com as plataformas
     if (pJogador != nullptr)
@@ -67,14 +78,7 @@ void FasePrimeira::executar()
         limitedireita.setWindow(window);
         limiteesquerda.setWindow(window);
 
-        plat1.desenhar();
-        plat2.desenhar();
-
-        aranha.desenhar();
-        galinha.desenhar();
-
-        limitedireita.desenhar();
-        limiteesquerda.desenhar();
+        lista_ents.desenhar();
     }
 }
 

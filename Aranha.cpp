@@ -22,7 +22,10 @@ void Aranha::danificar(Jogador* p){
 
 void Aranha::executar(){
 
+    mover();
+
 }
+
 
 void Aranha::salvar(){
 
