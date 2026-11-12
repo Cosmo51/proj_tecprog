@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1794354893 c:\users\pedro\downloads\trabalho\personagens.h
+1794480292 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1218,14 +1218,14 @@
 1794350570 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794354553 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794480292 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 
 1794354632 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
 	<iostream>
 
-1794352825 c:\users\pedro\downloads\trabalho\jogo.h
+1794480292 c:\users\pedro\downloads\trabalho\jogo.h
 	<SFML/Graphics.hpp>
 	"Personagens.h"
 	"Gerenciadores.h"
@@ -2070,5 +2070,14 @@
 	"Personagens.h"
 
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gato.cpp
+	"Personagens.h"
+
+1794480292 source:c:\users\pedro\downloads\trabalho\aranha.cpp
+	"Personagens.h"
+
+1794480292 source:c:\users\pedro\downloads\trabalho\galinha.cpp
+	"Personagens.h"
+
+1794480292 source:c:\users\pedro\downloads\trabalho\gato.cpp
 	"Personagens.h"
 
