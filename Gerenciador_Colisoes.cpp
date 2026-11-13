@@ -36,6 +36,8 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
     if (pJog1 == nullptr)
         return;
 
+    pJog1->restaurarVelocidade();
+
     std::list<Obstaculo*>::iterator it;
 
     for (it = LOs.begin(); it != LOs.end(); it++)

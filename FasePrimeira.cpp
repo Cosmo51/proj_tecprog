@@ -27,6 +27,10 @@ limiteesquerda(nullptr)
     GC.incluirObstaculo(plat2);
     plat2->configurar(120.f, 250.f, 50.f, 10.f);
 
+    Obst_Medio* lama = new Obst_Medio();
+    lista_ents.incluir(lama);
+    GC.incluirObstaculo(lama);
+
     limitedireita = new LimitesGeograficos();
     lista_ents.incluir(limitedireita);
     limitedireita->direita();

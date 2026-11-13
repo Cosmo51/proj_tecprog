@@ -9,7 +9,7 @@ Jogador::Jogador(){
     body.setSize(sf::Vector2f(25.f, 100.f));
     body.setFillColor(sf::Color::Blue);
     body.setPosition(sf::Vector2f(20.f, 290.f));
-
+    posicaoAnterior = body.getPosition();
 }
 
 Jogador::~Jogador(){
@@ -48,6 +48,8 @@ void Jogador::saiuDoChao(){
 void Jogador::mover(){
 
     float gravidade = 0.01f;
+
+    posicaoAnterior = body.getPosition();
 
     velY += gravidade;
 
@@ -92,7 +94,33 @@ void Jogador::pular()
 {
     if(noChao)
     {
-        velY = -1.8f;
+        if(velX == 0.25f)
+            velY = -0.6f;
+        else
+            velY = -1.8f;
+
         noChao = false;
     }
 }
+
+sf::Vector2f Jogador::getPosicaoAnterior() const
+{
+    return posicaoAnterior;
+}
+
+void Jogador::pararSubida()
+{
+    velY = 0.f;
+    noChao = false;
+}
+
+void Jogador::diminuirVelocidade()
+{
+    velX = 0.25f;
+}
+
+void Jogador::restaurarVelocidade()
+{
+    velX = 0.5f;
+}
+

@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1794484718 c:\users\pedro\downloads\trabalho\personagens.h
+1794603005 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1189,7 +1189,7 @@
 1794350155 source:c:\users\pedro\downloads\trabalho\entidade.cpp
 	"Entidades.h"
 
-1794591763 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
+1794603426 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
 	"Gerenciadores.h"
 	<iostream>
 
@@ -1201,7 +1201,7 @@
 	"Entidades.h"
 	"Personagens.h"
 
-1794590517 c:\users\pedro\downloads\trabalho\obstaculos.h
+1794604701 c:\users\pedro\downloads\trabalho\obstaculos.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 	"Personagens.h"
@@ -1218,7 +1218,7 @@
 1794350570 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794587005 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794603020 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 
 1794488698 source:c:\users\pedro\downloads\trabalho\jogo.cpp
@@ -1240,7 +1240,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\obst_dificil.cpp
 	"Obstaculos.h"
 
-1793890894 source:c:\users\pedro\downloads\trabalho\obst_medio.cpp
+1794604737 source:c:\users\pedro\downloads\trabalho\obst_medio.cpp
 	"Obstaculos.h"
 
 1793890894 source:c:\users\pedro\downloads\trabalho\obstaculo.cpp
@@ -1249,7 +1249,7 @@
 1794350403 source:c:\users\pedro\downloads\trabalho\personagem.cpp
 	"Personagens.h"
 
-1794354218 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
+1794601708 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
 	"Obstaculos.h"
 
 1793890894 source:c:\users\pedro\downloads\trabalho\projetil.cpp
@@ -1266,7 +1266,7 @@
 	"Listas.h"
 	"Gerenciadores.h"
 
-1794591064 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1794604553 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 
 1794583047 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp

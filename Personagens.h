@@ -34,6 +34,7 @@ private:
     float velY;
     bool noChao;
     void inicializa();
+    sf::Vector2f posicaoAnterior;
 
 protected:
     int pontos;
@@ -50,6 +51,10 @@ public:
     float getVelY() const;
     void pular();
     void saiuDoChao();
+    sf::Vector2f getPosicaoAnterior() const;
+    void pararSubida();
+    void diminuirVelocidade();
+    void restaurarVelocidade();
 };
 
 class Inimigo : public Personagem

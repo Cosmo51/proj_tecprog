@@ -15,23 +15,59 @@ void Plataforma::executar(){
 
 }
 
+
 void Plataforma::obstaculizar(Jogador* p)
 {
     if (p == nullptr)
         return;
 
-    sf::FloatRect limitesJogador = p->getBody().getGlobalBounds();
-    sf::FloatRect limitesPlataforma = body.getGlobalBounds();
+    sf::FloatRect jogador = p->getBody().getGlobalBounds();
+    sf::FloatRect plataforma = body.getGlobalBounds();
 
-    float baseJogador = limitesJogador.position.y + limitesJogador.size.y;
-    float topoPlataforma = limitesPlataforma.position.y;
+    sf::Vector2f anterior = p->getPosicaoAnterior();
 
-    if (baseJogador >= topoPlataforma && baseJogador <= topoPlataforma + 5.f && p->getVelY() >= 0.f)
+    float esqJ = jogador.position.x;
+    float dirJ = esqJ + jogador.size.x;
+    float topoJ = jogador.position.y;
+    float baseJ = topoJ + jogador.size.y;
+
+    float esqP = plataforma.position.x;
+    float dirP = esqP + plataforma.size.x;
+    float topoP = plataforma.position.y;
+    float baseP = topoP + plataforma.size.y;
+
+    float esqAnterior = anterior.x;
+    float dirAnterior = anterior.x + jogador.size.x;
+    float topoAnterior = anterior.y;
+    float baseAnterior = anterior.y + jogador.size.y;
+
+    // Colisao por cima
+    if (baseAnterior <= topoP && baseJ >= topoP && p->getVelY() >= 0.f)
     {
-        p->setPosicao(limitesJogador.position.x, topoPlataforma - limitesJogador.size.y);
+        p->setPosicao(esqJ, topoP - jogador.size.y);
         p->pararQueda();
     }
+
+    // Colisao por baixo
+    else if (topoAnterior >= baseP && topoJ <= baseP && p->getVelY() < 0.f)
+    {
+        p->setPosicao(esqJ, baseP);
+        p->pararSubida();
+    }
+
+    // Colisao pela esquerda
+    else if (dirAnterior <= esqP && dirJ >= esqP)
+    {
+        p->setPosicao(esqP - jogador.size.x, topoJ);
+    }
+
+    // Colisao pela direita
+    else if (esqAnterior >= dirP && esqJ <= dirP)
+    {
+        p->setPosicao(dirP, topoJ);
+    }
 }
+
 
 void Plataforma::salvar(){
 

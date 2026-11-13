@@ -66,6 +66,7 @@ namespace Obstaculos
 
     void executar();
     void obstaculizar(Jogador* p);
+    void salvar();
 
     };
 
