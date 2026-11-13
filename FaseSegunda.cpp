@@ -21,3 +21,14 @@ void FaseSegunda::criarObstMedios(){
 void FaseSegunda::criarProjeteis(){
 
 }
+
+void FaseSegunda::criarInimgos()
+{
+    criarInimFaceis();
+    criarChefoes();
+}
+
+void FaseSegunda::criarObstaculo(){
+
+}
+

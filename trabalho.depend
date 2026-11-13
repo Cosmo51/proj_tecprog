@@ -1179,7 +1179,7 @@
 1794489731 source:c:\users\pedro\downloads\trabalho\elemento.cpp
 	"Listas.h"
 
-1794490599 c:\users\pedro\downloads\trabalho\listas.h
+1794581540 c:\users\pedro\downloads\trabalho\listas.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1189,11 +1189,11 @@
 1794350155 source:c:\users\pedro\downloads\trabalho\entidade.cpp
 	"Entidades.h"
 
-1794352941 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
+1794591763 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
 	"Gerenciadores.h"
 	<iostream>
 
-1794268507 c:\users\pedro\downloads\trabalho\gerenciadores.h
+1794591761 c:\users\pedro\downloads\trabalho\gerenciadores.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<list>
@@ -1201,7 +1201,7 @@
 	"Entidades.h"
 	"Personagens.h"
 
-1794354190 c:\users\pedro\downloads\trabalho\obstaculos.h
+1794590517 c:\users\pedro\downloads\trabalho\obstaculos.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 	"Personagens.h"
@@ -1218,7 +1218,7 @@
 1794350570 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794484172 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794587005 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 
 1794488698 source:c:\users\pedro\downloads\trabalho\jogo.cpp
@@ -1255,21 +1255,21 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\projetil.cpp
 	"Entidades.h"
 
-1794490625 source:c:\users\pedro\downloads\trabalho\listaentidades.cpp
+1794580266 source:c:\users\pedro\downloads\trabalho\listaentidades.cpp
 	"Listas.h"
 
-1794485531 source:c:\users\pedro\downloads\trabalho\fase.cpp
+1794590857 source:c:\users\pedro\downloads\trabalho\fase.cpp
 	"Fases.h"
 
-1794488677 c:\users\pedro\downloads\trabalho\fases.h
+1794582799 c:\users\pedro\downloads\trabalho\fases.h
 	<SFML/Graphics.hpp>
 	"Listas.h"
 	"Gerenciadores.h"
 
-1794490748 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1794591064 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 
-1794172835 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
+1794583047 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
 	"Fases.h"
 
 1794271673 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\chefao.cpp

@@ -35,3 +35,9 @@ void ListaEntidades::desenhar()
     LEs.desenhar();
 }
 
+void ListaEntidades::setWindow(sf::RenderWindow* janela)
+{
+    LEs.setWindow(janela);
+}
+
+

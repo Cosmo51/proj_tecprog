@@ -27,12 +27,15 @@ public:
 class Gerenciador_Colisoes
 {
 private:
-//    vector<Inimigo*> LIs;
-//    list<Obstaculo*> LOs;
-//    set<Projetil*> LPs;
+    std::vector<Inimigo*> LIs;
+    std::list<Obstaculo*> LOs;
+    //set<Projetil*> LPs;
     Jogador* pJog1;
 
 public:
+    Gerenciador_Colisoes();
+    ~Gerenciador_Colisoes();
+    void setJogador(Jogador* pJ);
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();

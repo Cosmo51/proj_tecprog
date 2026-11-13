@@ -35,14 +35,14 @@ protected:
 class FasePrimeira : public Fase
 {
 private:
-    Aranha aranha;
-    Galinha galinha;
+    Aranha* aranha;
+    Galinha* galinha;
 
-    Plataforma plat1;
-    Plataforma plat2;
+    Plataforma* plat1;
+    Plataforma* plat2;
 
-    LimitesGeograficos limitedireita;
-    LimitesGeograficos limiteesquerda;
+    LimitesGeograficos* limitedireita;
+    LimitesGeograficos* limiteesquerda;
 
 public:
     FasePrimeira();
@@ -71,6 +71,9 @@ protected:
     void criarChefoes();
     void criarObstMedios();
     void criarProjeteis();
+
+    void criarInimgos();
+    void criarObstaculo();
 };
 
 }
