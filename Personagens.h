@@ -55,35 +55,37 @@ public:
     void pararSubida();
     void diminuirVelocidade();
     void restaurarVelocidade();
+    void perderVida();
+    int getVidas() const;
 };
 
 class Inimigo : public Personagem
 {
-
 protected:
-
     int nivel_maldade;
+    float velocidadeY;
+    sf::Vector2f posicaoAnterior;
 
 public:
-
     Inimigo();
     virtual ~Inimigo();
 
     void salvarDataBuffer();
 
     virtual void executar() = 0;
-    virtual void danificar (Jogador* p) = 0;
+    virtual void danificar(Jogador* p) = 0;
     virtual void salvar() = 0;
 
+    void pararQueda();
+    float getVelocidadeY() const;
+    sf::Vector2f getPosicaoAnterior() const;
 };
 
 class Aranha : public Inimigo
 {
-
 private:
     float raio;
     float velocidadeX;
-    float velocidadeY;
 
 public:
     Aranha();
@@ -93,8 +95,6 @@ public:
     void executar();
     void salvar();
     void mover();
-    void pararQueda();
-    float getVelocidadeY() const;
 };
 
 class Galinha : public Inimigo

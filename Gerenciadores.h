@@ -40,6 +40,7 @@ public:
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
     void tratarColisoesJogsProjeteis();
+    void tratarColisoesInimgsObstacs();
     void incluirInimigo(Inimigo* pi); // novamente ele não colocou tipo.
     void incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.
     void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.

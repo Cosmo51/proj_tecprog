@@ -124,3 +124,17 @@ void Jogador::restaurarVelocidade()
     velX = 0.5f;
 }
 
+void Jogador::perderVida()
+{
+    if (num_vidas > 0)
+    {
+        num_vidas--;
+    }
+}
+
+int Jogador::getVidas() const
+{
+    return num_vidas;
+}
+
+

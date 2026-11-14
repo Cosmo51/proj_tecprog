@@ -37,6 +37,7 @@ namespace Obstaculos
         void executar();
         void salvar();
         void obstaculizar(Jogador* p);
+        void obstaculizar(Inimigo* p);
         void configurar(float x, float y, float largura, float altura);
     };
 
@@ -44,6 +45,7 @@ namespace Obstaculos
 
     private:
     short int danosidade;
+    bool armada;
 
     public:
     Obst_Dificil();
@@ -52,6 +54,7 @@ namespace Obstaculos
     void salvarDataBuffer();
     void executar();
     void obstaculizar(Jogador* p);
+    void salvar();
 
     };
 

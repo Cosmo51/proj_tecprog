@@ -68,6 +68,59 @@ void Plataforma::obstaculizar(Jogador* p)
     }
 }
 
+void Plataforma::obstaculizar(Inimigo* p)
+{
+    if (p == nullptr)
+        return;
+
+    sf::FloatRect inimigo = p->getBody().getGlobalBounds();
+    sf::FloatRect plataforma = body.getGlobalBounds();
+
+    sf::Vector2f anterior = p->getPosicaoAnterior();
+
+    float esqI = inimigo.position.x;
+    float dirI = esqI + inimigo.size.x;
+    float topoI = inimigo.position.y;
+    float baseI = topoI + inimigo.size.y;
+
+    float esqP = plataforma.position.x;
+    float dirP = esqP + plataforma.size.x;
+    float topoP = plataforma.position.y;
+    float baseP = topoP + plataforma.size.y;
+
+    float esqAnterior = anterior.x;
+    float dirAnterior = anterior.x + inimigo.size.x;
+    float topoAnterior = anterior.y;
+    float baseAnterior = anterior.y + inimigo.size.y;
+
+    // Colisao por cima
+    if (baseAnterior <= topoP && baseI >= topoP &&
+        p->getVelocidadeY() >= 0.f)
+    {
+        p->setPosicao(esqI, topoP - inimigo.size.y);
+        p->pararQueda();
+    }
+
+    // Colisao por baixo
+    else if (topoAnterior >= baseP && topoI <= baseP &&
+             p->getVelocidadeY() < 0.f)
+    {
+        p->setPosicao(esqI, baseP);
+        p->pararQueda();
+    }
+
+    // Colisao pela esquerda
+    else if (dirAnterior <= esqP && dirI >= esqP)
+    {
+        p->setPosicao(esqP - inimigo.size.x, topoI);
+    }
+
+    // Colisao pela direita
+    else if (esqAnterior >= dirP && esqI <= dirP)
+    {
+        p->setPosicao(dirP, topoI);
+    }
+}
 
 void Plataforma::salvar(){
 

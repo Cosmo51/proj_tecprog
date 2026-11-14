@@ -31,7 +31,9 @@ void Aranha::salvar(){
 
 }
 
-void Aranha::mover(){
+void Aranha::mover()
+{
+    posicaoAnterior = body.getPosition();
 
     float gravidade = 0.01f;
 
@@ -46,21 +48,6 @@ void Aranha::mover(){
     if(body.getPosition().x + body.getSize().x >= 399.f){
         velocidadeX = -0.2f;
     }
-
-
-
-}
-
-void Aranha::pararQueda(){
-
-    velocidadeY = 0.f;
-
-}
-
-
-float Aranha::getVelocidadeY() const
-{
-    return velocidadeY;
 }
 
 

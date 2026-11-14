@@ -13,9 +13,11 @@ limiteesquerda(nullptr)
 {
     aranha = new Aranha();
     lista_ents.incluir(aranha);
+    GC.incluirInimigo(aranha);
 
     galinha = new Galinha();
     lista_ents.incluir(galinha);
+    GC.incluirInimigo(galinha);
 
     plat1 = new Plataforma();
     lista_ents.incluir(plat1);
@@ -30,6 +32,10 @@ limiteesquerda(nullptr)
     Obst_Medio* lama = new Obst_Medio();
     lista_ents.incluir(lama);
     GC.incluirObstaculo(lama);
+
+    Obst_Dificil* ratoeira = new Obst_Dificil();
+    lista_ents.incluir(ratoeira);
+    GC.incluirObstaculo(ratoeira);
 
     limitedireita = new LimitesGeograficos();
     lista_ents.incluir(limitedireita);
@@ -49,6 +55,7 @@ void FasePrimeira::executar()
 {
     // Executar os objetos da lista
     lista_ents.percorrer();
+    GC.tratarColisoesInimgsObstacs();
 
     // Colisoes do jogador com as plataformas
     GC.tratarColisoesJogsObstacs();

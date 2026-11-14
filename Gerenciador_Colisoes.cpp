@@ -64,6 +64,33 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
 }
 
+void Gerenciador_Colisoes::tratarColisoesInimgsObstacs()
+{
+    std::vector<Inimigo*>::iterator itIn;
+    std::list<Obstaculo*>::iterator itOb;
+
+    for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
+    {
+        Inimigo* inimigo = *itIn;
+
+        if (inimigo != nullptr)
+        {
+            for (itOb = LOs.begin(); itOb != LOs.end(); itOb++)
+            {
+                Plataforma* plataforma = dynamic_cast<Plataforma*>(*itOb);
+
+                if (plataforma != nullptr)
+                {
+                    if (verificarColisao(inimigo, plataforma))
+                    {
+                        plataforma->obstaculizar(inimigo);
+                    }
+                }
+            }
+        }
+    }
+}
+
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
 {
     if (pi != nullptr)

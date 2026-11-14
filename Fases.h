@@ -69,7 +69,7 @@ public:
 
 protected:
     void criarChefoes();
-    void criarObstMedios();
+    void criarObstDificeis();
     void criarProjeteis();
 
     void criarInimgos();
