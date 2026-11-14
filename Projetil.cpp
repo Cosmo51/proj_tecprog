@@ -3,7 +3,7 @@ using namespace Entidades;
 
 Projetil::Projetil()
 {
-
+    ativo = true;
 }
 
 Projetil::~Projetil()

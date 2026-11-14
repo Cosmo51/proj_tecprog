@@ -77,6 +77,7 @@
 		<Unit filename="Obst_medio.cpp" />
 		<Unit filename="Obstaculo.cpp" />
 		<Unit filename="Obstaculos.h" />
+		<Unit filename="Ovo.cpp" />
 		<Unit filename="Personagem.cpp" />
 		<Unit filename="Personagens.h" />
 		<Unit filename="Plataforma.cpp" />

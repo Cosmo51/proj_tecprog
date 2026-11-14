@@ -50,4 +50,9 @@ void Aranha::mover()
     }
 }
 
+void Aranha::inverterDirecao()
+{
+    velocidadeX = -velocidadeX;
+}
+
 

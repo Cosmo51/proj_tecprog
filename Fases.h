@@ -49,6 +49,7 @@ public:
     ~FasePrimeira();
 
     void executar();
+    void setJogador(Jogador* pJ);
 
 protected:
     void criarInimMedios();
@@ -56,6 +57,8 @@ protected:
 
     void criarInimgos();
     void criarObstaculo();
+    void criarProjeteis();
+    void criarOvo();
 };
 
 class FaseSegunda : public Fase

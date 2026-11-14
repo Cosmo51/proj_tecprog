@@ -1,4 +1,3 @@
-
 #include "Fases.h"
 
 using namespace Fases;
@@ -29,13 +28,15 @@ limiteesquerda(nullptr)
     GC.incluirObstaculo(plat2);
     plat2->configurar(120.f, 250.f, 50.f, 10.f);
 
+    Plataforma* paredeTeste = new Plataforma();
+    lista_ents.incluir(paredeTeste);
+    GC.incluirObstaculo(paredeTeste);
+
+paredeTeste->configurar(330.f, 290.f, 10.f, 100.f);
+
     Obst_Medio* lama = new Obst_Medio();
     lista_ents.incluir(lama);
     GC.incluirObstaculo(lama);
-
-    Obst_Dificil* ratoeira = new Obst_Dificil();
-    lista_ents.incluir(ratoeira);
-    GC.incluirObstaculo(ratoeira);
 
     limitedireita = new LimitesGeograficos();
     lista_ents.incluir(limitedireita);
@@ -53,27 +54,19 @@ FasePrimeira::~FasePrimeira()
 
 void FasePrimeira::executar()
 {
-    // Executar os objetos da lista
     lista_ents.percorrer();
-    GC.tratarColisoesInimgsObstacs();
 
-    // Colisoes do jogador com as plataformas
-    GC.tratarColisoesJogsObstacs();
-
-    // Colisao da aranha com o chao
-    if (GC.verificarColisao(aranha, plat1))
+    if (galinha != nullptr)
     {
-        sf::FloatRect limites = aranha->getBody().getGlobalBounds();
-
-        if (limites.position.y + limites.size.y >= 390.f && aranha->getVelocidadeY() >= 0.f)
+        if (galinha->verificarAtaque())
         {
-            aranha->setPosicao(limites.position.x, 390.f - limites.size.y);
-
-            aranha->pararQueda();
+            criarProjeteis();
         }
     }
 
-    // Desenhar os objetos da fase
+    GC.tratarColisoesInimgsObstacs();
+    GC.tratarColisoesJogsObstacs();
+
     if (window != nullptr)
     {
         lista_ents.setWindow(window);
@@ -84,6 +77,8 @@ void FasePrimeira::executar()
 void FasePrimeira::criarInimMedios()
 {
     Galinha* galinha = new Galinha();
+
+    galinha->setJogador(pJogador);
 
     lista_ents.incluir(galinha);
     GC.incluirInimigo(galinha);
@@ -103,6 +98,47 @@ void FasePrimeira::criarObstaculo()
 {
 
 }
+
+void FasePrimeira::setJogador(Jogador* pJ)
+{
+    Fase::setJogador(pJ);
+
+    if (galinha != nullptr)
+    {
+        galinha->setJogador(pJ);
+    }
+}
+
+void FasePrimeira::criarProjeteis()
+{
+    criarOvo();
+}
+
+void FasePrimeira::criarOvo()
+{
+    if (galinha == nullptr || pJogador == nullptr)
+        return;
+
+    Ovo* ovo = new Ovo();
+
+    float xGalinha = galinha->getBody().getPosition().x;
+    float yGalinha = galinha->getBody().getPosition().y;
+
+    float xJogador = pJogador->getBody().getPosition().x;
+
+    float direcao = 1.f;
+
+    if (xJogador < xGalinha)
+    {
+        direcao = -1.f;
+    }
+
+    ovo->configurar(xGalinha + 10.f, yGalinha + 45.f, direcao);
+
+    lista_ents.incluir(ovo);
+}
+
+
 
 
 

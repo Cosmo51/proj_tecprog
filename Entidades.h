@@ -37,5 +37,19 @@ namespace Entidades{
         void executar();
         void salvar();
     };
+
+    class Ovo : public Projetil
+    {
+    private:
+        float velocidadeX;
+
+    public:
+        Ovo();
+        ~Ovo();
+
+        void executar();
+        void salvar();
+        void configurar(float x, float y, float direcao);
+    };
 }
 

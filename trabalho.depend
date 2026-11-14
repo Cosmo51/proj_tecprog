@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1794673582 c:\users\pedro\downloads\trabalho\personagens.h
+1794697243 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1169,7 +1169,7 @@
 	<string_view>
 	<cstdint>
 
-1794349353 c:\users\pedro\downloads\trabalho\entidades.h
+1794695294 c:\users\pedro\downloads\trabalho\entidades.h
 	<SFML/Graphics.hpp>
 	"Ente.h"
 
@@ -1215,7 +1215,7 @@
 1794349353 source:c:\users\pedro\downloads\trabalho\inim_medio.cpp
 	"Personagens.h"
 
-1794673607 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
+1794697250 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
 1794670513 source:c:\users\pedro\downloads\trabalho\jogador.cpp
@@ -1250,10 +1250,10 @@
 1794350403 source:c:\users\pedro\downloads\trabalho\personagem.cpp
 	"Personagens.h"
 
-1794674152 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
+1794697320 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
 	"Obstaculos.h"
 
-1793890894 source:c:\users\pedro\downloads\trabalho\projetil.cpp
+1794695095 source:c:\users\pedro\downloads\trabalho\projetil.cpp
 	"Entidades.h"
 
 1794580266 source:c:\users\pedro\downloads\trabalho\listaentidades.cpp
@@ -1262,12 +1262,12 @@
 1794590857 source:c:\users\pedro\downloads\trabalho\fase.cpp
 	"Fases.h"
 
-1794671237 c:\users\pedro\downloads\trabalho\fases.h
+1794696606 c:\users\pedro\downloads\trabalho\fases.h
 	<SFML/Graphics.hpp>
 	"Listas.h"
 	"Gerenciadores.h"
 
-1794675172 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1794697417 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 
 1794671272 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
@@ -2072,12 +2072,16 @@
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gato.cpp
 	"Personagens.h"
 
-1794676930 source:c:\users\pedro\downloads\trabalho\galinha.cpp
+1794697167 source:c:\users\pedro\downloads\trabalho\galinha.cpp
 	"Personagens.h"
+	<iostream>
 
 1794480292 source:c:\users\pedro\downloads\trabalho\gato.cpp
 	"Personagens.h"
 
-1794673635 source:c:\users\pedro\downloads\trabalho\aranha.cpp
+1794697156 source:c:\users\pedro\downloads\trabalho\aranha.cpp
 	"Personagens.h"
+
+1794695339 source:c:\users\pedro\downloads\trabalho\ovo.cpp
+	"Entidades.h"
 

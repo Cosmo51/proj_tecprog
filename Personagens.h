@@ -75,6 +75,7 @@ public:
     virtual void executar() = 0;
     virtual void danificar(Jogador* p) = 0;
     virtual void salvar() = 0;
+    virtual void inverterDirecao() = 0;
 
     void pararQueda();
     float getVelocidadeY() const;
@@ -95,6 +96,7 @@ public:
     void executar();
     void salvar();
     void mover();
+    void inverterDirecao();
 };
 
 class Galinha : public Inimigo
@@ -102,6 +104,9 @@ class Galinha : public Inimigo
 
 private:
     int tamanho;
+    float velocidadeX;
+    Jogador* pJogador;
+    sf::Clock relogioDisparo;
 
 public:
     Galinha();
@@ -110,6 +115,9 @@ public:
     void executar();
     void salvar();
     void mover();
+    void setJogador(Jogador* p);
+    bool verificarAtaque();
+    void inverterDirecao();
 };
 
 class Gato : public Inimigo

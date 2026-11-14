@@ -113,12 +113,14 @@ void Plataforma::obstaculizar(Inimigo* p)
     else if (dirAnterior <= esqP && dirI >= esqP)
     {
         p->setPosicao(esqP - inimigo.size.x, topoI);
+        p->inverterDirecao();
     }
 
     // Colisao pela direita
     else if (esqAnterior >= dirP && esqI <= dirP)
     {
         p->setPosicao(dirP, topoI);
+        p->inverterDirecao();
     }
 }
 
