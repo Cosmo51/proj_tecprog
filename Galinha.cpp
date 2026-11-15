@@ -27,11 +27,9 @@ void Galinha::danificar(Jogador* p)
     if (p == nullptr)
         return;
 
-    float centroJogador = p->getBody().getPosition().x
-                        + p->getBody().getSize().x / 2.f;
+    float centroJogador = p->getBody().getPosition().x + p->getBody().getSize().x / 2.f;
 
-    float centroInimigo = body.getPosition().x
-                       + body.getSize().x / 2.f;
+    float centroInimigo = body.getPosition().x + body.getSize().x / 2.f;
 
     float direcao = -1.f;
 
