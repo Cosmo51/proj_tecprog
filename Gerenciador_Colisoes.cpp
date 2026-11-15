@@ -56,12 +56,197 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
 {
+    if (pJog1 == nullptr)
+        return;
 
+    std::vector<Inimigo*>::iterator it;
+
+    for (it = LIs.begin(); it != LIs.end(); it++)
+    {
+        Inimigo* inimigo = *it;
+
+        if (inimigo != nullptr && inimigo->getAtivo())
+        {
+            if (verificarColisao(pJog1, inimigo))
+            {
+                sf::FloatRect jog = pJog1->getBody().getGlobalBounds();
+                sf::FloatRect inim = inimigo->getBody().getGlobalBounds();
+
+                sf::Vector2f anteriorJ = pJog1->getPosicaoAnterior();
+                sf::Vector2f anteriorI = inimigo->getPosicaoAnterior();
+
+                float posXJogador = jog.position.x;
+                float topoJ = jog.position.y;
+
+                float esqI = inim.position.x;
+                float dirI = esqI + inim.size.x;
+                float topoI = inim.position.y;
+                float baseI = topoI + inim.size.y;
+
+                // Jogador cai sobre o inimigo
+                if (anteriorJ.y + jog.size.y <= anteriorI.y &&
+                    pJog1->getVelY() >= 0.f)
+                {
+                    pJog1->setPosicao(posXJogador, topoI - jog.size.y);
+                    pJog1->impulsionar();
+
+                    inimigo->desativar();
+
+                    std::cout << "Inimigo eliminado!" << std::endl;
+                }
+
+                // Jogador bate por baixo
+                else if (anteriorJ.y >= anteriorI.y + inim.size.y && pJog1->getVelY() < 0.f)
+                {
+                    pJog1->setPosicao(posXJogador, baseI);
+                    pJog1->pararSubida();
+
+                    inimigo->danificar(pJog1);
+                }
+
+                // Colisao lateral
+                else
+                {
+                    float centroJ = posXJogador + jog.size.x / 2.f;
+                    float centroI = esqI + inim.size.x / 2.f;
+
+                    if (centroJ < centroI)
+                    {
+                        pJog1->setPosicao(esqI - jog.size.x, topoJ);
+                    }
+                    else
+                    {
+                        pJog1->setPosicao(dirI, topoJ);
+                    }
+
+                    inimigo->danificar(pJog1);
+                }
+            }
+        }
+    }
+}
+
+void Gerenciador_Colisoes::removerInimigosInativos(ListaEntidades& lista)
+{
+    std::vector<Inimigo*>::iterator it = LIs.begin();
+
+    while (it != LIs.end())
+    {
+        Inimigo* inimigo = *it;
+
+        if (inimigo == nullptr)
+        {
+            it = LIs.erase(it);
+        }
+        else if (!inimigo->getAtivo())
+        {
+            it = LIs.erase(it);
+
+            lista.removerEntidade(inimigo);
+        }
+        else
+        {
+            it++;
+        }
+    }
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 {
+    if (pJog1 == nullptr)
+        return;
 
+    std::set<Projetil*>::iterator it;
+
+    for (it = LPs.begin(); it != LPs.end(); it++)
+    {
+        Projetil* projetil = *it;
+
+        if (projetil != nullptr)
+        {
+            if (projetil->getAtivo())
+            {
+                if (verificarColisao(pJog1, projetil))
+                {
+                    pJog1->perderVida();
+                    projetil->desativar();
+
+                    std::cout << "Vidas restantes: "
+                              << pJog1->getVidas()
+                              << std::endl;
+                }
+            }
+        }
+    }
+}
+
+void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
+{
+    std::set<Projetil*>::iterator it = LPs.begin();
+
+    while (it != LPs.end())
+    {
+        Projetil* projetil = *it;
+
+        if (projetil == nullptr)
+        {
+            it = LPs.erase(it);
+        }
+        else
+        {
+            sf::FloatRect limites = projetil->getBody().getGlobalBounds();
+
+            // Desativar quando sair da tela
+            if (limites.position.x + limites.size.x < 0.f ||
+                limites.position.x > 400.f ||
+                limites.position.y + limites.size.y < 0.f ||
+                limites.position.y > 400.f)
+            {
+                projetil->desativar();
+            }
+
+            if (!projetil->getAtivo())
+            {
+                // Primeiro retira do gerenciador
+                it = LPs.erase(it);
+
+                // Depois libera a memoria pela lista
+                lista.removerEntidade(projetil);
+            }
+            else
+            {
+                it++;
+            }
+        }
+    }
+}
+
+void Gerenciador_Colisoes::tratarColisoesProjeteisObstacs()
+{
+    std::set<Projetil*>::iterator itProj;
+    std::list<Obstaculo*>::iterator itObst;
+
+    for (itProj = LPs.begin(); itProj != LPs.end(); itProj++)
+    {
+        Projetil* projetil = *itProj;
+
+        if (projetil != nullptr && projetil->getAtivo())
+        {
+            for (itObst = LOs.begin(); itObst != LOs.end(); itObst++)
+            {
+                Plataforma* plataforma = dynamic_cast<Plataforma*>(*itObst);
+
+                if (plataforma != nullptr)
+                {
+                    if (verificarColisao(projetil, plataforma))
+                    {
+                        projetil->desativar();
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void Gerenciador_Colisoes::tratarColisoesInimgsObstacs()
@@ -109,7 +294,10 @@ void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
 
 void Gerenciador_Colisoes::incluirProjetil(Projetil* pj)
 {
-
+    if (pj != nullptr)
+    {
+        LPs.insert(pj);
+    }
 }
 
 void Gerenciador_Colisoes::executar()

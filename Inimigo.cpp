@@ -5,6 +5,7 @@ using namespace Personagens;
 Inimigo::Inimigo():nivel_maldade(0)
 {
     velocidadeY = 0.f;
+    ativo = true;
 }
 
 Inimigo::~Inimigo(){
@@ -28,4 +29,14 @@ float Inimigo::getVelocidadeY() const
 sf::Vector2f Inimigo::getPosicaoAnterior() const
 {
     return posicaoAnterior;
+}
+
+bool Inimigo::getAtivo() const
+{
+    return ativo;
+}
+
+void Inimigo::desativar()
+{
+    ativo = false;
 }

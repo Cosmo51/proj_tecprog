@@ -2,13 +2,17 @@
 #include<SFML/Graphics.hpp>
 #include<vector>
 #include<list>
+#include <set>
 #include "Obstaculos.h"
 #include "Entidades.h"
 #include "Personagens.h"
+#include "Listas.h"
 
 using namespace Obstaculos;
 using namespace Entidades;
 using namespace Personagens;
+using namespace Listas;
+
 
 namespace Gerenciadores
 {
@@ -29,7 +33,7 @@ class Gerenciador_Colisoes
 private:
     std::vector<Inimigo*> LIs;
     std::list<Obstaculo*> LOs;
-    //set<Projetil*> LPs;
+    std::set<Projetil*> LPs;
     Jogador* pJog1;
 
 public:
@@ -39,7 +43,10 @@ public:
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
+    void removerInimigosInativos(ListaEntidades& lista);
     void tratarColisoesJogsProjeteis();
+    void removerProjeteisInativos(ListaEntidades& lista);
+    void tratarColisoesProjeteisObstacs();
     void tratarColisoesInimgsObstacs();
     void incluirInimigo(Inimigo* pi); // novamente ele não colocou tipo.
     void incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.

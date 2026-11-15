@@ -65,7 +65,25 @@ void FasePrimeira::executar()
     }
 
     GC.tratarColisoesInimgsObstacs();
+    GC.tratarColisoesJogsInimgs();
+
+
+    if (aranha != nullptr && !aranha->getAtivo())
+    {
+        aranha = nullptr;
+    }
+
+    if (galinha != nullptr && !galinha->getAtivo())
+    {
+        galinha = nullptr;
+    }
+
+    GC.removerInimigosInativos(lista_ents);
+
     GC.tratarColisoesJogsObstacs();
+    GC.tratarColisoesProjeteisObstacs();
+    GC.tratarColisoesJogsProjeteis();
+    GC.removerProjeteisInativos(lista_ents);
 
     if (window != nullptr)
     {
@@ -136,6 +154,7 @@ void FasePrimeira::criarOvo()
     ovo->configurar(xGalinha + 10.f, yGalinha + 45.f, direcao);
 
     lista_ents.incluir(ovo);
+    GC.incluirProjetil(ovo);
 }
 
 

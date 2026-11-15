@@ -37,6 +37,8 @@ void Jogador::inicializa()
     velX = 0.5f;
     velY = 0.f;
     noChao = false;
+    impulsoX = 0.f;
+    invulneravel = false;
 }
 
 void Jogador::saiuDoChao(){
@@ -45,38 +47,59 @@ void Jogador::saiuDoChao(){
 
 }
 
-void Jogador::mover(){
-
+void Jogador::mover()
+{
     float gravidade = 0.01f;
 
     posicaoAnterior = body.getPosition();
 
-    velY += gravidade;
+    if (invulneravel &&
+        relogioDano.getElapsedTime().asSeconds() >= 0.5f)
+    {
+        invulneravel = false;
+    }
 
+    velY += gravidade;
     body.move(sf::Vector2f(0.f, velY));
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
-        body.move(sf::Vector2(-velX, 0.f));
+    // Durante os primeiros 0.2 segundos, aplica o knockback
+    if (invulneravel &&
+        relogioDano.getElapsedTime().asSeconds() < 0.2f)
+    {
+        body.move(sf::Vector2f(impulsoX, 0.f));
+    }
+    else
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        {
+            body.move(sf::Vector2f(-velX, 0.f));
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        {
+            body.move(sf::Vector2f(velX, 0.f));
+        }
     }
 
-    if(body.getPosition().x < 1.f){
-        body.setPosition(sf::Vector2f(1.f, body.getPosition().y));
-
+    // Limite esquerdo
+    if (body.getPosition().x < 1.f)
+    {
+        body.setPosition(sf::Vector2f(
+            1.f, body.getPosition().y));
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)){
-        body.move(sf::Vector2(velX, 0.f));
-    }
 
-    if(body.getPosition().x + body.getSize().x > 399.f){
-        body.setPosition(sf::Vector2f(399.f - body.getSize().x, body.getPosition().y));
-
+    // Limite direito
+    if (body.getPosition().x + body.getSize().x > 399.f)
+    {
+        body.setPosition(sf::Vector2f(
+            399.f - body.getSize().x,
+            body.getPosition().y));
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
     {
         pular();
     }
-
 }
 
 void Jogador::pararQueda()
@@ -136,5 +159,27 @@ int Jogador::getVidas() const
 {
     return num_vidas;
 }
+
+void Jogador::receberDanoContato(float direcao)
+{
+    if (invulneravel)
+        return;
+
+    perderVida();
+
+    impulsoX = 1.5f * direcao;
+    velY = -0.9f;
+    noChao = false;
+
+    invulneravel = true;
+    relogioDano.restart();
+}
+
+void Jogador::impulsionar()
+{
+    velY = -1.0f;
+    noChao = false;
+}
+
 
 

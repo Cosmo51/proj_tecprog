@@ -36,6 +36,8 @@ namespace Entidades{
         ~Projetil();
         void executar();
         void salvar();
+        bool getAtivo() const;
+        void desativar();
     };
 
     class Ovo : public Projetil

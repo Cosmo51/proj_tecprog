@@ -20,7 +20,7 @@ public:
     void salvarDataBuffer();
     virtual void executar() = 0;
     virtual void salvar() = 0;
-    virtual void mover() = 0;//deltaTime para a logica da gravidade a ser implementada
+    virtual void mover() = 0;
 
 };
 
@@ -35,6 +35,9 @@ private:
     bool noChao;
     void inicializa();
     sf::Vector2f posicaoAnterior;
+    float impulsoX;
+    bool invulneravel;
+    sf::Clock relogioDano;
 
 protected:
     int pontos;
@@ -57,6 +60,8 @@ public:
     void restaurarVelocidade();
     void perderVida();
     int getVidas() const;
+    void receberDanoContato(float direcao);
+    void impulsionar();
 };
 
 class Inimigo : public Personagem
@@ -65,6 +70,7 @@ protected:
     int nivel_maldade;
     float velocidadeY;
     sf::Vector2f posicaoAnterior;
+    bool ativo;
 
 public:
     Inimigo();
@@ -80,6 +86,8 @@ public:
     void pararQueda();
     float getVelocidadeY() const;
     sf::Vector2f getPosicaoAnterior() const;
+    bool getAtivo() const;
+    void desativar();
 };
 
 class Aranha : public Inimigo

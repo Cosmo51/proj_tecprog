@@ -16,8 +16,25 @@ Aranha::~Aranha(){
 
 }
 
-void Aranha::danificar(Jogador* p){
+void Aranha::danificar(Jogador* p)
+{
+    if (p == nullptr)
+        return;
 
+    float centroJogador = p->getBody().getPosition().x
+                        + p->getBody().getSize().x / 2.f;
+
+    float centroInimigo = body.getPosition().x
+                       + body.getSize().x / 2.f;
+
+    float direcao = -1.f;
+
+    if (centroJogador >= centroInimigo)
+    {
+        direcao = 1.f;
+    }
+
+    p->receberDanoContato(direcao);
 }
 
 void Aranha::executar(){

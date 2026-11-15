@@ -20,3 +20,13 @@ void Projetil::salvar()
 {
 
 }
+
+bool Projetil::getAtivo() const
+{
+    return ativo;
+}
+
+void Projetil::desativar()
+{
+    ativo = false;
+}
