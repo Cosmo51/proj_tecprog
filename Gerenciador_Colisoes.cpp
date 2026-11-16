@@ -91,8 +91,10 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
                     pJog1->impulsionar();
 
                     inimigo->desativar();
+                    pJog1->adicionarPontos(100);
 
                     std::cout << "Inimigo eliminado!" << std::endl;
+                    std::cout<<"Pontuacao: "<< pJog1->getPontos() << std::endl;
                 }
 
                 // Jogador bate por baixo

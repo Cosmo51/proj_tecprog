@@ -52,7 +52,9 @@ public:
     void setJogador(Jogador* pJ);
 
 protected:
+    void criarInimFaceis();
     void criarInimMedios();
+    void criarPlataformas();
     void criarObstMedios();
 
     void criarInimgos();

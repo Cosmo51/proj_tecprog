@@ -10,41 +10,8 @@ plat2(nullptr),
 limitedireita(nullptr),
 limiteesquerda(nullptr)
 {
-    aranha = new Aranha();
-    lista_ents.incluir(aranha);
-    GC.incluirInimigo(aranha);
-
-    galinha = new Galinha();
-    lista_ents.incluir(galinha);
-    GC.incluirInimigo(galinha);
-
-    plat1 = new Plataforma();
-    lista_ents.incluir(plat1);
-    GC.incluirObstaculo(plat1);
-    plat1->configurar(0.f, 390.f, 400.f, 10.f);
-
-    plat2 = new Plataforma();
-    lista_ents.incluir(plat2);
-    GC.incluirObstaculo(plat2);
-    plat2->configurar(120.f, 250.f, 50.f, 10.f);
-
-    Plataforma* paredeTeste = new Plataforma();
-    lista_ents.incluir(paredeTeste);
-    GC.incluirObstaculo(paredeTeste);
-
-paredeTeste->configurar(330.f, 290.f, 10.f, 100.f);
-
-    Obst_Medio* lama = new Obst_Medio();
-    lista_ents.incluir(lama);
-    GC.incluirObstaculo(lama);
-
-    limitedireita = new LimitesGeograficos();
-    lista_ents.incluir(limitedireita);
-    limitedireita->direita();
-
-    limiteesquerda = new LimitesGeograficos();
-    lista_ents.incluir(limiteesquerda);
-    limiteesquerda->esquerda();
+    criarInimgos();
+    criarObstaculo();
 }
 
 FasePrimeira::~FasePrimeira()
@@ -92,9 +59,18 @@ void FasePrimeira::executar()
     }
 }
 
+void FasePrimeira::criarInimFaceis(){
+
+    aranha = new Aranha;
+
+    lista_ents.incluir(aranha);
+    GC.incluirInimigo(aranha);
+
+}
+
 void FasePrimeira::criarInimMedios()
 {
-    Galinha* galinha = new Galinha();
+    galinha = new Galinha();
 
     galinha->setJogador(pJogador);
 
@@ -104,6 +80,30 @@ void FasePrimeira::criarInimMedios()
 
 void FasePrimeira::criarObstMedios()
 {
+
+    Obst_Medio* lama = new Obst_Medio();
+
+    lista_ents.incluir(lama);
+    GC.incluirObstaculo(lama);
+
+}
+
+void FasePrimeira::criarPlataformas(){
+
+    plat1 = new Plataforma();
+    lista_ents.incluir(plat1);
+    GC.incluirObstaculo(plat1);
+    plat1->configurar(0.f, 390.f, 400.f, 10.f);
+
+    plat2 = new Plataforma();
+    lista_ents.incluir(plat2);
+    GC.incluirObstaculo(plat2);
+    plat2->configurar(120.f, 250.f, 50.f, 10.f);
+
+    Plataforma* paredeTeste = new Plataforma();
+    lista_ents.incluir(paredeTeste);
+    GC.incluirObstaculo(paredeTeste);
+    paredeTeste->configurar(330.f, 290.f, 10.f, 100.f);
 }
 
 void FasePrimeira::criarInimgos()
@@ -115,6 +115,16 @@ void FasePrimeira::criarInimgos()
 void FasePrimeira::criarObstaculo()
 {
 
+    criarPlataformas();
+    criarObstMedios();
+
+    limitedireita = new LimitesGeograficos();
+    lista_ents.incluir(limitedireita);
+    limitedireita->direita();
+
+    limiteesquerda = new LimitesGeograficos();
+    lista_ents.incluir(limiteesquerda);
+    limiteesquerda->esquerda();
 }
 
 void FasePrimeira::setJogador(Jogador* pJ)

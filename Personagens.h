@@ -62,6 +62,8 @@ public:
     int getVidas() const;
     void receberDanoContato(float direcao);
     void impulsionar();
+    void adicionarPontos(int valor);
+    int getPontos() const;
 };
 
 class Inimigo : public Personagem

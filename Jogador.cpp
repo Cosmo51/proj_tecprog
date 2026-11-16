@@ -39,6 +39,7 @@ void Jogador::inicializa()
     noChao = false;
     impulsoX = 0.f;
     invulneravel = false;
+    pontos = 0;
 }
 
 void Jogador::saiuDoChao(){
@@ -179,6 +180,14 @@ void Jogador::impulsionar()
 {
     velY = -1.0f;
     noChao = false;
+}
+
+void Jogador::adicionarPontos(int valor){
+    pontos+=valor;
+}
+
+int Jogador::getPontos() const{
+    return pontos;
 }
 
 
