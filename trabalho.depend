@@ -1221,8 +1221,9 @@
 1794934147 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794937465 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1794938442 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
+	<iostream>
 
 1794928619 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
