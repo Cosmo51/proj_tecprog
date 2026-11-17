@@ -38,6 +38,8 @@ class FasePrimeira : public Fase
 {
 private:
     std::vector<Galinha*> galinhas;
+    Queijo* queijo;
+    bool venceu;
 
 public:
     FasePrimeira();
@@ -45,6 +47,7 @@ public:
 
     void executar();
     void setJogador(Jogador* pJ);
+    bool getVenceu() const;
 
 protected:
     void criarInimMedios();

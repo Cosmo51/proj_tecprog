@@ -4,7 +4,7 @@
 
 using namespace Fases;
 
-FasePrimeira::FasePrimeira()
+FasePrimeira::FasePrimeira() : venceu(false)
 {
     // Sorteia apenas uma vez, na criacao da fase.
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -12,6 +12,10 @@ FasePrimeira::FasePrimeira()
     // Cria os apoios antes de posicionar os inimigos sobre eles.
     criarObstaculo();
     criarInimgos();
+
+    queijo = new Queijo();
+    queijo->setPosicao(735.f, 440.f);
+    lista_ents.incluir(queijo);
 }
 
 FasePrimeira::~FasePrimeira()
@@ -43,6 +47,12 @@ void FasePrimeira::executar()
     GC.tratarColisoesJogsObstacs();
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
+
+    if (pJogador != nullptr && GC.verificarColisao(pJogador, queijo))
+    {
+        venceu = true;
+    }
+
     GC.removerProjeteisInativos(lista_ents);
 
     lista_ents.desenhar();
@@ -125,6 +135,13 @@ void FasePrimeira::criarPlataformas()
         lista_ents.incluir(plataforma);
         GC.incluirObstaculo(plataforma);
     }
+
+    Plataforma* plataformaQueijo = new Plataforma();
+
+    plataformaQueijo->configurar(680.f, 470.f, 110.f, 10.f);
+
+    lista_ents.incluir(plataformaQueijo);
+    GC.incluirObstaculo(plataformaQueijo);
 }
 
 void FasePrimeira::criarInimgos()
@@ -193,4 +210,9 @@ void FasePrimeira::criarOvo()
         lista_ents.incluir(ovo);
         GC.incluirProjetil(ovo);
     }
+}
+
+bool FasePrimeira::getVenceu() const
+{
+    return venceu;
 }

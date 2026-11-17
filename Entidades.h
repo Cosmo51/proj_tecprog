@@ -53,5 +53,15 @@ namespace Entidades{
         void salvar();
         void configurar(float x, float y, float direcao);
     };
+
+    class Queijo : public Entidade
+    {
+    public:
+        Queijo();
+        ~Queijo();
+
+        void executar();
+        void salvar();
+    };
 }
 

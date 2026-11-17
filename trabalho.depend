@@ -1169,7 +1169,7 @@
 	<string_view>
 	<cstdint>
 
-1794928619 c:\users\pedro\downloads\trabalho\entidades.h
+1794955865 c:\users\pedro\downloads\trabalho\entidades.h
 	<SFML/Graphics.hpp>
 	"Ente.h"
 
@@ -1225,8 +1225,9 @@
 	"Personagens.h"
 	<iostream>
 
-1794928619 source:c:\users\pedro\downloads\trabalho\jogo.cpp
+1794956388 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
+	<iostream>
 
 1794928619 c:\users\pedro\downloads\trabalho\jogo.h
 	"Gerenciadores.h"
@@ -1265,13 +1266,13 @@
 1794937054 source:c:\users\pedro\downloads\trabalho\fase.cpp
 	"Fases.h"
 
-1794937294 c:\users\pedro\downloads\trabalho\fases.h
+1794956164 c:\users\pedro\downloads\trabalho\fases.h
 	<SFML/Graphics.hpp>
 	"Listas.h"
 	"Gerenciadores.h"
 	<vector>
 
-1794937478 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1794956229 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 	<cstdlib>
 	<ctime>
@@ -2211,5 +2212,8 @@
 	"Obstaculos.h"
 
 1794799262 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\projetil.cpp
+	"Entidades.h"
+
+1794955891 source:c:\users\pedro\downloads\trabalho\queijo.cpp
 	"Entidades.h"
 
