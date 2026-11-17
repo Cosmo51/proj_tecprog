@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Listas.h"
 #include "Gerenciadores.h"
+#include <vector>
 
 using namespace Listas;
 using namespace Gerenciadores;
@@ -26,6 +27,7 @@ public:
 
 protected:
     void criarInimFaceis();
+    void criarInimFaceis(float x, float y, float esquerda, float direita);
     void criarPlataformas();
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
@@ -35,10 +37,7 @@ protected:
 class FasePrimeira : public Fase
 {
 private:
-    Galinha* galinha;
-
-    LimitesGeograficos* limitedireita;
-    LimitesGeograficos* limiteesquerda;
+    std::vector<Galinha*> galinhas;
 
 public:
     FasePrimeira();

@@ -72,17 +72,4 @@ namespace Obstaculos
     void salvar();
 
     };
-
-    class LimitesGeograficos : public Entidade{
-
-    public:
-        LimitesGeograficos();
-        ~LimitesGeograficos();
-
-        void executar();
-        void salvar();
-        void direita();
-        void esquerda();
-
-    };
 }

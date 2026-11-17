@@ -2,10 +2,13 @@
 using namespace Gerenciadores;
 
 Gerenciador_Grafico::Gerenciador_Grafico() :
-    janela(sf::VideoMode({400, 400}), "Jogo")
+    janela(sf::VideoMode({1000, 750}), "Jogo")
 {
     janela.setFramerateLimit(240);
-    // O gerenciador e construido antes do jogador e das fases.
+
+    sf::View vista(sf::FloatRect({0.f, 0.f}, {800.f, 600.f}));
+    janela.setView(vista);
+
     Ente::setGG(this);
 }
 

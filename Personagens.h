@@ -73,6 +73,8 @@ protected:
     float velocidadeY;
     sf::Vector2f posicaoAnterior;
     bool ativo;
+    float limiteEsquerdo;
+    float limiteDireito;
 
 public:
     Inimigo();
@@ -90,6 +92,7 @@ public:
     sf::Vector2f getPosicaoAnterior() const;
     bool getAtivo() const;
     void desativar();
+    void configurarPatrulha(float esquerda, float direita);
 };
 
 class Aranha : public Inimigo

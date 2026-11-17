@@ -1,4 +1,5 @@
 #include "Personagens.h"
+#include <iostream>
 
 using namespace Personagens;
 
@@ -8,7 +9,7 @@ Jogador::Jogador(){
 
     definirTamanho(25.f, 100.f);
     definirCor(sf::Color::Blue);
-    setPosicao(20.f, 290.f);
+    setPosicao(20.f, 490.f);
     posicaoAnterior = getPosicao();
 }
 
@@ -83,18 +84,19 @@ void Jogador::mover()
     }
 
     // Limite esquerdo
-    if (getPosicao().x < 1.f)
+    if (getPosicao().x < 0.f)
     {
         setPosicao(
-            1.f, getPosicao().y);
+            0.f, getPosicao().y);
     }
 
     // Limite direito
-    if (getPosicao().x + getTamanho().x > 399.f)
+    if (getPosicao().x + getTamanho().x > 800.f)
     {
         setPosicao(
-            399.f - getTamanho().x,
-            getPosicao().y);
+            800.f - getTamanho().x,
+            getPosicao().y
+        );
     }
 
     if (teclaPressionada(sf::Keyboard::Key::Space))
@@ -167,6 +169,8 @@ void Jogador::receberDanoContato(float direcao)
         return;
 
     perderVida();
+
+    std::cout << "Vidas restantes: " << getVidas() << std::endl;
 
     impulsoX = 1.5f * direcao;
     velY = -0.9f;

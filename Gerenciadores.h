@@ -56,12 +56,12 @@ public:
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
-    void tratarColisoesInimgsInimgs();
     void removerInimigosInativos(ListaEntidades& lista);
     void tratarColisoesJogsProjeteis();
     void removerProjeteisInativos(ListaEntidades& lista);
     void tratarColisoesProjeteisObstacs();
     void tratarColisoesInimgsObstacs();
+    void tratarColisoesInimgsInimgs();
     void incluirInimigo(Inimigo* pi); // novamente ele não colocou tipo.
     void incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.
     void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.

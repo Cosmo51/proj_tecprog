@@ -57,14 +57,19 @@ void Galinha::mover()
     moverFigura(0.f, velocidadeY);
     moverFigura(velocidadeX, 0.f);
 
-    if (getPosicao().x <= 200.f)
+    // Mantem todo o corpo sobre a plataforma de patrulha.
+    if (getPosicao().x < limiteEsquerdo)
     {
-        velocidadeX = 0.2f;
+        setPosicao(limiteEsquerdo, getPosicao().y);
+        if (velocidadeX < 0.f)
+            inverterDirecao();
     }
 
-    if (getPosicao().x + getTamanho().x >= 399.f)
+    if (getPosicao().x + getTamanho().x > limiteDireito)
     {
-        velocidadeX = -0.2f;
+        setPosicao(limiteDireito - getTamanho().x, getPosicao().y);
+        if (velocidadeX > 0.f)
+            inverterDirecao();
     }
 }
 
