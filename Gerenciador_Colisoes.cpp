@@ -128,6 +128,68 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
     }
 }
 
+void Gerenciador_Colisoes::tratarColisoesInimgsInimgs()
+{
+    std::vector<Inimigo*>::iterator it1;
+    std::vector<Inimigo*>::iterator it2;
+
+    for (it1 = LIs.begin(); it1 != LIs.end(); it1++)
+    {
+        Inimigo* inimigo1 = *it1;
+
+        if (inimigo1 == nullptr || !inimigo1->getAtivo())
+            continue;
+
+        it2 = it1;
+        it2++;
+
+        for (; it2 != LIs.end(); it2++)
+        {
+            Inimigo* inimigo2 = *it2;
+
+            if (inimigo2 == nullptr || !inimigo2->getAtivo())
+                continue;
+
+            if (verificarColisao(inimigo1, inimigo2))
+            {
+                sf::FloatRect r1 = inimigo1->getLimites();
+                sf::FloatRect r2 = inimigo2->getLimites();
+
+                float centro1 = r1.position.x + r1.size.x / 2.f;
+                float centro2 = r2.position.x + r2.size.x / 2.f;
+
+                float topo1 = r1.position.y;
+                float topo2 = r2.position.y;
+
+                float base1 = topo1 + r1.size.y;
+                float base2 = topo2 + r2.size.y;
+
+                // Trata apenas encontros laterais
+                if (topo1 < base2 && base1 > topo2)
+                {
+                    if (centro1 < centro2)
+                    {
+                        inimigo2->setPosicao(
+                            r1.position.x + r1.size.x,
+                            topo2
+                        );
+                    }
+                    else
+                    {
+                        inimigo2->setPosicao(
+                            r1.position.x - r2.size.x,
+                            topo2
+                        );
+                    }
+
+                    inimigo1->inverterDirecao();
+                    inimigo2->inverterDirecao();
+                }
+            }
+        }
+    }
+}
+
 void Gerenciador_Colisoes::removerInimigosInativos(ListaEntidades& lista)
 {
     std::vector<Inimigo*>::iterator it = LIs.begin();

@@ -29,6 +29,7 @@ void FasePrimeira::executar()
     }
 
     GC.tratarColisoesInimgsObstacs();
+    GC.tratarColisoesInimgsInimgs();
     GC.tratarColisoesJogsInimgs();
 
 

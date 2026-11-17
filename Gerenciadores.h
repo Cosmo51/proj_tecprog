@@ -56,6 +56,7 @@ public:
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
+    void tratarColisoesInimgsInimgs();
     void removerInimigosInativos(ListaEntidades& lista);
     void tratarColisoesJogsProjeteis();
     void removerProjeteisInativos(ListaEntidades& lista);
