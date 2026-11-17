@@ -26,10 +26,8 @@ void Fase::criarInimFaceis()
 void Fase::criarPlataformas()
 {
     Plataforma* chao = new Plataforma();
-
     lista_ents.incluir(chao);
     GC.incluirObstaculo(chao);
-
     chao->configurar(0.f, 390.f, 400.f, 10.f);
 }
 

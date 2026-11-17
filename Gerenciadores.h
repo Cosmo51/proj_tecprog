@@ -20,12 +20,25 @@ namespace Gerenciadores
 class Gerenciador_Grafico
 {
 private:
-// BiblioGrafica obj;
+    sf::RenderWindow janela;
 
 public:
     Gerenciador_Grafico();
     ~Gerenciador_Grafico();
     void desenharEnte(Ente* pE);
+    bool estaAberta() const;
+    void tratarEventos();
+    void limpar();
+    void mostrar();
+    bool teclaPressionada(sf::Keyboard::Key tecla) const;
+    void configurarFigura(sf::RectangleShape& figura, float x, float y, float largura, float altura, sf::Color cor);
+    void posicionarFigura(sf::RectangleShape& figura, float x, float y);
+    void dimensionarFigura(sf::RectangleShape& figura, float largura, float altura);
+    void colorirFigura(sf::RectangleShape& figura, sf::Color cor);
+    void moverFigura(sf::RectangleShape& figura, float x, float y);
+    sf::Vector2f obterPosicao(const sf::RectangleShape& figura) const;
+    sf::Vector2f obterTamanho(const sf::RectangleShape& figura) const;
+    sf::FloatRect obterLimites(const sf::RectangleShape& figura) const;
 };
 
 class Gerenciador_Colisoes
@@ -48,9 +61,9 @@ public:
     void removerProjeteisInativos(ListaEntidades& lista);
     void tratarColisoesProjeteisObstacs();
     void tratarColisoesInimgsObstacs();
-    void incluirInimigo(Inimigo* pi); // novamente ele n„o colocou tipo.
-    void incluirObstaculo(Obstaculo* po); // novamente ele n„o colocou tipo.
-    void incluirProjetil(Projetil* pj); // novamente ele n„o colocou tipo.
+    void incluirInimigo(Inimigo* pi); // novamente ele n√£o colocou tipo.
+    void incluirObstaculo(Obstaculo* po); // novamente ele n√£o colocou tipo.
+    void incluirProjetil(Projetil* pj); // novamente ele n√£o colocou tipo.
     void executar();
 };
 

@@ -8,9 +8,9 @@ Obst_Dificil::Obst_Dificil()
     armada = true;
     danosidade = 1;
 
-    body.setSize(sf::Vector2f(30.f, 10.f));
-    body.setFillColor(sf::Color::Red);
-    body.setPosition(sf::Vector2f(190.f, 380.f));
+    definirTamanho(30.f, 10.f);
+    definirCor(sf::Color::Red);
+    setPosicao(190.f, 380.f);
 }
 
 
@@ -34,7 +34,7 @@ void Obst_Dificil::obstaculizar(Jogador* p)
         std::cout << "Vidas restantes: " << p->getVidas() << std::endl;
         armada = false;
 
-        body.setFillColor(sf::Color(100, 100, 100));
+        definirCor(sf::Color(100, 100, 100));
     }
 }
 

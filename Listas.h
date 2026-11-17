@@ -42,7 +42,6 @@ public:
     void remover(int pos);
     void percorrer();
     void desenhar();
-    void setWindow(sf::RenderWindow* janela);
 };
 
 
@@ -241,23 +240,6 @@ void Lista<TL>::desenhar()
     }
 }
 
-template<class TL>
-void Lista<TL>::setWindow(sf::RenderWindow* janela)
-{
-    Elemento<TL>* atual = pPrimeiro;
-
-    while (atual != nullptr)
-    {
-        TL* entidade = atual->getInfo();
-
-        if (entidade != nullptr)
-        {
-            entidade->setWindow(janela);
-        }
-
-        atual = atual->getProximo();
-    }
-}
 
 
 
@@ -277,7 +259,6 @@ public:
     void removerEntidade(int pos);
     void percorrer();
     void desenhar();
-    void setWindow(sf::RenderWindow* janela);
 };
 
 }

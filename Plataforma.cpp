@@ -4,7 +4,7 @@ using namespace Obstaculos;
 
 Plataforma::Plataforma():altura(0)
 {
-    body.setFillColor(sf::Color::Green);
+    definirCor(sf::Color::Green);
 }
 
 Plataforma::~Plataforma(){
@@ -21,8 +21,8 @@ void Plataforma::obstaculizar(Jogador* p)
     if (p == nullptr)
         return;
 
-    sf::FloatRect jogador = p->getBody().getGlobalBounds();
-    sf::FloatRect plataforma = body.getGlobalBounds();
+    sf::FloatRect jogador = p->getLimites();
+    sf::FloatRect plataforma = getLimites();
 
     sf::Vector2f anterior = p->getPosicaoAnterior();
 
@@ -73,8 +73,8 @@ void Plataforma::obstaculizar(Inimigo* p)
     if (p == nullptr)
         return;
 
-    sf::FloatRect inimigo = p->getBody().getGlobalBounds();
-    sf::FloatRect plataforma = body.getGlobalBounds();
+    sf::FloatRect inimigo = p->getLimites();
+    sf::FloatRect plataforma = getLimites();
 
     sf::Vector2f anterior = p->getPosicaoAnterior();
 
@@ -130,8 +130,8 @@ void Plataforma::salvar(){
 
 void Plataforma::configurar(float x, float y, float largura, float altura)
 {
-    body.setSize(sf::Vector2f(largura, altura));
-    body.setPosition(sf::Vector2f(x, y));
+    definirTamanho(largura, altura);
+    setPosicao(x, y);
 
     this->altura = static_cast<int>(altura);
 }

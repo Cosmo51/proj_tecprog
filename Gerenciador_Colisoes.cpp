@@ -25,8 +25,8 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) 
         return false;
     }
 
-    sf::FloatRect limites1 = pe1->getBody().getGlobalBounds();
-    sf::FloatRect limites2 = pe2->getBody().getGlobalBounds();
+    sf::FloatRect limites1 = pe1->getLimites();
+    sf::FloatRect limites2 = pe2->getLimites();
 
     return limites1.findIntersection(limites2).has_value();
 }
@@ -69,8 +69,8 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
         {
             if (verificarColisao(pJog1, inimigo))
             {
-                sf::FloatRect jog = pJog1->getBody().getGlobalBounds();
-                sf::FloatRect inim = inimigo->getBody().getGlobalBounds();
+                sf::FloatRect jog = pJog1->getLimites();
+                sf::FloatRect inim = inimigo->getLimites();
 
                 sf::Vector2f anteriorJ = pJog1->getPosicaoAnterior();
                 sf::Vector2f anteriorI = inimigo->getPosicaoAnterior();
@@ -196,7 +196,7 @@ void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
         }
         else
         {
-            sf::FloatRect limites = projetil->getBody().getGlobalBounds();
+            sf::FloatRect limites = projetil->getLimites();
 
             // Desativar quando sair da tela
             if (limites.position.x + limites.size.x < 0.f ||

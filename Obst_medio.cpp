@@ -4,9 +4,9 @@ using namespace Obstaculos;
 
 Obst_Medio::Obst_Medio()
 {
-    body.setSize(sf::Vector2f(70.f, 8.f));
-    body.setFillColor(sf::Color(120, 75, 35));
-    body.setPosition(sf::Vector2f(250.f, 382.f));
+    definirTamanho(70.f, 8.f);
+    definirCor(sf::Color(120, 75, 35));
+    setPosicao(250.f, 382.f);
 }
 
 Obst_Medio::~Obst_Medio(){

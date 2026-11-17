@@ -31,6 +31,7 @@ void FasePrimeira::executar()
     GC.tratarColisoesInimgsObstacs();
     GC.tratarColisoesJogsInimgs();
 
+
     if (galinha != nullptr && !galinha->getAtivo())
     {
         galinha = nullptr;
@@ -43,16 +44,15 @@ void FasePrimeira::executar()
     GC.tratarColisoesJogsProjeteis();
     GC.removerProjeteisInativos(lista_ents);
 
-    if (window != nullptr)
-    {
-        lista_ents.setWindow(window);
-        lista_ents.desenhar();
-    }
+    lista_ents.desenhar();
 }
+
+
 
 void FasePrimeira::criarInimMedios()
 {
     galinha = new Galinha();
+
 
     lista_ents.incluir(galinha);
     GC.incluirInimigo(galinha);
@@ -68,26 +68,19 @@ void FasePrimeira::criarObstMedios()
 
 }
 
-void FasePrimeira::criarPlataformas(){
-
+void FasePrimeira::criarPlataformas()
+{
     Fase::criarPlataformas();
 
     Plataforma* plataforma = new Plataforma();
-
     lista_ents.incluir(plataforma);
     GC.incluirObstaculo(plataforma);
-
     plataforma->configurar(120.f, 250.f, 50.f, 10.f);
-
-    Plataforma* paredeTeste = new Plataforma();
-    lista_ents.incluir(paredeTeste);
-    GC.incluirObstaculo(paredeTeste);
-    paredeTeste->configurar(330.f, 290.f, 10.f, 100.f);
 }
 
 void FasePrimeira::criarInimgos()
 {
-    criarInimFaceis();
+    Fase::criarInimFaceis();
     criarInimMedios();
 }
 
@@ -128,10 +121,10 @@ void FasePrimeira::criarOvo()
 
     Ovo* ovo = new Ovo();
 
-    float xGalinha = galinha->getBody().getPosition().x;
-    float yGalinha = galinha->getBody().getPosition().y;
+    float xGalinha = galinha->getPosicao().x;
+    float yGalinha = galinha->getPosicao().y;
 
-    float xJogador = pJogador->getBody().getPosition().x;
+    float xJogador = pJogador->getPosicao().x;
 
     float direcao = 1.f;
 

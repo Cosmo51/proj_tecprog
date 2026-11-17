@@ -6,10 +6,10 @@ Jogador::Jogador(){
 
     inicializa();
 
-    body.setSize(sf::Vector2f(25.f, 100.f));
-    body.setFillColor(sf::Color::Blue);
-    body.setPosition(sf::Vector2f(20.f, 290.f));
-    posicaoAnterior = body.getPosition();
+    definirTamanho(25.f, 100.f);
+    definirCor(sf::Color::Blue);
+    setPosicao(20.f, 290.f);
+    posicaoAnterior = getPosicao();
 }
 
 Jogador::~Jogador(){
@@ -52,7 +52,7 @@ void Jogador::mover()
 {
     float gravidade = 0.01f;
 
-    posicaoAnterior = body.getPosition();
+    posicaoAnterior = getPosicao();
 
     if (invulneravel &&
         relogioDano.getElapsedTime().asSeconds() >= 0.5f)
@@ -61,43 +61,43 @@ void Jogador::mover()
     }
 
     velY += gravidade;
-    body.move(sf::Vector2f(0.f, velY));
+    moverFigura(0.f, velY);
 
     // Durante os primeiros 0.2 segundos, aplica o knockback
     if (invulneravel &&
         relogioDano.getElapsedTime().asSeconds() < 0.2f)
     {
-        body.move(sf::Vector2f(impulsoX, 0.f));
+        moverFigura(impulsoX, 0.f);
     }
     else
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        if (teclaPressionada(sf::Keyboard::Key::A))
         {
-            body.move(sf::Vector2f(-velX, 0.f));
+            moverFigura(-velX, 0.f);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        if (teclaPressionada(sf::Keyboard::Key::D))
         {
-            body.move(sf::Vector2f(velX, 0.f));
+            moverFigura(velX, 0.f);
         }
     }
 
     // Limite esquerdo
-    if (body.getPosition().x < 1.f)
+    if (getPosicao().x < 1.f)
     {
-        body.setPosition(sf::Vector2f(
-            1.f, body.getPosition().y));
+        setPosicao(
+            1.f, getPosicao().y);
     }
 
     // Limite direito
-    if (body.getPosition().x + body.getSize().x > 399.f)
+    if (getPosicao().x + getTamanho().x > 399.f)
     {
-        body.setPosition(sf::Vector2f(
-            399.f - body.getSize().x,
-            body.getPosition().y));
+        setPosicao(
+            399.f - getTamanho().x,
+            getPosicao().y);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+    if (teclaPressionada(sf::Keyboard::Key::Space))
     {
         pular();
     }
