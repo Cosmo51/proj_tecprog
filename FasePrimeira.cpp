@@ -3,10 +3,7 @@
 using namespace Fases;
 
 FasePrimeira::FasePrimeira() :
-aranha(nullptr),
 galinha(nullptr),
-plat1(nullptr),
-plat2(nullptr),
 limitedireita(nullptr),
 limiteesquerda(nullptr)
 {
@@ -34,12 +31,6 @@ void FasePrimeira::executar()
     GC.tratarColisoesInimgsObstacs();
     GC.tratarColisoesJogsInimgs();
 
-
-    if (aranha != nullptr && !aranha->getAtivo())
-    {
-        aranha = nullptr;
-    }
-
     if (galinha != nullptr && !galinha->getAtivo())
     {
         galinha = nullptr;
@@ -59,20 +50,9 @@ void FasePrimeira::executar()
     }
 }
 
-void FasePrimeira::criarInimFaceis(){
-
-    aranha = new Aranha;
-
-    lista_ents.incluir(aranha);
-    GC.incluirInimigo(aranha);
-
-}
-
 void FasePrimeira::criarInimMedios()
 {
     galinha = new Galinha();
-
-    galinha->setJogador(pJogador);
 
     lista_ents.incluir(galinha);
     GC.incluirInimigo(galinha);
@@ -90,15 +70,14 @@ void FasePrimeira::criarObstMedios()
 
 void FasePrimeira::criarPlataformas(){
 
-    plat1 = new Plataforma();
-    lista_ents.incluir(plat1);
-    GC.incluirObstaculo(plat1);
-    plat1->configurar(0.f, 390.f, 400.f, 10.f);
+    Fase::criarPlataformas();
 
-    plat2 = new Plataforma();
-    lista_ents.incluir(plat2);
-    GC.incluirObstaculo(plat2);
-    plat2->configurar(120.f, 250.f, 50.f, 10.f);
+    Plataforma* plataforma = new Plataforma();
+
+    lista_ents.incluir(plataforma);
+    GC.incluirObstaculo(plataforma);
+
+    plataforma->configurar(120.f, 250.f, 50.f, 10.f);
 
     Plataforma* paredeTeste = new Plataforma();
     lista_ents.incluir(paredeTeste);

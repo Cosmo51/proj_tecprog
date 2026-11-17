@@ -35,11 +35,7 @@ protected:
 class FasePrimeira : public Fase
 {
 private:
-    Aranha* aranha;
     Galinha* galinha;
-
-    Plataforma* plat1;
-    Plataforma* plat2;
 
     LimitesGeograficos* limitedireita;
     LimitesGeograficos* limiteesquerda;
@@ -52,7 +48,6 @@ public:
     void setJogador(Jogador* pJ);
 
 protected:
-    void criarInimFaceis();
     void criarInimMedios();
     void criarPlataformas();
     void criarObstMedios();
