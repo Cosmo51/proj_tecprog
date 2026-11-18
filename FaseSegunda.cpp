@@ -29,7 +29,7 @@ void FaseSegunda::criarProjeteis(){
 
 void FaseSegunda::criarInimgos()
 {
-    criarInimFaceis();
+    //criarInimFaceis();
     criarChefoes();
 }
 

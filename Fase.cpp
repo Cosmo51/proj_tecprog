@@ -15,10 +15,6 @@ void Fase::executar(){
 
 }
 
-void Fase::criarInimFaceis()
-{
-    criarInimFaceis(355.f, 290.f, 200.f, 399.f);
-}
 
 void Fase::criarInimFaceis(float x, float y, float esquerda, float direita)
 {
