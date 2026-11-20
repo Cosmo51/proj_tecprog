@@ -261,21 +261,12 @@ void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
             sf::FloatRect limites = projetil->getLimites();
 
             // Desativar quando sair da tela
-<<<<<<< HEAD
             if (limites.position.x + limites.size.x < 0.f ||
                 limites.position.x > 1000.f ||
                 limites.position.y + limites.size.y < 0.f ||
                 limites.position.y > 750.f)
             {
                 projetil->desativar();
-=======
-            if (limites.position.x + limites.size.x < 0.f ||
-                limites.position.x > 1000.f ||
-                limites.position.y + limites.size.y < 0.f ||
-                limites.position.y > 750.f)
-            {
-                projetil->desativar();
->>>>>>> 4ca3bc9b27626093d96e0e68ee8a5edadfd3c7fb
             }
 
             if (!projetil->getAtivo())

@@ -1,7 +1,6 @@
 #include "Gerenciadores.h"
 using namespace Gerenciadores;
 
-<<<<<<< HEAD
 Gerenciador_Grafico::Gerenciador_Grafico() :
     janela(sf::VideoMode({1000, 750}), "Jogo")
 {
@@ -11,17 +10,6 @@ Gerenciador_Grafico::Gerenciador_Grafico() :
     janela.setView(vista);
 
     Ente::setGG(this);
-=======
-Gerenciador_Grafico::Gerenciador_Grafico() :
-    janela(sf::VideoMode({1000, 750}), "Jogo")
-{
-    janela.setFramerateLimit(240);
-
-    sf::View vista(sf::FloatRect({0.f, 0.f}, {1000.f, 750.f}));
-    janela.setView(vista);
-
-    Ente::setGG(this);
->>>>>>> 4ca3bc9b27626093d96e0e68ee8a5edadfd3c7fb
 }
 
 Gerenciador_Grafico::~Gerenciador_Grafico()

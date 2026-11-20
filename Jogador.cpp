@@ -91,15 +91,9 @@ void Jogador::mover()
     }
 
     // Limite direito
-<<<<<<< HEAD
     if (getPosicao().x + getTamanho().x > 1000.f)
     {
         setPosicao(1000.f - getTamanho().x, getPosicao().y);
-=======
-    if (getPosicao().x + getTamanho().x > 1000.f)
-    {
-        setPosicao(1000.f - getTamanho().x, getPosicao().y);
->>>>>>> 4ca3bc9b27626093d96e0e68ee8a5edadfd3c7fb
     }
 
     if (teclaPressionada(sf::Keyboard::Key::Space))

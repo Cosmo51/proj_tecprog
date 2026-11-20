@@ -44,7 +44,7 @@
 			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
+			<Add directory="C:/Users/pedro/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
 		</Linker>
 		<Unit filename="Aranha.cpp" />
 		<Unit filename="Ente.cpp" />
