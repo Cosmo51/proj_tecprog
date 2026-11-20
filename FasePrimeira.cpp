@@ -14,7 +14,7 @@ FasePrimeira::FasePrimeira() : venceu(false)
     criarInimgos();
 
     queijo = new Queijo();
-    queijo->setPosicao(735.f, 440.f);
+    queijo->setPosicao(925.f, 580.f);
     lista_ents.incluir(queijo);
 }
 
@@ -58,12 +58,13 @@ void FasePrimeira::executar()
     lista_ents.desenhar();
 }
 
+
 void FasePrimeira::criarInimMedios()
 {
     const float posicoes[][4] = {
-        {340.f, 265.f, 295.f, 440.f}, // Segunda plataforma
-        {670.f, 65.f, 625.f, 770.f},  // Quarta plataforma
-        {700.f, 490.f, 650.f, 799.f}  // Chao
+        {175.f, 415.f, 60.f, 230.f},
+        {745.f, 425.f, 720.f, 815.f},
+        {525.f, 695.f, 0.f, 1000.f}
     };
 
     for (int i = 0; i < 3; i++)
@@ -71,38 +72,35 @@ void FasePrimeira::criarInimMedios()
         Galinha* g = new Galinha();
 
         g->setPosicao(posicoes[i][0], posicoes[i][1]);
-        g->configurarPatrulha(posicoes[i][2], posicoes[i][3]);
 
-        if (pJogador != nullptr)
-            g->setJogador(pJogador);
+        g->configurarPatrulha(
+            posicoes[i][2],
+            posicoes[i][3]
+        );
 
         galinhas.push_back(g);
         lista_ents.incluir(g);
         GC.incluirInimigo(g);
     }
-
-    // Galinha adicional somente se a plataforma existir
 }
 
 void FasePrimeira::criarObstMedios()
 {
     const float posicoes[][2] = {
-        {230.f, 582.f}, // Chao
-        {560.f, 582.f}, // Chao
-        {370.f, 357.f}, // Segunda plataforma
-        {690.f, 582.f}  // Opcional no chao
+        {90.f, 732.f},   // Chao esquerdo - obrigatoria
+        {410.f, 472.f},  // Plataforma central - obrigatoria
+        {885.f, 732.f},  // Chao direito - obrigatoria
+        {555.f, 732.f},  // Chao central - opcional
+        {85.f, 452.f}    // Plataforma superior esquerda - opcional
     };
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (i < 3 || std::rand() % 100 < 50)
         {
             Obst_Medio* lama = new Obst_Medio();
 
-            lama->setPosicao(
-                posicoes[i][0],
-                posicoes[i][1]
-            );
+            lama->setPosicao(posicoes[i][0], posicoes[i][1]);
 
             lista_ents.incluir(lama);
             GC.incluirObstaculo(lama);
@@ -115,52 +113,95 @@ void FasePrimeira::criarPlataformas()
     Fase::criarPlataformas();
 
     const float posicoes[][4] = {
-        {130.f, 465.f, 145.f, 10.f}, // Aranha
-        {295.f, 365.f, 145.f, 10.f}, // Galinha
-        {460.f, 265.f, 145.f, 10.f}, // Aranha
-        {625.f, 165.f, 145.f, 10.f}  // Galinha
+        {190.f, 610.f, 140.f, 10.f},
+        {60.f, 460.f, 170.f, 10.f},
+        {380.f, 480.f, 150.f, 10.f},
+        {555.f, 350.f, 140.f, 10.f},
+        {720.f, 470.f, 140.f, 10.f},
+        {870.f, 610.f, 120.f, 10.f}
     };
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 6; i++)
     {
-        Plataforma* plataforma = new Plataforma();
+        Plataforma* p = new Plataforma();
 
-        plataforma->configurar(
-            posicoes[i][0],
-            posicoes[i][1],
-            posicoes[i][2],
-            posicoes[i][3]
-        );
+        p->configurar(posicoes[i][0], posicoes[i][1],
+                     posicoes[i][2], posicoes[i][3]);
 
-        lista_ents.incluir(plataforma);
-        GC.incluirObstaculo(plataforma);
+        lista_ents.incluir(p);
+        GC.incluirObstaculo(p);
     }
 
-    Plataforma* plataformaQueijo = new Plataforma();
+    // Parede vertical obrigatoria no chao
+    Plataforma* parede = new Plataforma();
 
-    plataformaQueijo->configurar(680.f, 470.f, 110.f, 10.f);
+    parede->configurar(465.f, 610.f, 10.f, 130.f);
 
-    lista_ents.incluir(plataformaQueijo);
-    GC.incluirObstaculo(plataformaQueijo);
+    lista_ents.incluir(parede);
+    GC.incluirObstaculo(parede);
+
+    // Parede vertical opcional no chao
+    if (std::rand() % 100 < 50)
+    {
+        Plataforma* paredeOpcional = new Plataforma();
+
+        paredeOpcional->configurar(740.f, 610.f, 10.f, 130.f);
+
+        lista_ents.incluir(paredeOpcional);
+        GC.incluirObstaculo(paredeOpcional);
+    }
+
+    // Pilar vertical opcional na plataforma direita
+    if (std::rand() % 100 < 50)
+    {
+        Plataforma* p = new Plataforma();
+        p->configurar(850.f, 245.f, 10.f, 225.f);
+
+        lista_ents.incluir(p);
+        GC.incluirObstaculo(p);
+    }
 }
+
+
 
 void FasePrimeira::criarInimgos()
 {
-    // Aranha na primeira plataforma
-    Fase::criarInimFaceis(175.f, 365.f, 130.f, 275.f);
+    // Aranha obrigatoria na plataforma central superior
+    Fase::criarInimFaceis(435.f, 445.f, 380.f, 530.f);
 
-    // Aranha na terceira plataforma
-    Fase::criarInimFaceis(505.f, 165.f, 460.f, 605.f);
+    // Duas aranhas obrigatorias no chao
+    Fase::criarInimFaceis(320.f, 705.f, 0.f, 1000.f);
+    Fase::criarInimFaceis(650.f, 705.f, 0.f, 1000.f);
 
-    // Uma aranha obrigatoria no chao
-    Fase::criarInimFaceis(465.f, 490.f, 300.f, 600.f);
-
-    // Possibilidade de mais uma aranha no chao
+    // Aranha opcional na plataforma inferior esquerda
     if (std::rand() % 100 < 50)
-        Fase::criarInimFaceis(590.f, 490.f, 450.f, 650.f);
+    {
+        Fase::criarInimFaceis(240.f, 575.f, 190.f, 330.f);
+    }
 
     criarInimMedios();
+
+    // Plataforma central superior: aranha OU galinha opcional
+    if (std::rand() % 100 < 50)
+    {
+        if (std::rand() % 2 == 0)
+        {
+            Fase::criarInimFaceis(610.f, 315.f, 555.f, 695.f);
+        }
+        else
+        {
+            Galinha* g = new Galinha();
+
+            g->setPosicao(610.f, 305.f);
+            g->configurarPatrulha(555.f, 695.f);
+
+            galinhas.push_back(g);
+            lista_ents.incluir(g);
+            GC.incluirInimigo(g);
+        }
+    }
 }
+
 
 void FasePrimeira::criarObstaculo()
 {
@@ -206,7 +247,7 @@ void FasePrimeira::criarOvo()
         if (xJogador < xGalinha)
             direcao = -1.f;
 
-        ovo->configurar(xGalinha + 10.f, yGalinha + 45.f, direcao);
+        ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f, direcao);
         lista_ents.incluir(ovo);
         GC.incluirProjetil(ovo);
     }

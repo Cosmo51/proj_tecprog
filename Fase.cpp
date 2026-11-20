@@ -15,6 +15,10 @@ void Fase::executar(){
 
 }
 
+void Fase::criarInimFaceis()
+{
+    criarInimFaceis(355.f, 290.f, 200.f, 399.f);
+}
 
 void Fase::criarInimFaceis(float x, float y, float esquerda, float direita)
 {
@@ -30,7 +34,7 @@ void Fase::criarPlataformas()
 {
     Plataforma* chao = new Plataforma();
 
-    chao->configurar(0.f, 590.f, 800.f, 10.f);
+    chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
     lista_ents.incluir(chao);
     GC.incluirObstaculo(chao);

@@ -26,7 +26,7 @@ public:
     void setJogador(Jogador* pJ);
 
 protected:
-
+    void criarInimFaceis();
     void criarInimFaceis(float x, float y, float esquerda, float direita);
     void criarPlataformas();
     virtual void criarInimgos() = 0;
