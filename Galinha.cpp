@@ -5,7 +5,7 @@ using namespace Personagens;
 
 Galinha::Galinha(){
 
-    definirTamanho(25.f, 100.f);
+    definirTamanho(40.f, 45.f);
     definirCor(sf::Color::Yellow);
     setPosicao(300.f, 290.f);
 
@@ -91,7 +91,7 @@ bool Galinha::verificarAtaque()
     if (distanciaX < 0.f)
         distanciaX = -distanciaX;
 
-    if (distanciaX <= 100.f)
+    if (distanciaX <= 250.f)
     {
         if (relogioDisparo.getElapsedTime().asSeconds() >= 2.f)
         {

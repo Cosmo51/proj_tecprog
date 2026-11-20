@@ -34,7 +34,7 @@ void Fase::criarPlataformas()
 {
     Plataforma* chao = new Plataforma();
 
-    chao->configurar(0.f, 590.f, 800.f, 10.f);
+    chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
     lista_ents.incluir(chao);
     GC.incluirObstaculo(chao);

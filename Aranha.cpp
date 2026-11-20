@@ -4,7 +4,7 @@ using namespace Personagens;
 
 Aranha::Aranha(){
 
-    definirTamanho(25.f, 100.f);
+    definirTamanho(35.f, 35.f);
     definirCor(sf::Color::Red);
     setPosicao(355.f, 290.f);
     velocidadeX = -0.2f;

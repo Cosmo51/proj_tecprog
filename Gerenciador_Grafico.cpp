@@ -6,7 +6,7 @@ Gerenciador_Grafico::Gerenciador_Grafico() :
 {
     janela.setFramerateLimit(240);
 
-    sf::View vista(sf::FloatRect({0.f, 0.f}, {800.f, 600.f}));
+    sf::View vista(sf::FloatRect({0.f, 0.f}, {1000.f, 750.f}));
     janela.setView(vista);
 
     Ente::setGG(this);

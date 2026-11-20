@@ -262,9 +262,9 @@ void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
 
             // Desativar quando sair da tela
             if (limites.position.x + limites.size.x < 0.f ||
-                limites.position.x > 800.f ||
+                limites.position.x > 1000.f ||
                 limites.position.y + limites.size.y < 0.f ||
-                limites.position.y > 600.f)
+                limites.position.y > 750.f)
             {
                 projetil->desativar();
             }

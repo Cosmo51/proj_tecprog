@@ -7,9 +7,9 @@ Jogador::Jogador(){
 
     inicializa();
 
-    definirTamanho(25.f, 100.f);
+    definirTamanho(35.f, 45.f);
     definirCor(sf::Color::Blue);
-    setPosicao(20.f, 490.f);
+    setPosicao(20.f, 695.f);
     posicaoAnterior = getPosicao();
 }
 
@@ -91,12 +91,9 @@ void Jogador::mover()
     }
 
     // Limite direito
-    if (getPosicao().x + getTamanho().x > 800.f)
+    if (getPosicao().x + getTamanho().x > 1000.f)
     {
-        setPosicao(
-            800.f - getTamanho().x,
-            getPosicao().y
-        );
+        setPosicao(1000.f - getTamanho().x, getPosicao().y);
     }
 
     if (teclaPressionada(sf::Keyboard::Key::Space))

@@ -1190,7 +1190,7 @@
 1794928619 source:c:\users\pedro\downloads\trabalho\entidade.cpp
 	"Entidades.h"
 
-1794937792 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
+1795189964 source:c:\users\pedro\downloads\trabalho\gerenciador_colisoes.cpp
 	"Gerenciadores.h"
 	<iostream>
 
@@ -1209,7 +1209,7 @@
 	"Entidades.h"
 	"Personagens.h"
 
-1794936807 source:c:\users\pedro\downloads\trabalho\gerenciador_grafico.cpp
+1795189961 source:c:\users\pedro\downloads\trabalho\gerenciador_grafico.cpp
 	"Gerenciadores.h"
 
 1794349353 source:c:\users\pedro\downloads\trabalho\inim_facil.cpp
@@ -1221,7 +1221,7 @@
 1794934147 source:c:\users\pedro\downloads\trabalho\inimigo.cpp
 	"Personagens.h"
 
-1794938442 source:c:\users\pedro\downloads\trabalho\jogador.cpp
+1795192086 source:c:\users\pedro\downloads\trabalho\jogador.cpp
 	"Personagens.h"
 	<iostream>
 
@@ -1263,7 +1263,7 @@
 1794928619 source:c:\users\pedro\downloads\trabalho\listaentidades.cpp
 	"Listas.h"
 
-1794937054 source:c:\users\pedro\downloads\trabalho\fase.cpp
+1795189710 source:c:\users\pedro\downloads\trabalho\fase.cpp
 	"Fases.h"
 
 1794956164 c:\users\pedro\downloads\trabalho\fases.h
@@ -1272,7 +1272,7 @@
 	"Gerenciadores.h"
 	<vector>
 
-1794956229 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1795194764 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 	<cstdlib>
 	<ctime>
@@ -2079,14 +2079,14 @@
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gato.cpp
 	"Personagens.h"
 
-1794934147 source:c:\users\pedro\downloads\trabalho\galinha.cpp
+1795192112 source:c:\users\pedro\downloads\trabalho\galinha.cpp
 	"Personagens.h"
 	<iostream>
 
 1794928619 source:c:\users\pedro\downloads\trabalho\gato.cpp
 	"Personagens.h"
 
-1794934147 source:c:\users\pedro\downloads\trabalho\aranha.cpp
+1795192101 source:c:\users\pedro\downloads\trabalho\aranha.cpp
 	"Personagens.h"
 
 1794928619 source:c:\users\pedro\downloads\trabalho\ovo.cpp
