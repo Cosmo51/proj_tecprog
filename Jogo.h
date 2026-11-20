@@ -13,6 +13,7 @@ private:
     Gerenciador_Grafico GG;
     Jogador pJog1;
     FasePrimeira fase1;
+    FaseSegunda fase2;
 
 public:
     Jogo();

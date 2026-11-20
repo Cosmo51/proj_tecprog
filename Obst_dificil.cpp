@@ -38,6 +38,11 @@ void Obst_Dificil::obstaculizar(Jogador* p)
     }
 }
 
+void Obst_Dificil::configurar(float x, float y)
+{
+    setPosicao(x, y);
+}
+
 void Obst_Dificil::salvar()
 {
 

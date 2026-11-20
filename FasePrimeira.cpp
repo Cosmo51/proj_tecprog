@@ -4,7 +4,7 @@
 
 using namespace Fases;
 
-FasePrimeira::FasePrimeira() : venceu(false)
+FasePrimeira::FasePrimeira() : venceu(false), maxAranhas(5), maxGalinhas(5), maxLamas(5), maxPlataformas(10)
 {
     // Sorteia apenas uma vez, na criacao da fase.
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -58,52 +58,59 @@ void FasePrimeira::executar()
     lista_ents.desenhar();
 }
 
-
 void FasePrimeira::criarInimMedios()
 {
     const float posicoes[][4] = {
         {175.f, 415.f, 60.f, 230.f},
         {745.f, 425.f, 720.f, 815.f},
-        {525.f, 695.f, 0.f, 1000.f}
+        {525.f, 695.f, 0.f, 1000.f},
+        {95.f, 415.f, 60.f, 230.f},
+        {850.f, 695.f, 0.f, 1000.f}
     };
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 5; i++)
     {
-        Galinha* g = new Galinha();
+        if (i < 3 || (static_cast<int>(galinhas.size()) < maxGalinhas &&
+                      std::rand() % 100 < 50))
+        {
+            Galinha* g = new Galinha();
 
-        g->setPosicao(posicoes[i][0], posicoes[i][1]);
+            g->setPosicao(posicoes[i][0], posicoes[i][1]);
+            g->configurarPatrulha(posicoes[i][2], posicoes[i][3]);
 
-        g->configurarPatrulha(
-            posicoes[i][2],
-            posicoes[i][3]
-        );
-
-        galinhas.push_back(g);
-        lista_ents.incluir(g);
-        GC.incluirInimigo(g);
+            galinhas.push_back(g);
+            lista_ents.incluir(g);
+            GC.incluirInimigo(g);
+        }
     }
 }
 
 void FasePrimeira::criarObstMedios()
 {
     const float posicoes[][2] = {
-        {90.f, 732.f},   // Chao esquerdo - obrigatoria
-        {410.f, 472.f},  // Plataforma central - obrigatoria
-        {885.f, 732.f},  // Chao direito - obrigatoria
-        {555.f, 732.f},  // Chao central - opcional
-        {85.f, 452.f}    // Plataforma superior esquerda - opcional
+        {90.f, 732.f},
+        {410.f, 472.f},
+        {885.f, 732.f},
+        {555.f, 732.f},
+        {85.f, 452.f},
+        {760.f, 732.f}
     };
 
-    for (int i = 0; i < 5; i++)
+    int quantidadeLamas = 0;
+
+    for (int i = 0; i < 6; i++)
     {
-        if (i < 3 || std::rand() % 100 < 50)
+        if (quantidadeLamas < maxLamas &&
+            (i < 3 || std::rand() % 100 < 50))
         {
             Obst_Medio* lama = new Obst_Medio();
 
-            lama->setPosicao(posicoes[i][0], posicoes[i][1]);
+            lama->configurar(posicoes[i][0], posicoes[i][1]);
 
             lista_ents.incluir(lama);
             GC.incluirObstaculo(lama);
+
+            quantidadeLamas++;
         }
     }
 }
@@ -140,43 +147,62 @@ void FasePrimeira::criarPlataformas()
     lista_ents.incluir(parede);
     GC.incluirObstaculo(parede);
 
-    // Parede vertical opcional no chao
-    if (std::rand() % 100 < 50)
+    int quantidadePlataformas = 8;
+
+    // Paredes opcionais
+    const float opcionais[][4] = {
+        {740.f, 610.f, 10.f, 130.f},
+        {850.f, 245.f, 10.f, 225.f},
+        {680.f, 610.f, 10.f, 130.f}
+    };
+
+    for (int i = 0; i < 3; i++)
     {
-        Plataforma* paredeOpcional = new Plataforma();
+        if (quantidadePlataformas < maxPlataformas &&
+            std::rand() % 100 < 50)
+        {
+            Plataforma* p = new Plataforma();
 
-        paredeOpcional->configurar(740.f, 610.f, 10.f, 130.f);
+            p->configurar(opcionais[i][0], opcionais[i][1],
+                         opcionais[i][2], opcionais[i][3]);
 
-        lista_ents.incluir(paredeOpcional);
-        GC.incluirObstaculo(paredeOpcional);
-    }
+            lista_ents.incluir(p);
+            GC.incluirObstaculo(p);
 
-    // Pilar vertical opcional na plataforma direita
-    if (std::rand() % 100 < 50)
-    {
-        Plataforma* p = new Plataforma();
-        p->configurar(850.f, 245.f, 10.f, 225.f);
-
-        lista_ents.incluir(p);
-        GC.incluirObstaculo(p);
+            quantidadePlataformas++;
+        }
     }
 }
 
-
-
 void FasePrimeira::criarInimgos()
 {
-    // Aranha obrigatoria na plataforma central superior
+    // Aranhas obrigatorias
     Fase::criarInimFaceis(435.f, 445.f, 380.f, 530.f);
-
-    // Duas aranhas obrigatorias no chao
     Fase::criarInimFaceis(320.f, 705.f, 0.f, 1000.f);
     Fase::criarInimFaceis(650.f, 705.f, 0.f, 1000.f);
 
-    // Aranha opcional na plataforma inferior esquerda
-    if (std::rand() % 100 < 50)
+    int quantidadeAranhas = 3;
+
+    // Aranhas opcionais
+    const float opcionais[][4] = {
+        {240.f, 575.f, 190.f, 330.f},
+        {780.f, 705.f, 0.f, 1000.f}
+    };
+
+    for (int i = 0; i < 2; i++)
     {
-        Fase::criarInimFaceis(240.f, 575.f, 190.f, 330.f);
+        if (quantidadeAranhas < maxAranhas &&
+            std::rand() % 100 < 50)
+        {
+            Fase::criarInimFaceis(
+                opcionais[i][0],
+                opcionais[i][1],
+                opcionais[i][2],
+                opcionais[i][3]
+            );
+
+            quantidadeAranhas++;
+        }
     }
 
     criarInimMedios();
@@ -186,14 +212,21 @@ void FasePrimeira::criarInimgos()
     {
         if (std::rand() % 2 == 0)
         {
-            Fase::criarInimFaceis(610.f, 315.f, 555.f, 695.f);
+            if (quantidadeAranhas < maxAranhas)
+            {
+                Fase::criarInimFaceis(610.f, 315.f, 555.f, 695.f);
+                quantidadeAranhas++;
+            }
         }
-        else
+        else if (static_cast<int>(galinhas.size()) < maxGalinhas)
         {
             Galinha* g = new Galinha();
 
             g->setPosicao(610.f, 305.f);
             g->configurarPatrulha(555.f, 695.f);
+
+            if (pJogador != nullptr)
+                g->setJogador(pJogador);
 
             galinhas.push_back(g);
             lista_ents.incluir(g);

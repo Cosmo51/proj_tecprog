@@ -128,6 +128,11 @@ void Plataforma::salvar(){
 
 }
 
+void Plataforma::configurar(float x, float y)
+{
+    setPosicao(x, y);
+}
+
 void Plataforma::configurar(float x, float y, float largura, float altura)
 {
     definirTamanho(largura, altura);

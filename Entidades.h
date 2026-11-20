@@ -54,6 +54,22 @@ namespace Entidades{
         void configurar(float x, float y, float direcao);
     };
 
+    class Novelo : public Projetil
+    {
+    private:
+        float velocidadeX;
+        float velocidadeY;
+        float gravidade;
+
+    public:
+        Novelo();
+        ~Novelo();
+
+        void executar();
+        void salvar();
+        void configurar(float x, float y, float direcao);
+    };
+
     class Queijo : public Entidade
     {
     public:

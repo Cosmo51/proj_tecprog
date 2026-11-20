@@ -628,7 +628,7 @@
 1793890894 source:c:\users\pedro\downloads\trabalho\chefao.cpp
 	"Personagens.h"
 
-1794934147 c:\users\pedro\downloads\trabalho\personagens.h
+1795199426 c:\users\pedro\downloads\trabalho\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
@@ -1169,7 +1169,7 @@
 	<string_view>
 	<cstdint>
 
-1794955865 c:\users\pedro\downloads\trabalho\entidades.h
+1795199022 c:\users\pedro\downloads\trabalho\entidades.h
 	<SFML/Graphics.hpp>
 	"Ente.h"
 
@@ -1204,7 +1204,7 @@
 	"Personagens.h"
 	"Listas.h"
 
-1794937403 c:\users\pedro\downloads\trabalho\obstaculos.h
+1795216847 c:\users\pedro\downloads\trabalho\obstaculos.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 	"Personagens.h"
@@ -1225,11 +1225,11 @@
 	"Personagens.h"
 	<iostream>
 
-1795195322 source:c:\users\pedro\downloads\trabalho\jogo.cpp
+1795216263 source:c:\users\pedro\downloads\trabalho\jogo.cpp
 	"Jogo.h"
 	<iostream>
 
-1794928619 c:\users\pedro\downloads\trabalho\jogo.h
+1795203436 c:\users\pedro\downloads\trabalho\jogo.h
 	"Gerenciadores.h"
 	"Personagens.h"
 	"Fases.h"
@@ -1241,11 +1241,11 @@
 	<SFML/Graphics.hpp>
 	"Jogo.h"
 
-1794928619 source:c:\users\pedro\downloads\trabalho\obst_dificil.cpp
+1795216580 source:c:\users\pedro\downloads\trabalho\obst_dificil.cpp
 	"Obstaculos.h"
 	<iostream>
 
-1794928619 source:c:\users\pedro\downloads\trabalho\obst_medio.cpp
+1795216566 source:c:\users\pedro\downloads\trabalho\obst_medio.cpp
 	"Obstaculos.h"
 
 1794928619 source:c:\users\pedro\downloads\trabalho\obstaculo.cpp
@@ -1254,7 +1254,7 @@
 1794928619 source:c:\users\pedro\downloads\trabalho\personagem.cpp
 	"Personagens.h"
 
-1794928619 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
+1795216879 source:c:\users\pedro\downloads\trabalho\plataforma.cpp
 	"Obstaculos.h"
 
 1794928619 source:c:\users\pedro\downloads\trabalho\projetil.cpp
@@ -1263,21 +1263,21 @@
 1794928619 source:c:\users\pedro\downloads\trabalho\listaentidades.cpp
 	"Listas.h"
 
-1795196410 source:c:\users\pedro\downloads\trabalho\fase.cpp
+1795209536 source:c:\users\pedro\downloads\trabalho\fase.cpp
 	"Fases.h"
 
-1795195322 c:\users\pedro\downloads\trabalho\fases.h
+1795217185 c:\users\pedro\downloads\trabalho\fases.h
 	<SFML/Graphics.hpp>
 	"Listas.h"
 	"Gerenciadores.h"
 	<vector>
 
-1795196410 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
+1795216606 source:c:\users\pedro\downloads\trabalho\faseprimeira.cpp
 	"Fases.h"
 	<cstdlib>
 	<ctime>
 
-1794928619 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
+1795217235 source:c:\users\pedro\downloads\trabalho\fasesegunda.cpp
 	"Fases.h"
 
 1794271673 source:c:\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\chefao.cpp
@@ -2079,11 +2079,11 @@
 1794370796 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\gato.cpp
 	"Personagens.h"
 
-1795194874 source:c:\users\pedro\downloads\trabalho\galinha.cpp
+1795197823 source:c:\users\pedro\downloads\trabalho\galinha.cpp
 	"Personagens.h"
 	<iostream>
 
-1794928619 source:c:\users\pedro\downloads\trabalho\gato.cpp
+1795199595 source:c:\users\pedro\downloads\trabalho\gato.cpp
 	"Personagens.h"
 
 1795192101 source:c:\users\pedro\downloads\trabalho\aranha.cpp
@@ -2223,5 +2223,8 @@
 	"Entidades.h"
 
 1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\queijo.cpp
+	"Entidades.h"
+
+1795199060 source:c:\users\pedro\downloads\trabalho\novelo.cpp
 	"Entidades.h"
 

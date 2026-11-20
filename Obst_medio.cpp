@@ -17,6 +17,11 @@ void Obst_Medio::executar(){
 
 }
 
+void Obst_Medio::configurar(float x, float y)
+{
+    setPosicao(x, y);
+}
+
 void Obst_Medio::salvar(){
 
 }

@@ -135,14 +135,22 @@ public:
 
 class Gato : public Inimigo
 {
-
 private:
     short int forca;
+    float velocidadeX;
+    Jogador* pJogador;
+    sf::Clock relogioDisparo;
 
 public:
     Gato();
     ~Gato();
-    void executar();
 
+    void executar();
+    void mover();
+    void danificar(Jogador* p);
+    void inverterDirecao();
+    void salvar();
+    void setJogador(Jogador* p);
+    bool verificarAtaque();
 };
 }

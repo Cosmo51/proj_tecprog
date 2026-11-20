@@ -93,7 +93,7 @@ bool Galinha::verificarAtaque()
 
     if (distanciaX <= 250.f)
     {
-        if (relogioDisparo.getElapsedTime().asSeconds() >= 2.f)
+        if (relogioDisparo.getElapsedTime().asSeconds() >= 3.f)
         {
             relogioDisparo.restart();
             return true;

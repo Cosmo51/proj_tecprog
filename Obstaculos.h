@@ -22,6 +22,7 @@ namespace Obstaculos
         virtual void executar() = 0;
         virtual void salvar() = 0;
         virtual void obstaculizar(Jogador* p) = 0;
+        virtual void configurar(float x, float y) = 0;
 
     };
 
@@ -38,6 +39,7 @@ namespace Obstaculos
         void salvar();
         void obstaculizar(Jogador* p);
         void obstaculizar(Inimigo* p);
+        void configurar(float x, float y);
         void configurar(float x, float y, float largura, float altura);
     };
 
@@ -54,6 +56,7 @@ namespace Obstaculos
     void salvarDataBuffer();
     void executar();
     void obstaculizar(Jogador* p);
+    void configurar(float x, float y);
     void salvar();
 
     };
@@ -69,6 +72,7 @@ namespace Obstaculos
 
     void executar();
     void obstaculizar(Jogador* p);
+    void configurar(float x, float y);
     void salvar();
 
     };

@@ -4,6 +4,7 @@
 Jogo::Jogo()
 {
     fase1.setJogador(&pJog1);
+    fase2.setJogador(&pJog1);
     executar();
 }
 
@@ -25,13 +26,20 @@ void Jogo::executar()
 
         pJog1.mover();
         pJog1.saiuDoChao();
-        fase1.executar();
+        fase2.executar();
 
         if (fase1.getVenceu())
         {
             std::cout << "FASE 1 CONCLUIDA!" << std::endl;
             std::cout << "Pontuacao final: "
                       << pJog1.getPontos() << std::endl;
+            break;
+        }
+
+        if (fase2.getVenceu())
+        {
+            std::cout << "FASE 2 CONCLUIDA!" << std::endl;
+            std::cout << "Pontuacao final: " << pJog1.getPontos() << std::endl;
             break;
         }
 

@@ -26,7 +26,6 @@ public:
     void setJogador(Jogador* pJ);
 
 protected:
-    void criarInimFaceis();
     void criarInimFaceis(float x, float y, float esquerda, float direita);
     void criarPlataformas();
     virtual void criarInimgos() = 0;
@@ -40,6 +39,10 @@ private:
     std::vector<Galinha*> galinhas;
     Queijo* queijo;
     bool venceu;
+    const int maxAranhas;
+    const int maxGalinhas;
+    const int maxLamas;
+    const int maxPlataformas;
 
 public:
     FasePrimeira();
@@ -63,19 +66,31 @@ protected:
 class FaseSegunda : public Fase
 {
 private:
-    //const int maxChefoes;
+    std::vector<Gato*> gatos;
+    Queijo* queijo;
+    bool venceu;
+    const int maxGatos;
+    const int maxPlataformas;
+    const int maxAranhas;
+    const int maxRatoeiras;
 
 public:
     FaseSegunda();
     ~FaseSegunda();
 
+    void executar();
+    void setJogador(Jogador* pJ);
+    bool getVenceu() const;
+
 protected:
     void criarChefoes();
     void criarObstDificeis();
-    void criarProjeteis();
+    void criarPlataformas();
 
     void criarInimgos();
     void criarObstaculo();
+    void criarProjeteis();
+    void criarNovelo();
 };
 
 }
