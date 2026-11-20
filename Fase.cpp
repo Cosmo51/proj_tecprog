@@ -30,6 +30,7 @@ void Fase::criarInimFaceis(float x, float y, float esquerda, float direita)
     GC.incluirInimigo(aranha);
 }
 
+<<<<<<< HEAD
 void Fase::criarPlataformas()
 {
     Plataforma* chao = new Plataforma();
@@ -38,6 +39,16 @@ void Fase::criarPlataformas()
 
     lista_ents.incluir(chao);
     GC.incluirObstaculo(chao);
+=======
+void Fase::criarPlataformas()
+{
+    Plataforma* chao = new Plataforma();
+
+    chao->configurar(0.f, 740.f, 1000.f, 10.f);
+
+    lista_ents.incluir(chao);
+    GC.incluirObstaculo(chao);
+>>>>>>> 4ca3bc9b27626093d96e0e68ee8a5edadfd3c7fb
 }
 
 void Fase::criarCenario(){
