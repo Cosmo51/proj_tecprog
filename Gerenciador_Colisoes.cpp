@@ -368,3 +368,10 @@ void Gerenciador_Colisoes::executar()
 {
 
 }
+
+void Gerenciador_Colisoes::limpar()
+{
+    LIs.clear();
+    LOs.clear();
+    LPs.clear();
+}

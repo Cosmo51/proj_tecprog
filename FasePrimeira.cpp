@@ -6,9 +6,6 @@ using namespace Fases;
 
 FasePrimeira::FasePrimeira() : venceu(false), maxAranhas(5), maxGalinhas(5), maxLamas(5), maxPlataformas(10)
 {
-    // Sorteia apenas uma vez, na criacao da fase.
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
     // Cria os apoios antes de posicionar os inimigos sobre eles.
     criarObstaculo();
     criarInimgos();
@@ -316,4 +313,22 @@ void FasePrimeira::pausar(bool pausa)
         if (*it != nullptr)
             (*it)->pausar(pausa);
     }
+}
+
+void FasePrimeira::reiniciar()
+{
+    galinhas.clear();
+    GC.limpar();
+    lista_ents.limpar();
+
+    venceu = false;
+
+    criarObstaculo();
+    criarInimgos();
+
+    queijo = new Queijo();
+    queijo->setPosicao(925.f, 580.f);
+    lista_ents.incluir(queijo);
+
+    setJogador(pJogador);
 }

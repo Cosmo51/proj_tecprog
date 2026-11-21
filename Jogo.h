@@ -27,4 +27,7 @@ public:
     void iniciarJogo(int fase = 1);
     void sair();
     void pausar(bool pausa);
+    void voltarMenu();
+    int getPontuacao() const;
+    void finalizarJogo(bool venceu);
 };

@@ -68,6 +68,7 @@ public:
     void incluirObstaculo(Obstaculo* po); // novamente ele não colocou tipo.
     void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.
     void executar();
+    void limpar();
 };
 
 }

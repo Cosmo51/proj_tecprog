@@ -25,6 +25,7 @@ public:
     virtual void executar();
     void setJogador(Jogador* pJ);
     virtual void pausar(bool pausa) = 0;
+    virtual void reiniciar() = 0;
 
 protected:
     virtual void criarInimFaceis() = 0;
@@ -53,6 +54,7 @@ public:
     void setJogador(Jogador* pJ);
     bool getVenceu() const;
     void pausar(bool pausa);
+    void reiniciar();
 
 protected:
     void criarInimMedios();
@@ -85,6 +87,7 @@ public:
     void setJogador(Jogador* pJ);
     bool getVenceu() const;
     void pausar(bool pausa);
+    void reiniciar();
 
 protected:
     void criarChefoes();

@@ -259,6 +259,7 @@ public:
     void removerEntidade(int pos);
     void percorrer();
     void desenhar();
+    void limpar();
 };
 
 }

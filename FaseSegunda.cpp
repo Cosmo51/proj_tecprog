@@ -323,3 +323,21 @@ void FaseSegunda::pausar(bool pausa)
             (*it)->pausar(pausa);
     }
 }
+
+void FaseSegunda::reiniciar()
+{
+    gatos.clear();
+    GC.limpar();
+    lista_ents.limpar();
+
+    venceu = false;
+
+    criarObstaculo();
+    criarInimgos();
+
+    queijo = new Queijo();
+    queijo->setPosicao(915.f, 70.f);
+    lista_ents.incluir(queijo);
+
+    setJogador(pJogador);
+}

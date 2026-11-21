@@ -66,6 +66,7 @@ public:
     int getPontos() const;
     void prepararNovaFase();
     void pausar(bool pausa);
+    void reiniciar();
 };
 
 class Inimigo : public Personagem

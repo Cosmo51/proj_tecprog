@@ -2,6 +2,7 @@
 #include "Gerenciadores.h"
 #include "Jogo.h"
 #include <iostream>
+#include <string>
 
 Menu::Menu() : pJogo(nullptr), opcaoSelecionada(0),
                teclaCimaAnterior(false),
@@ -43,6 +44,11 @@ void Menu::executar()
 
         case 2:
             quantidadeOpcoes = 4;
+            break;
+
+        case 3:
+        case 4:
+            quantidadeOpcoes = 3;
             break;
     }
 
@@ -129,10 +135,29 @@ void Menu::executar()
                             break;
 
                         case 2:
-                            std::cout << "Menu principal" << std::endl;
+                            pJogo->voltarMenu();
                             break;
 
                         case 3:
+                            pJogo->sair();
+                            return;
+                    }
+                    break;
+
+                // Game Over e Vitoria
+                case 3:
+                case 4:
+                    switch (opcaoSelecionada)
+                    {
+                        case 0:
+                            pJogo->iniciarJogo();
+                            break;
+
+                        case 1:
+                            pJogo->voltarMenu();
+                            break;
+
+                        case 2:
                             pJogo->sair();
                             return;
                     }
@@ -150,6 +175,7 @@ void Menu::executar()
     titulo.setCharacterSize(50);
     titulo.setFillColor(sf::Color::Yellow);
 
+    // Desenha o menu principal
     if (tipoMenu == 0)
     {
         titulo.setString("RATINHO NA FAZENDA");
@@ -189,6 +215,8 @@ void Menu::executar()
             pGG->desenharTexto(texto);
         }
     }
+
+    // Desenha o menu de selecao de fases
     else if (tipoMenu == 1)
     {
         titulo.setString("SELECIONAR FASE");
@@ -224,6 +252,8 @@ void Menu::executar()
             pGG->desenharTexto(texto);
         }
     }
+
+    // Desenha o menu de pausa
     else if (tipoMenu == 2)
     {
         titulo.setString("JOGO PAUSADO");
@@ -246,6 +276,70 @@ void Menu::executar()
         };
 
         for (int i = 0; i < 4; i++)
+        {
+            sf::Text texto(fonte);
+
+            texto.setString(opcoes[i]);
+            texto.setCharacterSize(35);
+            texto.setPosition({posicoes[i][0], posicoes[i][1]});
+
+            if (i == opcaoSelecionada)
+                texto.setFillColor(sf::Color::Yellow);
+            else
+                texto.setFillColor(sf::Color::White);
+
+            pGG->desenharTexto(texto);
+        }
+    }
+
+    // Desenha as telas de Game Over e Vitoria
+    else if (tipoMenu == 3 || tipoMenu == 4)
+    {
+        if (tipoMenu == 3)
+        {
+            titulo.setString("GAME OVER");
+            titulo.setFillColor(sf::Color::Red);
+            titulo.setPosition({345.f, 100.f});
+        }
+        else
+        {
+            titulo.setString("VITORIA!");
+            titulo.setFillColor(sf::Color::Green);
+            titulo.setPosition({390.f, 100.f});
+        }
+
+        pGG->desenharTexto(titulo);
+
+        // Pontuacao final
+        sf::Text pontuacao(fonte);
+
+        if (pJogo != nullptr)
+        {
+            pontuacao.setString(
+                "Pontuacao final: " +
+                std::to_string(pJogo->getPontuacao())
+            );
+        }
+
+        pontuacao.setCharacterSize(30);
+        pontuacao.setFillColor(sf::Color::White);
+        pontuacao.setPosition({350.f, 200.f});
+
+        pGG->desenharTexto(pontuacao);
+
+        const std::string opcoes[3] = {
+            "Jogar novamente",
+            "Menu principal",
+            "Sair"
+        };
+
+        const float posicoes[][2] = {
+            {365.f, 325.f},
+            {380.f, 400.f},
+            {470.f, 475.f}
+        };
+
+        for (int i = 0; i < 3; i++)
         {
             sf::Text texto(fonte);
 

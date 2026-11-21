@@ -83,10 +83,8 @@ void Jogo::executar()
 
         if (pJog1.getVidas() <= 0)
         {
-            std::cout << "GAME OVER!" << std::endl;
-            std::cout << "Pontuacao final: "
-                      << pJog1.getPontos() << std::endl;
-            break;
+            finalizarJogo(false);
+            continue;
         }
 
         if (faseAtual == 1 && fase1.getVenceu())
@@ -103,10 +101,8 @@ void Jogo::executar()
 
         if (faseAtual == 2 && fase2.getVenceu())
         {
-            std::cout << "FASE 2 CONCLUIDA!" << std::endl;
-            std::cout << "Pontuacao final: "
-                      << pJog1.getPontos() << std::endl;
-            break;
+            finalizarJogo(true);
+            continue;
         }
 
         pJog1.desenhar();
@@ -117,7 +113,14 @@ void Jogo::executar()
 
 void Jogo::iniciarJogo(int fase)
 {
+    pJog1.reiniciar();
+
+    fase1.reiniciar();
+    fase2.reiniciar();
+
     faseAtual = fase;
+
+    pausado = false;
     noMenu = false;
 }
 
@@ -146,6 +149,30 @@ void Jogo::pausar(bool pausa)
     {
         std::cout << "JOGO RETOMADO!" << std::endl;
     }
+}
+
+void Jogo::voltarMenu()
+{
+    pausado = false;
+    noMenu = true;
+
+    menu.setTipoMenu(0);
+}
+
+int Jogo::getPontuacao() const
+{
+    return pJog1.getPontos();
+}
+
+void Jogo::finalizarJogo(bool venceu)
+{
+    pausado = false;
+    noMenu = true;
+
+    if (venceu)
+        menu.setTipoMenu(4);
+    else
+        menu.setTipoMenu(3);
 }
 
 

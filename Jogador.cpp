@@ -212,5 +212,15 @@ void Jogador::pausar(bool pausa)
         relogioDano.start();
 }
 
+void Jogador::reiniciar()
+{
+    inicializa();
+    prepararNovaFase();
+
+    num_vidas = 3;
+
+    relogioDano.restart();
+}
+
 
 
