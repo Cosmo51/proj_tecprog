@@ -58,6 +58,73 @@ void FasePrimeira::executar()
     lista_ents.desenhar();
 }
 
+void FasePrimeira::criarInimFaceis()
+{
+    const float posicoes[][4] = {
+        {435.f, 445.f, 380.f, 530.f},
+        {320.f, 705.f, 0.f, 1000.f},
+        {650.f, 705.f, 0.f, 1000.f},
+        {240.f, 575.f, 190.f, 330.f},
+        {780.f, 705.f, 0.f, 1000.f}
+    };
+
+    int quantidadeAranhas = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (quantidadeAranhas < maxAranhas &&
+            (i < 3 || std::rand() % 100 < 50))
+        {
+            Aranha* aranha = new Aranha();
+
+            aranha->setPosicao(posicoes[i][0], posicoes[i][1]);
+            aranha->configurarPatrulha(
+                posicoes[i][2],
+                posicoes[i][3]
+            );
+
+            lista_ents.incluir(aranha);
+            GC.incluirInimigo(aranha);
+
+            quantidadeAranhas++;
+        }
+    }
+
+    // Plataforma central superior: aranha OU galinha opcional
+    if (std::rand() % 100 < 50)
+    {
+        if (std::rand() % 2 == 0)
+        {
+            if (quantidadeAranhas < maxAranhas)
+            {
+                Aranha* aranha = new Aranha();
+
+                aranha->setPosicao(610.f, 315.f);
+                aranha->configurarPatrulha(555.f, 695.f);
+
+                lista_ents.incluir(aranha);
+                GC.incluirInimigo(aranha);
+
+                quantidadeAranhas++;
+            }
+        }
+        else if (static_cast<int>(galinhas.size()) < maxGalinhas)
+        {
+            Galinha* g = new Galinha();
+
+            g->setPosicao(610.f, 305.f);
+            g->configurarPatrulha(555.f, 695.f);
+
+            if (pJogador != nullptr)
+                g->setJogador(pJogador);
+
+            galinhas.push_back(g);
+            lista_ents.incluir(g);
+            GC.incluirInimigo(g);
+        }
+    }
+}
+
 void FasePrimeira::criarInimMedios()
 {
     const float posicoes[][4] = {
@@ -117,7 +184,13 @@ void FasePrimeira::criarObstMedios()
 
 void FasePrimeira::criarPlataformas()
 {
-    Fase::criarPlataformas();
+    // Chao obrigatorio
+    Plataforma* chao = new Plataforma();
+
+    chao->configurar(0.f, 740.f, 1000.f, 10.f);
+
+    lista_ents.incluir(chao);
+    GC.incluirObstaculo(chao);
 
     const float posicoes[][4] = {
         {190.f, 610.f, 140.f, 10.f},
@@ -176,63 +249,8 @@ void FasePrimeira::criarPlataformas()
 
 void FasePrimeira::criarInimgos()
 {
-    // Aranhas obrigatorias
-    Fase::criarInimFaceis(435.f, 445.f, 380.f, 530.f);
-    Fase::criarInimFaceis(320.f, 705.f, 0.f, 1000.f);
-    Fase::criarInimFaceis(650.f, 705.f, 0.f, 1000.f);
-
-    int quantidadeAranhas = 3;
-
-    // Aranhas opcionais
-    const float opcionais[][4] = {
-        {240.f, 575.f, 190.f, 330.f},
-        {780.f, 705.f, 0.f, 1000.f}
-    };
-
-    for (int i = 0; i < 2; i++)
-    {
-        if (quantidadeAranhas < maxAranhas &&
-            std::rand() % 100 < 50)
-        {
-            Fase::criarInimFaceis(
-                opcionais[i][0],
-                opcionais[i][1],
-                opcionais[i][2],
-                opcionais[i][3]
-            );
-
-            quantidadeAranhas++;
-        }
-    }
-
     criarInimMedios();
-
-    // Plataforma central superior: aranha OU galinha opcional
-    if (std::rand() % 100 < 50)
-    {
-        if (std::rand() % 2 == 0)
-        {
-            if (quantidadeAranhas < maxAranhas)
-            {
-                Fase::criarInimFaceis(610.f, 315.f, 555.f, 695.f);
-                quantidadeAranhas++;
-            }
-        }
-        else if (static_cast<int>(galinhas.size()) < maxGalinhas)
-        {
-            Galinha* g = new Galinha();
-
-            g->setPosicao(610.f, 305.f);
-            g->configurarPatrulha(555.f, 695.f);
-
-            if (pJogador != nullptr)
-                g->setJogador(pJogador);
-
-            galinhas.push_back(g);
-            lista_ents.incluir(g);
-            GC.incluirInimigo(g);
-        }
-    }
+    criarInimFaceis();
 }
 
 void FasePrimeira::criarObstaculo()
@@ -288,4 +306,14 @@ void FasePrimeira::criarOvo()
 bool FasePrimeira::getVenceu() const
 {
     return venceu;
+}
+
+void FasePrimeira::pausar(bool pausa)
+{
+    for (std::vector<Galinha*>::iterator it = galinhas.begin();
+         it != galinhas.end(); it++)
+    {
+        if (*it != nullptr)
+            (*it)->pausar(pausa);
+    }
 }

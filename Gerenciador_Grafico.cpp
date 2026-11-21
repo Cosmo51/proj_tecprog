@@ -35,7 +35,9 @@ void Gerenciador_Grafico::tratarEventos()
 }
 
 void Gerenciador_Grafico::limpar() { janela.clear(); }
+
 void Gerenciador_Grafico::mostrar() { janela.display(); }
+
 bool Gerenciador_Grafico::teclaPressionada(sf::Keyboard::Key tecla) const
 {
     return sf::Keyboard::isKeyPressed(tecla);
@@ -81,4 +83,14 @@ sf::Vector2f Gerenciador_Grafico::obterTamanho(const sf::RectangleShape& figura)
 sf::FloatRect Gerenciador_Grafico::obterLimites(const sf::RectangleShape& figura) const
 {
     return figura.getGlobalBounds();
+}
+
+void Gerenciador_Grafico::desenharTexto(const sf::Text& texto)
+{
+    janela.draw(texto);
+}
+
+void Gerenciador_Grafico::fechar()
+{
+    janela.close();
 }

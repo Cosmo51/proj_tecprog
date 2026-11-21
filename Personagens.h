@@ -64,6 +64,8 @@ public:
     void impulsionar();
     void adicionarPontos(int valor);
     int getPontos() const;
+    void prepararNovaFase();
+    void pausar(bool pausa);
 };
 
 class Inimigo : public Personagem
@@ -131,6 +133,7 @@ public:
     void setJogador(Jogador* p);
     bool verificarAtaque();
     void inverterDirecao();
+    void pausar(bool pausa);
 };
 
 class Gato : public Inimigo
@@ -152,5 +155,6 @@ public:
     void salvar();
     void setJogador(Jogador* p);
     bool verificarAtaque();
+    void pausar(bool pausa);
 };
 }

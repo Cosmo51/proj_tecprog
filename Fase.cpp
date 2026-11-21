@@ -15,26 +15,6 @@ void Fase::executar(){
 
 }
 
-void Fase::criarInimFaceis(float x, float y, float esquerda, float direita)
-{
-    Aranha* aranha = new Aranha();
-    aranha->setPosicao(x, y);
-    aranha->configurarPatrulha(esquerda, direita);
-
-    lista_ents.incluir(aranha);
-    GC.incluirInimigo(aranha);
-}
-
-void Fase::criarPlataformas()
-{
-    Plataforma* chao = new Plataforma();
-
-    chao->configurar(0.f, 740.f, 1000.f, 10.f);
-
-    lista_ents.incluir(chao);
-    GC.incluirObstaculo(chao);
-}
-
 void Fase::criarCenario(){
 
 }

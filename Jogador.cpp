@@ -191,5 +191,26 @@ int Jogador::getPontos() const{
     return pontos;
 }
 
+void Jogador::prepararNovaFase()
+{
+    setPosicao(20.f, 695.f);
+    posicaoAnterior = getPosicao();
+
+    velX = 0.5f;
+    velY = 0.f;
+    impulsoX = 0.f;
+
+    noChao = false;
+    invulneravel = false;
+}
+
+void Jogador::pausar(bool pausa)
+{
+    if (pausa)
+        relogioDano.stop();
+    else
+        relogioDano.start();
+}
+
 
 

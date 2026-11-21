@@ -108,6 +108,14 @@ void Galinha::inverterDirecao()
     velocidadeX = -velocidadeX;
 }
 
+void Galinha::pausar(bool pausa)
+{
+    if (pausa)
+        relogioDisparo.stop();
+    else
+        relogioDisparo.start();
+}
+
 
 
 

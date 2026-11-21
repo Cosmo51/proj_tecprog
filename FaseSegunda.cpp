@@ -52,6 +52,67 @@ void FaseSegunda::executar()
     lista_ents.desenhar();
 }
 
+void FaseSegunda::criarInimFaceis()
+{
+    const float posicoes[][4] = {
+        {165.f, 705.f, 0.f, 1000.f},
+        {305.f, 590.f, 235.f, 375.f},
+        {575.f, 30.f, 550.f, 690.f},
+        {585.f, 260.f, 485.f, 625.f},
+        {535.f, 515.f, 445.f, 585.f}
+    };
+
+    int quantidadeAranhas = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (quantidadeAranhas < maxAranhas &&
+            (i < 3 || std::rand() % 100 < 50))
+        {
+            Aranha* aranha = new Aranha();
+
+            aranha->setPosicao(posicoes[i][0], posicoes[i][1]);
+            aranha->configurarPatrulha(
+                posicoes[i][2],
+                posicoes[i][3]
+            );
+
+            lista_ents.incluir(aranha);
+            GC.incluirInimigo(aranha);
+
+            quantidadeAranhas++;
+        }
+    }
+
+    // Inimigo XOR na plataforma direita
+    if (std::rand() % 2 == 0)
+    {
+        if (quantidadeAranhas < maxAranhas)
+        {
+            Aranha* aranha = new Aranha();
+
+            aranha->setPosicao(855.f, 470.f);
+            aranha->configurarPatrulha(805.f, 945.f);
+
+            lista_ents.incluir(aranha);
+            GC.incluirInimigo(aranha);
+
+            quantidadeAranhas++;
+        }
+    }
+    else if (static_cast<int>(gatos.size()) < maxGatos)
+    {
+        Gato* gato = new Gato();
+
+        gato->setPosicao(845.f, 460.f);
+        gato->configurarPatrulha(805.f, 945.f);
+
+        gatos.push_back(gato);
+        lista_ents.incluir(gato);
+        GC.incluirInimigo(gato);
+    }
+}
+
 void FaseSegunda::criarChefoes()
 {
     const float posicoes[][4] = {
@@ -98,7 +159,13 @@ void FaseSegunda::criarChefoes()
 
 void FaseSegunda::criarPlataformas()
 {
-    Fase::criarPlataformas();
+    // Chao obrigatorio
+    Plataforma* chao = new Plataforma();
+
+    chao->configurar(0.f, 740.f, 1000.f, 10.f);
+
+    lista_ents.incluir(chao);
+    GC.incluirObstaculo(chao);
 
     const float posicoes[][4] = {
         {110.f, 640.f, 10.f, 100.f},
@@ -220,60 +287,8 @@ void FaseSegunda::criarNovelo()
 
 void FaseSegunda::criarInimgos()
 {
-    // Aranhas obrigatorias
-    Fase::criarInimFaceis(165.f, 705.f, 0.f, 1000.f);
-    Fase::criarInimFaceis(305.f, 590.f, 235.f, 375.f);
-    Fase::criarInimFaceis(575.f, 30.f, 550.f, 690.f);
-
-    int quantidadeAranhas = 3;
-
-    // Aranhas opcionais
-    const float opcionais[][4] = {
-        {585.f, 260.f, 485.f, 625.f},
-        {535.f, 515.f, 445.f, 585.f}
-    };
-
-    for (int i = 0; i < 2; i++)
-    {
-        if (quantidadeAranhas < maxAranhas &&
-            std::rand() % 100 < 50)
-        {
-            Fase::criarInimFaceis(
-                opcionais[i][0],
-                opcionais[i][1],
-                opcionais[i][2],
-                opcionais[i][3]
-            );
-
-            quantidadeAranhas++;
-        }
-    }
-
     criarChefoes();
-
-    // Inimigo XOR na plataforma direita
-    if (std::rand() % 2 == 0)
-    {
-        if (quantidadeAranhas < maxAranhas)
-        {
-            Fase::criarInimFaceis(855.f, 470.f, 805.f, 945.f);
-            quantidadeAranhas++;
-        }
-    }
-    else
-    {
-        if (static_cast<int>(gatos.size()) < maxGatos)
-        {
-            Gato* gato = new Gato();
-
-            gato->setPosicao(845.f, 460.f);
-            gato->configurarPatrulha(805.f, 945.f);
-
-            gatos.push_back(gato);
-            lista_ents.incluir(gato);
-            GC.incluirInimigo(gato);
-        }
-    }
+    criarInimFaceis();
 }
 
 void FaseSegunda::criarObstaculo()
@@ -297,4 +312,14 @@ void FaseSegunda::setJogador(Jogador* pJ)
 bool FaseSegunda::getVenceu() const
 {
     return venceu;
+}
+
+void FaseSegunda::pausar(bool pausa)
+{
+    for (std::vector<Gato*>::iterator it = gatos.begin();
+         it != gatos.end(); it++)
+    {
+        if (*it != nullptr)
+            (*it)->pausar(pausa);
+    }
 }

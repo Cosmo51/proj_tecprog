@@ -24,10 +24,11 @@ public:
 
     virtual void executar();
     void setJogador(Jogador* pJ);
+    virtual void pausar(bool pausa) = 0;
 
 protected:
-    void criarInimFaceis(float x, float y, float esquerda, float direita);
-    void criarPlataformas();
+    virtual void criarInimFaceis() = 0;
+    virtual void criarPlataformas() = 0;
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
     void criarCenario();
@@ -51,9 +52,11 @@ public:
     void executar();
     void setJogador(Jogador* pJ);
     bool getVenceu() const;
+    void pausar(bool pausa);
 
 protected:
     void criarInimMedios();
+    void criarInimFaceis();
     void criarPlataformas();
     void criarObstMedios();
 
@@ -81,9 +84,11 @@ public:
     void executar();
     void setJogador(Jogador* pJ);
     bool getVenceu() const;
+    void pausar(bool pausa);
 
 protected:
     void criarChefoes();
+    void criarInimFaceis();
     void criarObstDificeis();
     void criarPlataformas();
 

@@ -11,11 +11,6 @@ Projetil::~Projetil()
 
 }
 
-void Projetil::executar()
-{
-
-}
-
 void Projetil::salvar()
 {
 

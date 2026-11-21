@@ -111,5 +111,13 @@ bool Gato::verificarAtaque()
     return false;
 }
 
+void Gato::pausar(bool pausa)
+{
+    if (pausa)
+        relogioDisparo.stop();
+    else
+        relogioDisparo.start();
+}
+
 
 

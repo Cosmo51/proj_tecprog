@@ -39,6 +39,8 @@ public:
     sf::Vector2f obterPosicao(const sf::RectangleShape& figura) const;
     sf::Vector2f obterTamanho(const sf::RectangleShape& figura) const;
     sf::FloatRect obterLimites(const sf::RectangleShape& figura) const;
+    void desenharTexto(const sf::Text& texto);
+    void fechar();
 };
 
 class Gerenciador_Colisoes
