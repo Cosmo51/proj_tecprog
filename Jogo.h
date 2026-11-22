@@ -1,8 +1,10 @@
 #pragma once
+#include <string>
 #include "Gerenciadores.h"
 #include "Personagens.h"
 #include "Fases.h"
 #include "Menu.h"
+#include "Ranking.h"
 
 using namespace Personagens;
 using namespace Fases;
@@ -13,6 +15,8 @@ class Jogo
 private:
     Gerenciador_Grafico GG;
     Jogador pJog1;
+    Ranking ranking;
+    std::string nomeJogador;
     FasePrimeira fase1;
     FaseSegunda fase2;
     Menu menu;
@@ -30,4 +34,7 @@ public:
     void voltarMenu();
     int getPontuacao() const;
     void finalizarJogo(bool venceu);
+    void setNomeJogador(const std::string& nome);
+    const std::string& getNomeJogador() const;
+    Ranking& getRanking();
 };

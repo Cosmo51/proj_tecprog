@@ -31,6 +31,10 @@ void Gerenciador_Grafico::tratarEventos()
     {
         if (evento->is<sf::Event::Closed>())
             janela.close();
+
+            if (const auto* texto = evento-> getIf<sf::Event::TextEntered>()){
+                caracteresDigitados.push(texto->unicode);
+            }
     }
 }
 
@@ -93,4 +97,15 @@ void Gerenciador_Grafico::desenharTexto(const sf::Text& texto)
 void Gerenciador_Grafico::fechar()
 {
     janela.close();
+}
+
+bool Gerenciador_Grafico::obterCaractereDigitado(char32_t& caractere)
+{
+    if (caracteresDigitados.empty())
+        return false;
+
+    caractere = caracteresDigitados.front();
+    caracteresDigitados.pop();
+
+    return true;
 }

@@ -41,10 +41,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="C:/Users/pedro/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/include" />
+			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/Users/pedro/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
+			<Add directory="C:/Users/leona/Downloads/SFML-3.1.0-windows-gcc-14.2.0-mingw-64-bit/SFML-3.1.0/lib" />
 		</Linker>
 		<Unit filename="Aranha.cpp" />
 		<Unit filename="Ente.cpp" />
@@ -81,6 +81,8 @@
 		<Unit filename="Plataforma.cpp" />
 		<Unit filename="Projetil.cpp" />
 		<Unit filename="Queijo.cpp" />
+		<Unit filename="Ranking.cpp" />
+		<Unit filename="Ranking.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

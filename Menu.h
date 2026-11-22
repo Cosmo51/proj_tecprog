@@ -1,5 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include <string>
 #include "Ente.h"
 
 class Jogo;
@@ -14,6 +15,8 @@ private:
     bool teclaBaixoAnterior;
     bool teclaEnterAnterior;
     int tipoMenu;
+    std::string nomeJogador;
+    bool teclaBackspaceAnterior;
 
 public:
     Menu();
@@ -21,4 +24,5 @@ public:
     void executar();
     void setJogo(Jogo* pJ);
     void setTipoMenu(int tipo);
+    const std::string& getNomeJogador() const;
 };

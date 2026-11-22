@@ -3,6 +3,7 @@
 #include<vector>
 #include<list>
 #include <set>
+#include <queue>
 #include "Obstaculos.h"
 #include "Entidades.h"
 #include "Personagens.h"
@@ -21,6 +22,7 @@ class Gerenciador_Grafico
 {
 private:
     sf::RenderWindow janela;
+    std::queue<char32_t> caracteresDigitados;
 
 public:
     Gerenciador_Grafico();
@@ -41,6 +43,7 @@ public:
     sf::FloatRect obterLimites(const sf::RectangleShape& figura) const;
     void desenharTexto(const sf::Text& texto);
     void fechar();
+    bool obterCaractereDigitado(char32_t& caractere);
 };
 
 class Gerenciador_Colisoes

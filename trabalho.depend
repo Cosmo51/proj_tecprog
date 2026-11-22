@@ -2097,139 +2097,162 @@
 1794928619 source:c:\users\pedro\downloads\trabalho\ovo.cpp
 	"Entidades.h"
 
-1795031854 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ovo.cpp
+1795317841 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ovo.cpp
 	"Entidades.h"
 
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\entidades.h
+1795317837 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\entidades.h
 	<SFML/Graphics.hpp>
 	"Ente.h"
 
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ente.h
+1795317837 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ente.h
 	<SFML/Graphics.hpp>
 
-1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\aranha.cpp
+1795317836 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\aranha.cpp
 	"Personagens.h"
 
-1795031413 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\personagens.h
+1795317841 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\personagens.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ente.cpp
+1795317837 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ente.cpp
 	"Ente.h"
 	"Gerenciadores.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\entidade.cpp
+1795317837 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\entidade.cpp
 	"Entidades.h"
 
-1795035064 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fase.cpp
+1795317837 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fase.cpp
 	"Fases.h"
 
-1795035064 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fases.h
+1795317837 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fases.h
 	<SFML/Graphics.hpp>
 	"Listas.h"
 	"Gerenciadores.h"
 	<vector>
 
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\listas.h
+1795317839 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\listas.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciadores.h
+1795320603 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciadores.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<list>
 	<set>
+	<queue>
 	"Obstaculos.h"
 	"Entidades.h"
 	"Personagens.h"
 	"Listas.h"
 
-1794972818 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obstaculos.h
+1795317841 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obstaculos.h
 	<SFML/Graphics.hpp>
 	"Entidades.h"
 	"Personagens.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\faseprimeira.cpp
+1795317837 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\faseprimeira.cpp
 	"Fases.h"
 	<cstdlib>
 	<ctime>
 
-1795034948 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fasesegunda.cpp
+1795317838 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\fasesegunda.cpp
 	"Fases.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\galinha.cpp
+1795317838 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\galinha.cpp
 	"Personagens.h"
 	<iostream>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gato.cpp
+1795317838 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gato.cpp
 	"Personagens.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciador_colisoes.cpp
+1795317838 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciador_colisoes.cpp
 	"Gerenciadores.h"
 	<iostream>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciador_grafico.cpp
+1795320603 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\gerenciador_grafico.cpp
 	"Gerenciadores.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\inimigo.cpp
+1795317838 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\inimigo.cpp
 	"Personagens.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogador.cpp
+1795317839 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogador.cpp
 	"Personagens.h"
 	<iostream>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogo.cpp
+1795322532 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogo.cpp
 	"Jogo.h"
 	<iostream>
 
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogo.h
+1795322532 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\jogo.h
+	<string>
 	"Gerenciadores.h"
 	"Personagens.h"
 	"Fases.h"
+	"Menu.h"
+	"Ranking.h"
 
 1794799262 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\limitesgeograficos.cpp
 	"Obstaculos.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\listaentidades.cpp
+1795317839 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\listaentidades.cpp
 	"Listas.h"
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\main.cpp
-	<SFML/Graphics.hpp>
+1795320187 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\main.cpp
 	"Jogo.h"
+	<cstdlib>
+	<ctime>
+	"Ranking.h"
+	<iostream>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\menu.cpp
+1795322485 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\menu.cpp
 	"Menu.h"
-
-1794972819 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\menu.h
-	<SFML/Graphics.hpp>
-	"Ente.h"
+	"Gerenciadores.h"
 	"Jogo.h"
+	<iostream>
+	<string>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obst_dificil.cpp
+1795320988 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\menu.h
+	<SFML/Graphics.hpp>
+	<string>
+	"Ente.h"
+
+1795317840 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obst_dificil.cpp
 	"Obstaculos.h"
 	<iostream>
 
-1794972819 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obst_medio.cpp
+1795317840 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obst_medio.cpp
 	"Obstaculos.h"
 
-1794972820 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obstaculo.cpp
+1795317840 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\obstaculo.cpp
 	"Obstaculos.h"
 
-1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\personagem.cpp
+1795317841 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\personagem.cpp
 	"Personagens.h"
 
-1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\plataforma.cpp
+1795317841 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\plataforma.cpp
 	"Obstaculos.h"
 
-1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\projetil.cpp
+1795317835 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\projetil.cpp
 	"Entidades.h"
 
 1795195322 source:c:\users\pedro\downloads\trabalho\queijo.cpp
 	"Entidades.h"
 
-1794972818 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\queijo.cpp
+1795317835 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\queijo.cpp
 	"Entidades.h"
 
 1795199060 source:c:\users\pedro\downloads\trabalho\novelo.cpp
 	"Entidades.h"
+
+1795317840 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\novelo.cpp
+	"Entidades.h"
+
+1795319636 source:c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ranking.cpp
+	"Ranking.h"
+	<fstream>
+
+1795319779 c:\users\leona\onedrive\codigos\sem_02\tec_prog\proj_tecprog-main\proj_tecprog-main\proj_tecprog-main\ranking.h
+	<map>
+	<string>
+	<utility>
 

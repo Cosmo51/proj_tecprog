@@ -113,6 +113,7 @@ void Jogo::executar()
 
 void Jogo::iniciarJogo(int fase)
 {
+
     pJog1.reiniciar();
 
     fase1.reiniciar();
@@ -169,11 +170,27 @@ void Jogo::finalizarJogo(bool venceu)
     pausado = false;
     noMenu = true;
 
+    ranking.adicionarPontuacao(pJog1.getPontos(), nomeJogador);
+    ranking.salvar();
+
     if (venceu)
         menu.setTipoMenu(4);
     else
         menu.setTipoMenu(3);
 }
 
+void Jogo::setNomeJogador(const std::string& nome)
+{
+    nomeJogador = nome;
+}
 
+const std::string& Jogo::getNomeJogador() const
+{
+    return nomeJogador;
+}
+
+Ranking& Jogo::getRanking()
+{
+    return ranking;
+}
 

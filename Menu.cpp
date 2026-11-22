@@ -8,7 +8,8 @@ Menu::Menu() : pJogo(nullptr), opcaoSelecionada(0),
                teclaCimaAnterior(false),
                teclaBaixoAnterior(false),
                teclaEnterAnterior(false),
-               tipoMenu(0)
+               tipoMenu(0),
+               nomeJogador("")
 {
     if (!fonte.openFromFile("arial.ttf"))
     {
@@ -32,6 +33,34 @@ void Menu::executar()
 
     int quantidadeOpcoes = 0;
 
+
+if (tipoMenu == 5)
+{
+    char32_t caractere;
+
+    while (pGG->obterCaractereDigitado(caractere))
+    {
+
+        if (caractere >= 32 && caractere <= 126 &&
+            nomeJogador.size() < 16)
+        {
+            nomeJogador += static_cast<char>(caractere);
+        }
+    }
+
+
+    bool teclaBackspaceAtual =
+        pGG->teclaPressionada(sf::Keyboard::Key::Backspace);
+
+    if (teclaBackspaceAtual && !teclaBackspaceAnterior &&
+        !nomeJogador.empty())
+    {
+        nomeJogador.pop_back();
+    }
+
+    teclaBackspaceAnterior = teclaBackspaceAtual;
+}
+
     switch (tipoMenu)
     {
         case 0:
@@ -49,6 +78,9 @@ void Menu::executar()
         case 3:
         case 4:
             quantidadeOpcoes = 3;
+            break;
+        case 6:
+            quantidadeOpcoes = 1;
             break;
     }
 
@@ -71,7 +103,8 @@ void Menu::executar()
     }
 
     // Confirmacao da opcao
-    if (teclaEnterAtual && !teclaEnterAnterior)
+    if (tipoMenu != 5 &&
+    teclaEnterAtual && !teclaEnterAnterior)
     {
         if (pJogo != nullptr)
         {
@@ -82,7 +115,8 @@ void Menu::executar()
                     switch (opcaoSelecionada)
                     {
                         case 0:
-                            pJogo->iniciarJogo();
+                            nomeJogador.clear();
+                            setTipoMenu(5);
                             break;
 
                         case 1:
@@ -94,12 +128,13 @@ void Menu::executar()
                             break;
 
                         case 3:
-                            std::cout << "Ranking" << std::endl;
+                            setTipoMenu(6);
                             break;
 
                         case 4:
                             pJogo->sair();
                             return;
+
                     }
                     break;
 
@@ -144,6 +179,7 @@ void Menu::executar()
                     }
                     break;
 
+
                 // Game Over e Vitoria
                 case 3:
                 case 4:
@@ -162,7 +198,22 @@ void Menu::executar()
                             return;
                     }
                     break;
+
+                case 6:
+                    setTipoMenu(0);
+                    break;
             }
+        }
+    }
+
+        // Confirmacao do nome
+    if (tipoMenu == 5 &&
+        teclaEnterAtual && !teclaEnterAnterior)
+    {
+        if (!nomeJogador.empty() && pJogo != nullptr)
+        {
+            pJogo->setNomeJogador(nomeJogador);
+            pJogo->iniciarJogo();
         }
     }
 
@@ -355,6 +406,83 @@ void Menu::executar()
             pGG->desenharTexto(texto);
         }
     }
+
+        else if (tipoMenu == 6)
+        {
+        titulo.setString("RANKING");
+        titulo.setPosition({390.f, 100.f});
+        const auto& pontuacoes = pJogo->getRanking().getPontuacoes();
+
+            int posicao = 1;
+            float altura = 170.f;
+
+            for (auto it = pontuacoes.rbegin();
+                 it != pontuacoes.rend() && posicao <= 10;
+                 ++it)
+            {
+                sf::Text texto(fonte);
+
+                texto.setString(
+                    std::to_string(posicao) + ". " +
+                    it->second + " - " +
+                    std::to_string(it->first) + " pontos"
+                );
+
+                texto.setCharacterSize(27);
+                texto.setFillColor(sf::Color::White);
+                texto.setPosition({300.f, altura});
+
+                pGG->desenharTexto(texto);
+
+                altura += 40.f;
+                posicao++;
+            }
+
+            sf::Text voltar(fonte);
+
+            voltar.setString("ENTER - Voltar");
+            voltar.setCharacterSize(25);
+            voltar.setFillColor(sf::Color::Yellow);
+            voltar.setPosition({400.f, 600.f});
+
+            pGG->desenharTexto(voltar);
+        }
+
+                    // Tela de entrada do nome
+        else if (tipoMenu == 5)
+        {
+            titulo.setString("NOVO JOGO");
+            titulo.setPosition({350.f, 150.f});
+
+            pGG->desenharTexto(titulo);
+
+            sf::Text instrucao(fonte);
+
+            instrucao.setString("Digite seu nome:");
+            instrucao.setCharacterSize(30);
+            instrucao.setFillColor(sf::Color::White);
+            instrucao.setPosition({350.f, 300.f});
+
+            pGG->desenharTexto(instrucao);
+
+            sf::Text nome(fonte);
+
+            nome.setString(nomeJogador + "_");
+            nome.setCharacterSize(35);
+            nome.setFillColor(sf::Color::Yellow);
+            nome.setPosition({350.f, 370.f});
+
+            pGG->desenharTexto(nome);
+
+            sf::Text ajuda(fonte);
+
+            ajuda.setString("ENTER - Confirmar | BACKSPACE - Apagar");
+            ajuda.setCharacterSize(20);
+            ajuda.setFillColor(sf::Color::White);
+            ajuda.setPosition({250.f, 470.f});
+
+            pGG->desenharTexto(ajuda);
+        }
 }
 
 void Menu::setJogo(Jogo* pJ)
