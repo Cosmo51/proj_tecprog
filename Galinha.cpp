@@ -18,8 +18,49 @@ Galinha::~Galinha(){
 
 }
 
-void Galinha::salvar(){
+void Galinha::salvar()
+{
+    std::ofstream arquivo("inimigos.txt", std::ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Galinha" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << " "
+                << limiteEsquerdo << " "
+                << limiteDireito << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Galinha::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+    float esquerda, direita;
+
+    if (arquivo >> posX >> posY
+                >> velX >> velY
+                >> esquerda >> direita)
+    {
+        setPosicao(posX, posY);
+
+        posicaoAnterior = getPosicao();
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        configurarPatrulha(esquerda, direita);
+
+        relogioDisparo.restart();
+
+        return true;
+    }
+
+    return false;
 }
 
 void Galinha::danificar(Jogador* p)

@@ -1,5 +1,6 @@
 #include "Personagens.h"
 #include <iostream>
+#include <fstream>
 
 using namespace Personagens;
 
@@ -29,8 +30,28 @@ void Jogador::executar(){
 
 }
 
-void Jogador::salvar(){
+void Jogador::salvar()
+{
+    std::ofstream arquivo("jogador.txt");
 
+    if (!arquivo.is_open())
+    {
+        std::cout << "Erro ao salvar jogador!" << std::endl;
+        return;
+    }
+
+    arquivo << getPosicao().x << " "
+            << getPosicao().y << std::endl;
+
+    arquivo << num_vidas << std::endl;
+    arquivo << pontos << std::endl;
+
+    arquivo << velX << " "
+            << velY << std::endl;
+
+    arquivo << noChao << std::endl;
+
+    arquivo.close();
 }
 
 void Jogador::inicializa()
@@ -220,6 +241,51 @@ void Jogador::reiniciar()
     num_vidas = 3;
 
     relogioDano.restart();
+}
+
+bool Jogador::carregar()
+{
+    std::ifstream arquivo("jogador.txt");
+
+    if (!arquivo.is_open())
+    {
+        std::cout << "Erro ao carregar jogador!" << std::endl;
+        return false;
+    }
+
+    float posX, posY;
+    int vidasSalvas, pontosSalvos;
+    float velXSalva, velYSalva;
+    bool noChaoSalvo;
+
+    if (!(arquivo >> posX >> posY
+                  >> vidasSalvas
+                  >> pontosSalvos
+                  >> velXSalva >> velYSalva
+                  >> noChaoSalvo))
+    {
+        return false;
+    }
+
+    setPosicao(posX, posY);
+    posicaoAnterior = getPosicao();
+
+    num_vidas = vidasSalvas;
+    pontos = pontosSalvos;
+
+    velX = velXSalva;
+    velY = velYSalva;
+
+    noChao = noChaoSalvo;
+
+    impulsoX = 0.f;
+    invulneravel = false;
+
+    relogioDano.restart();
+
+    arquivo.close();
+
+    return true;
 }
 
 

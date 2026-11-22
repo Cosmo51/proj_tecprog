@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Entidades.h"
+#include <fstream>
 using namespace Entidades;
 
 
@@ -67,6 +68,7 @@ public:
     void prepararNovaFase();
     void pausar(bool pausa);
     void reiniciar();
+    bool carregar();
 };
 
 class Inimigo : public Personagem
@@ -111,6 +113,7 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
+    bool carregar(std::ifstream& arquivo);
     void mover();
     void inverterDirecao();
 };
@@ -130,6 +133,7 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
+    bool carregar(std::ifstream& arquivo);
     void mover();
     void setJogador(Jogador* p);
     bool verificarAtaque();
@@ -154,6 +158,7 @@ public:
     void danificar(Jogador* p);
     void inverterDirecao();
     void salvar();
+    bool carregar(std::ifstream& arquivo);
     void setJogador(Jogador* p);
     bool verificarAtaque();
     void pausar(bool pausa);

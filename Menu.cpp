@@ -32,36 +32,37 @@ void Menu::executar()
     bool teclaCimaAtual = pGG->teclaPressionada(sf::Keyboard::Key::Up);
     bool teclaBaixoAtual = pGG->teclaPressionada(sf::Keyboard::Key::Down);
     bool teclaEnterAtual = pGG->teclaPressionada(sf::Keyboard::Key::Enter);
+    bool teclaEscAtual = pGG->teclaPressionada(sf::Keyboard::Key::Escape);
 
     int quantidadeOpcoes = 0;
 
 
-if (tipoMenu == 5)
-{
-    char32_t caractere;
-
-    while (pGG->obterCaractereDigitado(caractere))
+    if (tipoMenu == 5)
     {
+        char32_t caractere;
 
-        if (caractere >= 32 && caractere <= 126 &&
-            nomeJogador.size() < 16)
+        while (pGG->obterCaractereDigitado(caractere))
         {
-            nomeJogador += static_cast<char>(caractere);
+
+            if (caractere >= 32 && caractere <= 126 &&
+                nomeJogador.size() < 16)
+            {
+                nomeJogador += static_cast<char>(caractere);
+            }
         }
+
+
+        bool teclaBackspaceAtual =
+            pGG->teclaPressionada(sf::Keyboard::Key::Backspace);
+
+        if (teclaBackspaceAtual && !teclaBackspaceAnterior &&
+            !nomeJogador.empty())
+        {
+            nomeJogador.pop_back();
+        }
+
+        teclaBackspaceAnterior = teclaBackspaceAtual;
     }
-
-
-    bool teclaBackspaceAtual =
-        pGG->teclaPressionada(sf::Keyboard::Key::Backspace);
-
-    if (teclaBackspaceAtual && !teclaBackspaceAnterior &&
-        !nomeJogador.empty())
-    {
-        nomeJogador.pop_back();
-    }
-
-    teclaBackspaceAnterior = teclaBackspaceAtual;
-}
 
     switch (tipoMenu)
     {
@@ -105,6 +106,15 @@ if (tipoMenu == 5)
             opcaoSelecionada = 0;
     }
 
+    // Voltar ao menu principal com Esc
+    if (tipoMenu == 5 && teclaEscAtual)
+    {
+        setTipoMenu(0);
+        nomeJogador.clear();
+        teclaEnterAnterior = teclaEnterAtual;
+        return;
+    }
+
     // Confirmacao da opcao
     if (tipoMenu != 5 &&
     teclaEnterAtual && !teclaEnterAnterior)
@@ -127,7 +137,7 @@ if (tipoMenu == 5)
                             break;
 
                         case 2:
-                            std::cout << "Carregar jogo" << std::endl;
+                            pJogo->carregarJogo();
                             break;
 
                         case 3:
@@ -171,7 +181,7 @@ if (tipoMenu == 5)
                             break;
 
                         case 1:
-                            std::cout << "Salvar jogo" << std::endl;
+                            pJogo->salvarJogo();
                             break;
 
                         case 2:
@@ -485,7 +495,7 @@ if (tipoMenu == 5)
 
             sf::Text ajuda(fonte);
 
-            ajuda.setString("ENTER - Confirmar | BACKSPACE - Apagar");
+            ajuda.setString("ENTER - Confirmar | BACKSPACE - Apagar | ESC - Voltar");
             ajuda.setCharacterSize(20);
             ajuda.setFillColor(sf::Color::White);
             ajuda.setPosition({250.f, 470.f});

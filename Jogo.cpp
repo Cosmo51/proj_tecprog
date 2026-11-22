@@ -1,5 +1,6 @@
 #include "Jogo.h"
 #include <iostream>
+#include <fstream>
 
 Jogo::Jogo() : noMenu(true), faseAtual(1),
                pausado(false), modoTeste(false)
@@ -201,5 +202,86 @@ Ranking& Jogo::getRanking()
 void Jogo::setModoTeste(bool teste)
 {
     modoTeste = teste;
+}
+
+void Jogo::salvarJogo()
+{
+    if (modoTeste)
+    {
+        std::cout << "Nao e possivel salvar partidas de teste!"
+                  << std::endl;
+        return;
+    }
+
+    std::ofstream arquivo("jogo.txt");
+
+    if (!arquivo.is_open())
+    {
+        std::cout << "Erro ao salvar jogo!" << std::endl;
+        return;
+    }
+
+    arquivo << faseAtual << std::endl;
+    arquivo << nomeJogador << std::endl;
+
+    arquivo.close();
+
+    pJog1.salvar();
+
+    if (faseAtual == 1)
+        fase1.salvar();
+    else
+        fase2.salvar();
+
+    std::cout << "Jogo salvo!" << std::endl;
+}
+
+void Jogo::carregarJogo()
+{
+    std::ifstream arquivo("jogo.txt");
+
+    int faseSalva;
+    std::string nomeSalvo;
+
+    if (arquivo >> faseSalva &&
+        std::getline(arquivo >> std::ws, nomeSalvo) &&
+        (faseSalva == 1 || faseSalva == 2) &&
+        pJog1.carregar())
+    {
+        bool sucesso;
+
+        if (faseSalva == 1)
+            sucesso = fase1.carregar();
+        else
+            sucesso = fase2.carregar();
+
+        if (sucesso)
+        {
+            faseAtual = faseSalva;
+            nomeJogador = nomeSalvo;
+
+            if (faseAtual == 1)
+                fase2.reiniciar();
+            else
+                fase1.reiniciar();
+
+            modoTeste = false;
+            noMenu = false;
+
+            pausar(false);
+
+            std::cout << "Jogo carregado!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Erro ao carregar fase!" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Erro ao carregar jogo!" << std::endl;
+    }
+
+    arquivo.close();
 }
 

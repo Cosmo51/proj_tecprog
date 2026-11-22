@@ -124,8 +124,34 @@ void Plataforma::obstaculizar(Inimigo* p)
     }
 }
 
-void Plataforma::salvar(){
+void Plataforma::salvar()
+{
+    std::ofstream arquivo("obstaculos.txt", std::ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Plataforma" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << getTamanho().x << " "
+                << getTamanho().y << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Plataforma::carregar(std::ifstream& arquivo)
+{
+    float posX, posY, largura, altura;
+
+    if (arquivo >> posX >> posY >> largura >> altura)
+    {
+        configurar(posX, posY, largura, altura);
+
+        return true;
+    }
+
+    return false;
 }
 
 void Plataforma::configurar(float x, float y)

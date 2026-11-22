@@ -1,4 +1,5 @@
 #include "Personagens.h"
+#include <fstream>
 
 using namespace Personagens;
 
@@ -43,9 +44,47 @@ void Aranha::executar(){
 
 }
 
+void Aranha::salvar()
+{
+    std::ofstream arquivo("inimigos.txt", std::ios::app);
 
-void Aranha::salvar(){
+    if (arquivo.is_open())
+    {
+        arquivo << "Aranha" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << " "
+                << limiteEsquerdo << " "
+                << limiteDireito << std::endl;
 
+        arquivo.close();
+    }
+}
+
+bool Aranha::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+    float esquerda, direita;
+
+    if (arquivo >> posX >> posY
+                >> velX >> velY
+                >> esquerda >> direita)
+    {
+        setPosicao(posX, posY);
+
+        posicaoAnterior = getPosicao();
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        configurarPatrulha(esquerda, direita);
+
+        return true;
+    }
+
+    return false;
 }
 
 void Aranha::mover()

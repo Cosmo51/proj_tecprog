@@ -22,8 +22,32 @@ void Obst_Medio::configurar(float x, float y)
     setPosicao(x, y);
 }
 
-void Obst_Medio::salvar(){
+void Obst_Medio::salvar()
+{
+    std::ofstream arquivo("obstaculos.txt", std::ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Lama" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Obst_Medio::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+
+    if (arquivo >> posX >> posY)
+    {
+        configurar(posX, posY);
+
+        return true;
+    }
+
+    return false;
 }
 
 void Obst_Medio::obstaculizar(Jogador* p)

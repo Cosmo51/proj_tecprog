@@ -28,6 +28,36 @@ void Novelo::executar()
 
 void Novelo::salvar()
 {
+    std::ofstream arquivo("projeteis.txt", std::ios::app);
+
+    if (arquivo.is_open())
+    {
+        arquivo << "Novelo" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Novelo::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+
+    if (arquivo >> posX >> posY >> velX >> velY)
+    {
+        setPosicao(posX, posY);
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        return true;
+    }
+
+    return false;
 }
 
 void Novelo::configurar(float x, float y, float direcao)

@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include "Entidades.h"
 #include "Personagens.h"
+#include <fstream>
 
 using namespace Entidades;
 using namespace Personagens;
@@ -37,6 +38,7 @@ namespace Obstaculos
 
         void executar();
         void salvar();
+        bool carregar(std::ifstream& arquivo);
         void obstaculizar(Jogador* p);
         void obstaculizar(Inimigo* p);
         void configurar(float x, float y);
@@ -58,6 +60,7 @@ namespace Obstaculos
     void obstaculizar(Jogador* p);
     void configurar(float x, float y);
     void salvar();
+    bool carregar(std::ifstream& arquivo);
 
     };
 
@@ -74,6 +77,7 @@ namespace Obstaculos
     void obstaculizar(Jogador* p);
     void configurar(float x, float y);
     void salvar();
+    bool carregar(std::ifstream& arquivo);
 
     };
 }

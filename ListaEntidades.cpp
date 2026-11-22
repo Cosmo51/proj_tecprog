@@ -42,5 +42,10 @@ void ListaEntidades::limpar()
     LEs.limpar();
 }
 
+void ListaEntidades::salvar()
+{
+    LEs.salvar();
+}
+
 
 

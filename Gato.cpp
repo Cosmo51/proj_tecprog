@@ -78,7 +78,52 @@ void Gato::inverterDirecao()
 
 void Gato::salvar()
 {
+    std::ofstream arquivo("inimigos.txt", std::ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Gato" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << " "
+                << limiteEsquerdo << " "
+                << limiteDireito << " "
+                << forca << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Gato::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+    float esquerda, direita;
+    short int forcaSalva;
+
+    if (arquivo >> posX >> posY
+                >> velX >> velY
+                >> esquerda >> direita
+                >> forcaSalva)
+    {
+        setPosicao(posX, posY);
+
+        posicaoAnterior = getPosicao();
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        configurarPatrulha(esquerda, direita);
+
+        forca = forcaSalva;
+
+        relogioDisparo.restart();
+
+        return true;
+    }
+
+    return false;
 }
 
 void Gato::setJogador(Jogador* p)

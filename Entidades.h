@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Ente.h"
+#include<fstream>
 
 namespace Entidades{
 
@@ -51,6 +52,7 @@ namespace Entidades{
 
         void executar();
         void salvar();
+        bool carregar(std::ifstream& arquivo);
         void configurar(float x, float y, float direcao);
     };
 
@@ -67,6 +69,7 @@ namespace Entidades{
 
         void executar();
         void salvar();
+        bool carregar(std::ifstream& arquivo);
         void configurar(float x, float y, float direcao);
     };
 

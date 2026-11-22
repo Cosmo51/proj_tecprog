@@ -26,6 +26,8 @@ public:
     void setJogador(Jogador* pJ);
     virtual void pausar(bool pausa) = 0;
     virtual void reiniciar() = 0;
+    void salvar();
+    virtual bool carregar() = 0;
 
 protected:
     virtual void criarInimFaceis() = 0;
@@ -33,6 +35,8 @@ protected:
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
     void criarCenario();
+    bool carregarObstaculos();
+    bool carregarProjeteis();
 };
 
 class FasePrimeira : public Fase
@@ -55,6 +59,7 @@ public:
     bool getVenceu() const;
     void pausar(bool pausa);
     void reiniciar();
+    bool carregar();
 
 protected:
     void criarInimMedios();
@@ -88,6 +93,7 @@ public:
     bool getVenceu() const;
     void pausar(bool pausa);
     void reiniciar();
+    bool carregar();
 
 protected:
     void criarChefoes();

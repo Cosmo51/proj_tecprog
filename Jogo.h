@@ -39,4 +39,6 @@ public:
     const std::string& getNomeJogador() const;
     Ranking& getRanking();
     void setModoTeste(bool teste);
+    void salvarJogo();
+    void carregarJogo();
 };

@@ -1,7 +1,12 @@
+1000|Pedro
+1000|Pedro
+900|pedrinho
 600|Natal
 500|leo
+400|teste3
 250|Maria
-200|felipe
+200|pedrinho
 200|leo
-100|Pedro
+200|felipe
 100|Joao
+100|Pedro

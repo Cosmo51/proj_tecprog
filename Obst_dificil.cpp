@@ -45,6 +45,36 @@ void Obst_Dificil::configurar(float x, float y)
 
 void Obst_Dificil::salvar()
 {
+    std::ofstream arquivo("obstaculos.txt", std::ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Ratoeira" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << armada << std::endl;
+
+        arquivo.close();
+    }
+}
+
+bool Obst_Dificil::carregar(std::ifstream& arquivo)
+{
+    float posX, posY;
+    bool armadaSalva;
+
+    if (arquivo >> posX >> posY >> armadaSalva)
+    {
+        configurar(posX, posY);
+
+        armada = armadaSalva;
+
+        if (!armada)
+            definirCor(sf::Color(100, 100, 100));
+
+        return true;
+    }
+
+    return false;
 }
 

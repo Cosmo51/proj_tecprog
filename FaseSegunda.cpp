@@ -1,4 +1,5 @@
 #include "Fases.h"
+#include<fstream>
 
 using namespace Fases;
 
@@ -340,4 +341,82 @@ void FaseSegunda::reiniciar()
     lista_ents.incluir(queijo);
 
     setJogador(pJogador);
+}
+
+bool FaseSegunda::carregar()
+{
+    std::ifstream arquivo("inimigos.txt");
+
+    if (!arquivo.is_open())
+        return false;
+
+    gatos.clear();
+    GC.limpar();
+    lista_ents.limpar();
+
+    venceu = false;
+
+    if (!carregarObstaculos())
+    {
+        reiniciar();
+        return false;
+    }
+
+    std::string tipo;
+    bool sucesso = true;
+
+    while (sucesso && arquivo >> tipo)
+    {
+        if (tipo == "Aranha")
+        {
+            Aranha* aranha = new Aranha();
+
+            if (aranha->carregar(arquivo))
+            {
+                lista_ents.incluir(aranha);
+                GC.incluirInimigo(aranha);
+            }
+            else
+            {
+                delete aranha;
+                sucesso = false;
+            }
+        }
+        else if (tipo == "Gato")
+        {
+            Gato* g = new Gato();
+
+            if (g->carregar(arquivo))
+            {
+                gatos.push_back(g);
+                lista_ents.incluir(g);
+                GC.incluirInimigo(g);
+            }
+            else
+            {
+                delete g;
+                sucesso = false;
+            }
+        }
+        else
+        {
+            sucesso = false;
+        }
+    }
+
+    arquivo.close();
+
+    if (!sucesso || !carregarProjeteis())
+    {
+        reiniciar();
+        return false;
+    }
+
+    queijo = new Queijo();
+    queijo->setPosicao(915.f, 70.f);
+    lista_ents.incluir(queijo);
+
+    setJogador(pJogador);
+
+    return true;
 }

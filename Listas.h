@@ -42,8 +42,8 @@ public:
     void remover(int pos);
     void percorrer();
     void desenhar();
+    void salvar();
 };
-
 
 // Implementacao da classe Elemento
 
@@ -240,8 +240,21 @@ void Lista<TL>::desenhar()
     }
 }
 
+template<class TL>
+void Lista<TL>::salvar()
+{
+    Elemento<TL>* atual = pPrimeiro;
 
+    while (atual != nullptr)
+    {
+        TL* entidade = atual->getInfo();
 
+        if (entidade != nullptr)
+            entidade->salvar();
+
+        atual = atual->getProximo();
+    }
+}
 
 // Classe que gerencia a lista de entidades
 
@@ -260,6 +273,7 @@ public:
     void percorrer();
     void desenhar();
     void limpar();
+    void salvar();
 };
 
 }
