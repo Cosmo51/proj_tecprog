@@ -1,6 +1,8 @@
 #include "Personagens.h"
 #include <iostream>
+#include <stdlib.h>
 
+using namespace std;
 using namespace Personagens;
 
 Galinha::Galinha(){
@@ -9,7 +11,7 @@ Galinha::Galinha(){
     definirCor(sf::Color::Yellow);
     setPosicao(300.f, 290.f);
 
-    pJogador = nullptr;
+    pJogador = NULL;
     velocidadeX = 0.2f;
 
 }
@@ -20,7 +22,7 @@ Galinha::~Galinha(){
 
 void Galinha::salvar()
 {
-    std::ofstream arquivo("inimigos.txt", std::ios::app);
+    ofstream arquivo("inimigos.txt", ios::app);
 
     if (arquivo.is_open())
     {
@@ -30,13 +32,13 @@ void Galinha::salvar()
                 << velocidadeX << " "
                 << velocidadeY << " "
                 << limiteEsquerdo << " "
-                << limiteDireito << std::endl;
+                << limiteDireito << endl;
 
         arquivo.close();
     }
 }
 
-bool Galinha::carregar(std::ifstream& arquivo)
+bool Galinha::carregar(ifstream& arquivo)
 {
     float posX, posY;
     float velX, velY;
@@ -65,21 +67,21 @@ bool Galinha::carregar(std::ifstream& arquivo)
 
 void Galinha::danificar(Jogador* p)
 {
-    if (p == nullptr)
-        return;
-
-    float centroJogador = p->getPosicao().x + p->getTamanho().x / 2.f;
-
-    float centroInimigo = getPosicao().x + getTamanho().x / 2.f;
-
-    float direcao = -1.f;
-
-    if (centroJogador >= centroInimigo)
+    if (p != NULL)
     {
-        direcao = 1.f;
-    }
+        float centroJogador = p->getPosicao().x + p->getTamanho().x / 2.f;
 
-    p->receberDanoContato(direcao);
+        float centroInimigo = getPosicao().x + getTamanho().x / 2.f;
+
+        float direcao = -1.f;
+
+        if (centroJogador >= centroInimigo)
+        {
+            direcao = 1.f;
+        }
+
+        p->receberDanoContato(direcao);
+    }
 }
 
 void Galinha::executar()
@@ -121,7 +123,7 @@ void Galinha::setJogador(Jogador* p)
 
 bool Galinha::verificarAtaque()
 {
-    if (pJogador == nullptr)
+    if (pJogador == NULL)
         return false;
 
     sf::Vector2f posGalinha = getPosicao();

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std;
+
 using namespace Personagens;
 
 Jogador::Jogador(){
@@ -24,34 +26,33 @@ void Jogador::colidir(Inimigo* pIn){
 
 }
 
-void Jogador::executar(){
-
-
-
+void Jogador::executar()
+{
+    mover();
+    saiuDoChao();
 }
 
 void Jogador::salvar()
 {
-    std::ofstream arquivo("jogador.txt");
+    ofstream arquivo("jogador.txt");
 
-    if (!arquivo.is_open())
+    if (arquivo.is_open())
     {
-        std::cout << "Erro ao salvar jogador!" << std::endl;
-        return;
+        arquivo << getPosicao().x << " "
+                << getPosicao().y << endl;
+
+        arquivo << num_vidas << endl;
+        arquivo << pontos << endl;
+
+        arquivo << velX << " " << velY << endl;
+        arquivo << noChao << endl;
+
+        arquivo.close();
     }
-
-    arquivo << getPosicao().x << " "
-            << getPosicao().y << std::endl;
-
-    arquivo << num_vidas << std::endl;
-    arquivo << pontos << std::endl;
-
-    arquivo << velX << " "
-            << velY << std::endl;
-
-    arquivo << noChao << std::endl;
-
-    arquivo.close();
+    else
+    {
+        cout << "Erro ao salvar jogador!" << endl;
+    }
 }
 
 void Jogador::inicializa()
@@ -170,10 +171,7 @@ void Jogador::restaurarVelocidade()
 
 void Jogador::perderVida()
 {
-    if (num_vidas > 0)
-    {
-        num_vidas--;
-    }
+    operator--();
 }
 
 int Jogador::getVidas() const
@@ -183,19 +181,19 @@ int Jogador::getVidas() const
 
 void Jogador::receberDanoContato(float direcao)
 {
-    if (invulneravel)
-        return;
+    if (!invulneravel)
+    {
+        perderVida();
 
-    perderVida();
+        cout << "Vidas restantes: " << getVidas() << endl;
 
-    std::cout << "Vidas restantes: " << getVidas() << std::endl;
+        impulsoX = 1.5f * direcao;
+        velY = -0.9f;
+        noChao = false;
 
-    impulsoX = 1.5f * direcao;
-    velY = -0.9f;
-    noChao = false;
-
-    invulneravel = true;
-    relogioDano.restart();
+        invulneravel = true;
+        relogioDano.restart();
+    }
 }
 
 void Jogador::impulsionar()
@@ -204,8 +202,9 @@ void Jogador::impulsionar()
     noChao = false;
 }
 
-void Jogador::adicionarPontos(int valor){
-    pontos+=valor;
+void Jogador::adicionarPontos(int quantidade)
+{
+    operator+=(quantidade);
 }
 
 int Jogador::getPontos() const{
@@ -245,11 +244,11 @@ void Jogador::reiniciar()
 
 bool Jogador::carregar()
 {
-    std::ifstream arquivo("jogador.txt");
+    ifstream arquivo("jogador.txt");
 
     if (!arquivo.is_open())
     {
-        std::cout << "Erro ao carregar jogador!" << std::endl;
+        cout << "Erro ao carregar jogador!" << endl;
         return false;
     }
 
@@ -288,5 +287,14 @@ bool Jogador::carregar()
     return true;
 }
 
+void Jogador::operator--()
+{
+    if (num_vidas > 0)
+        num_vidas--;
+}
 
+void Jogador::operator+=(int pontosGanhos)
+{
+    pontos += pontosGanhos;
+}
 

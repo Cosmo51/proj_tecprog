@@ -1,6 +1,9 @@
 #include "Personagens.h"
 #include <fstream>
 
+#include <stdlib.h>
+
+using namespace std;
 using namespace Personagens;
 
 Aranha::Aranha(){
@@ -19,23 +22,23 @@ Aranha::~Aranha(){
 
 void Aranha::danificar(Jogador* p)
 {
-    if (p == nullptr)
-        return;
-
-    float centroJogador = p->getPosicao().x
-                        + p->getTamanho().x / 2.f;
-
-    float centroInimigo = getPosicao().x
-                       + getTamanho().x / 2.f;
-
-    float direcao = -1.f;
-
-    if (centroJogador >= centroInimigo)
+    if (p != NULL)
     {
-        direcao = 1.f;
-    }
+        float centroJogador = p->getPosicao().x
+                            + p->getTamanho().x / 2.f;
 
-    p->receberDanoContato(direcao);
+        float centroInimigo = getPosicao().x
+                           + getTamanho().x / 2.f;
+
+        float direcao = -1.f;
+
+        if (centroJogador >= centroInimigo)
+        {
+            direcao = 1.f;
+        }
+
+        p->receberDanoContato(direcao);
+    }
 }
 
 void Aranha::executar(){
@@ -46,7 +49,7 @@ void Aranha::executar(){
 
 void Aranha::salvar()
 {
-    std::ofstream arquivo("inimigos.txt", std::ios::app);
+    ofstream arquivo("inimigos.txt", ios::app);
 
     if (arquivo.is_open())
     {
@@ -56,13 +59,13 @@ void Aranha::salvar()
                 << velocidadeX << " "
                 << velocidadeY << " "
                 << limiteEsquerdo << " "
-                << limiteDireito << std::endl;
+                << limiteDireito << endl;
 
         arquivo.close();
     }
 }
 
-bool Aranha::carregar(std::ifstream& arquivo)
+bool Aranha::carregar(ifstream& arquivo)
 {
     float posX, posY;
     float velX, velY;

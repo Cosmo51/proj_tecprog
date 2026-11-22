@@ -1,14 +1,21 @@
 Plataforma 0 740 1000 10
-Plataforma 190 610 140 10
-Plataforma 60 460 170 10
-Plataforma 380 480 150 10
-Plataforma 555 350 140 10
-Plataforma 720 470 140 10
-Plataforma 870 610 120 10
-Plataforma 465 610 10 130
-Plataforma 740 610 10 130
-Plataforma 680 610 10 130
-Lama 90 732
-Lama 410 472
-Lama 885 732
-Lama 760 732
+Plataforma 110 640 10 100
+Plataforma 235 625 140 10
+Plataforma 140 375 140 10
+Plataforma 330 420 10 105
+Plataforma 330 220 140 10
+Plataforma 485 295 140 10
+Plataforma 550 65 140 10
+Plataforma 700 205 140 10
+Plataforma 860 100 140 10
+Plataforma 445 550 140 10
+Plataforma 705 370 10 75
+Plataforma 805 505 140 10
+Plataforma 575 305 10 245
+Plataforma 700 640 10 100
+Plataforma 420 640 10 100
+Ratoeira 175 730 1
+Ratoeira 475 540 1
+Ratoeira 875 495 1
+Ratoeira 600 730 1
+Ratoeira 920 730 1

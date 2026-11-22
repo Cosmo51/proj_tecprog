@@ -1,9 +1,10 @@
-
 #include "Personagens.h"
+#include <stdlib.h>
 
+using namespace std;
 using namespace Personagens;
 
-Gato::Gato() : pJogador(nullptr)
+Gato::Gato() : pJogador(NULL)
 {
     definirTamanho(55.f, 45.f);
     definirCor(sf::Color::Magenta);
@@ -54,21 +55,21 @@ void Gato::mover()
 
 void Gato::danificar(Jogador* p)
 {
-    if (p == nullptr)
-        return;
+    if (p != NULL)
+    {
+        float centroJogador = p->getPosicao().x
+                            + p->getTamanho().x / 2.f;
 
-    float centroJogador = p->getPosicao().x
-                        + p->getTamanho().x / 2.f;
+        float centroGato = getPosicao().x
+                         + getTamanho().x / 2.f;
 
-    float centroGato = getPosicao().x
-                     + getTamanho().x / 2.f;
+        float direcao = -1.f;
 
-    float direcao = -1.f;
+        if (centroJogador >= centroGato)
+            direcao = 1.f;
 
-    if (centroJogador >= centroGato)
-        direcao = 1.f;
-
-    p->receberDanoContato(direcao);
+        p->receberDanoContato(direcao);
+    }
 }
 
 void Gato::inverterDirecao()
@@ -78,7 +79,7 @@ void Gato::inverterDirecao()
 
 void Gato::salvar()
 {
-    std::ofstream arquivo("inimigos.txt", std::ios::app);
+    ofstream arquivo("inimigos.txt", ios::app);
 
     if (arquivo.is_open())
     {
@@ -89,13 +90,13 @@ void Gato::salvar()
                 << velocidadeY << " "
                 << limiteEsquerdo << " "
                 << limiteDireito << " "
-                << forca << std::endl;
+                << forca << endl;
 
         arquivo.close();
     }
 }
 
-bool Gato::carregar(std::ifstream& arquivo)
+bool Gato::carregar(ifstream& arquivo)
 {
     float posX, posY;
     float velX, velY;
@@ -133,7 +134,7 @@ void Gato::setJogador(Jogador* p)
 
 bool Gato::verificarAtaque()
 {
-    if (pJogador == nullptr || !getAtivo())
+    if (pJogador == NULL || !getAtivo())
         return false;
 
     sf::Vector2f posGato = getPosicao();

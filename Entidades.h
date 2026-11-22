@@ -10,7 +10,7 @@ namespace Entidades{
     protected:
         int x;
         int y;
-        //ostream buffer; // n„o sei como isso funciona.
+        //ostream buffer; // n√£o sei como isso funciona.
 
 
 

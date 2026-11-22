@@ -1,5 +1,7 @@
 #include "Entidades.h"
 
+using namespace std;
+
 using namespace Entidades;
 
 Ovo::Ovo()
@@ -24,7 +26,7 @@ void Ovo::executar()
 
 void Ovo::salvar()
 {
-    std::ofstream arquivo("projeteis.txt", std::ios::app);
+    ofstream arquivo("projeteis.txt", ios::app);
 
     if (arquivo.is_open())
     {
@@ -32,13 +34,13 @@ void Ovo::salvar()
                 << getPosicao().x << " "
                 << getPosicao().y << " "
                 << velocidadeX << " "
-                << std::endl;
+                << endl;
 
         arquivo.close();
     }
 }
 
-bool Ovo::carregar(std::ifstream& arquivo)
+bool Ovo::carregar(ifstream& arquivo)
 {
     float posX, posY;
     float velX;

@@ -1,6 +1,8 @@
 #include "Obstaculos.h"
 #include <iostream>
+#include <stdlib.h>
 
+using namespace std;
 using namespace Obstaculos;
 
 Obst_Dificil::Obst_Dificil()
@@ -28,10 +30,10 @@ void Obst_Dificil::executar(){
 
 void Obst_Dificil::obstaculizar(Jogador* p)
 {
-    if (p != nullptr && armada)
+    if (p != NULL && armada)
     {
         p->perderVida();
-        std::cout << "Vidas restantes: " << p->getVidas() << std::endl;
+        cout << "Vidas restantes: " << p->getVidas() << endl;
         armada = false;
 
         definirCor(sf::Color(100, 100, 100));
@@ -45,20 +47,20 @@ void Obst_Dificil::configurar(float x, float y)
 
 void Obst_Dificil::salvar()
 {
-    std::ofstream arquivo("obstaculos.txt", std::ios::app);
+    ofstream arquivo("obstaculos.txt", ios::app);
 
     if (arquivo.is_open())
     {
         arquivo << "Ratoeira" << " "
                 << getPosicao().x << " "
                 << getPosicao().y << " "
-                << armada << std::endl;
+                << armada << endl;
 
         arquivo.close();
     }
 }
 
-bool Obst_Dificil::carregar(std::ifstream& arquivo)
+bool Obst_Dificil::carregar(ifstream& arquivo)
 {
     float posX, posY;
     bool armadaSalva;

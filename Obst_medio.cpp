@@ -1,5 +1,7 @@
 #include "Obstaculos.h"
+#include <stdlib.h>
 
+using namespace std;
 using namespace Obstaculos;
 
 Obst_Medio::Obst_Medio()
@@ -24,19 +26,19 @@ void Obst_Medio::configurar(float x, float y)
 
 void Obst_Medio::salvar()
 {
-    std::ofstream arquivo("obstaculos.txt", std::ios::app);
+    ofstream arquivo("obstaculos.txt", ios::app);
 
     if (arquivo.is_open())
     {
         arquivo << "Lama" << " "
                 << getPosicao().x << " "
-                << getPosicao().y << std::endl;
+                << getPosicao().y << endl;
 
         arquivo.close();
     }
 }
 
-bool Obst_Medio::carregar(std::ifstream& arquivo)
+bool Obst_Medio::carregar(ifstream& arquivo)
 {
     float posX, posY;
 
@@ -52,7 +54,7 @@ bool Obst_Medio::carregar(std::ifstream& arquivo)
 
 void Obst_Medio::obstaculizar(Jogador* p)
 {
-    if (p != nullptr)
+    if (p != NULL)
     {
         p->diminuirVelocidade();
     }

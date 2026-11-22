@@ -69,6 +69,8 @@ public:
     void pausar(bool pausa);
     void reiniciar();
     bool carregar();
+    void operator--();
+    void operator+=(int pontosGanhos);
 };
 
 class Inimigo : public Personagem

@@ -1,4 +1,8 @@
 #include "Gerenciadores.h"
+#include <optional>
+#include <stdlib.h>
+
+using namespace std;
 using namespace Gerenciadores;
 
 Gerenciador_Grafico::Gerenciador_Grafico() :
@@ -14,12 +18,12 @@ Gerenciador_Grafico::Gerenciador_Grafico() :
 
 Gerenciador_Grafico::~Gerenciador_Grafico()
 {
-    Ente::setGG(nullptr);
+    Ente::setGG(NULL);
 }
 
 void Gerenciador_Grafico::desenharEnte(Ente* pE)
 {
-    if (pE != nullptr)
+    if (pE != NULL)
         janela.draw(pE->getBody());
 }
 
@@ -32,7 +36,7 @@ void Gerenciador_Grafico::tratarEventos()
         caracteresDigitados.pop();
     }
 
-    while (const std::optional evento = janela.pollEvent())
+    while (const optional evento = janela.pollEvent())
     {
         if (evento->is<sf::Event::Closed>())
             janela.close();

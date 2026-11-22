@@ -1,5 +1,8 @@
 #include "Fases.h"
-#include<fstream>
+#include <fstream>
+#include <stdlib.h>
+
+using namespace std;
 
 using namespace Fases;
 
@@ -28,10 +31,10 @@ void FaseSegunda::executar()
     GC.tratarColisoesJogsInimgs();
 
     // Descarta os ponteiros dos gatos ANTES de apagar os objetos.
-    std::vector<Gato*>::iterator it = gatos.begin();
+    vector<Gato*>::iterator it = gatos.begin();
     while (it != gatos.end())
     {
-        if (*it == nullptr || !(*it)->getAtivo())
+        if (*it == NULL || !(*it)->getAtivo())
             it = gatos.erase(it);
         else
             it++;
@@ -43,7 +46,7 @@ void FaseSegunda::executar()
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
-    if (pJogador != nullptr && GC.verificarColisao(pJogador, queijo))
+    if (pJogador != NULL && GC.verificarColisao(pJogador, queijo))
     {
         venceu = true;
     }
@@ -68,7 +71,7 @@ void FaseSegunda::criarInimFaceis()
     for (int i = 0; i < 5; i++)
     {
         if (quantidadeAranhas < maxAranhas &&
-            (i < 3 || std::rand() % 100 < 50))
+            (i < 3 || rand() % 100 < 50))
         {
             Aranha* aranha = new Aranha();
 
@@ -86,7 +89,7 @@ void FaseSegunda::criarInimFaceis()
     }
 
     // Inimigo XOR na plataforma direita
-    if (std::rand() % 2 == 0)
+    if (rand() % 2 == 0)
     {
         if (quantidadeAranhas < maxAranhas)
         {
@@ -144,7 +147,7 @@ void FaseSegunda::criarChefoes()
     for (int i = 0; i < 2; i++)
     {
         if (static_cast<int>(gatos.size()) < maxGatos &&
-            std::rand() % 100 < 50)
+            rand() % 100 < 50)
         {
             Gato* gato = new Gato();
 
@@ -207,7 +210,7 @@ void FaseSegunda::criarPlataformas()
     for (int i = 0; i < 4; i++)
     {
         if (quantidadePlataformas < maxPlataformas &&
-            std::rand() % 100 < 50)
+            rand() % 100 < 50)
         {
             Plataforma* p = new Plataforma();
 
@@ -238,7 +241,7 @@ void FaseSegunda::criarObstDificeis()
     for (int i = 0; i < 6; i++)
     {
         if (quantidadeRatoeiras < maxRatoeiras &&
-            (i < 3 || std::rand() % 100 < 50))
+            (i < 3 || rand() % 100 < 50))
         {
             Obst_Dificil* ratoeira = new Obst_Dificil();
 
@@ -259,30 +262,30 @@ void FaseSegunda::criarProjeteis()
 
 void FaseSegunda::criarNovelo()
 {
-    if (pJogador == nullptr)
-        return;
-
-    for (std::vector<Gato*>::iterator it = gatos.begin();
-         it != gatos.end(); it++)
+    if (pJogador != NULL)
     {
-        Gato* g = *it;
+        for (vector<Gato*>::iterator it = gatos.begin();
+             it != gatos.end(); it++)
+        {
+            Gato* g = *it;
 
-        if (g == nullptr || !g->getAtivo() || !g->verificarAtaque())
-            continue;
+            if (g == NULL || !g->getAtivo() || !g->verificarAtaque())
+                continue;
 
-        Novelo* novelo = new Novelo();
+            Novelo* novelo = new Novelo();
 
-        float xGato = g->getPosicao().x;
-        float yGato = g->getPosicao().y;
-        float xJogador = pJogador->getPosicao().x;
+            float xGato = g->getPosicao().x;
+            float yGato = g->getPosicao().y;
+            float xJogador = pJogador->getPosicao().x;
 
-        float direcao = 1.f;
-        if (xJogador < xGato)
-            direcao = -1.f;
+            float direcao = 1.f;
+            if (xJogador < xGato)
+                direcao = -1.f;
 
-        novelo->configurar(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
-        lista_ents.incluir(novelo);
-        GC.incluirProjetil(novelo);
+            novelo->configurar(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
+            lista_ents.incluir(novelo);
+            GC.incluirProjetil(novelo);
+        }
     }
 }
 
@@ -302,10 +305,10 @@ void FaseSegunda::setJogador(Jogador* pJ)
 {
     Fase::setJogador(pJ);
 
-    for (std::vector<Gato*>::iterator it = gatos.begin();
+    for (vector<Gato*>::iterator it = gatos.begin();
          it != gatos.end(); it++)
     {
-        if (*it != nullptr)
+        if (*it != NULL)
             (*it)->setJogador(pJ);
     }
 }
@@ -317,10 +320,10 @@ bool FaseSegunda::getVenceu() const
 
 void FaseSegunda::pausar(bool pausa)
 {
-    for (std::vector<Gato*>::iterator it = gatos.begin();
+    for (vector<Gato*>::iterator it = gatos.begin();
          it != gatos.end(); it++)
     {
-        if (*it != nullptr)
+        if (*it != NULL)
             (*it)->pausar(pausa);
     }
 }
@@ -345,7 +348,7 @@ void FaseSegunda::reiniciar()
 
 bool FaseSegunda::carregar()
 {
-    std::ifstream arquivo("inimigos.txt");
+    ifstream arquivo("inimigos.txt");
 
     if (!arquivo.is_open())
         return false;
@@ -362,7 +365,7 @@ bool FaseSegunda::carregar()
         return false;
     }
 
-    std::string tipo;
+    string tipo;
     bool sucesso = true;
 
     while (sucesso && arquivo >> tipo)

@@ -1,13 +1,11 @@
 #include "Jogo.h"
-#include <cstdlib>
-#include <ctime>
+#include <stdlib.h>
+#include <time.h>
 
-#include "Ranking.h"
-#include <iostream>
 
 int main()
 {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    srand(static_cast<unsigned int>(time(NULL)));
 
     Jogo jogo;
 

@@ -1,9 +1,11 @@
 #include "Fases.h"
 #include <fstream>
+#include <stdlib.h>
 
+using namespace std;
 using namespace Fases;
 
-Fase::Fase() : pJogador(nullptr)
+Fase::Fase() : pJogador(NULL)
 {
 }
 
@@ -28,9 +30,9 @@ void Fase::setJogador(Jogador* pJ)
 
 void Fase::salvar()
 {
-    std::ofstream arquivoInimigos("inimigos.txt");
-    std::ofstream arquivoObstaculos("obstaculos.txt");
-    std::ofstream arquivoProjeteis("projeteis.txt");
+    ofstream arquivoInimigos("inimigos.txt");
+    ofstream arquivoObstaculos("obstaculos.txt");
+    ofstream arquivoProjeteis("projeteis.txt");
 
     if (arquivoInimigos.is_open() &&
         arquivoObstaculos.is_open() &&
@@ -46,12 +48,12 @@ void Fase::salvar()
 
 bool Fase::carregarObstaculos()
 {
-    std::ifstream arquivo("obstaculos.txt");
+    ifstream arquivo("obstaculos.txt");
 
     if (!arquivo.is_open())
         return false;
 
-    std::string tipo;
+    string tipo;
     bool sucesso = true;
 
     while (sucesso && arquivo >> tipo)
@@ -114,12 +116,12 @@ bool Fase::carregarObstaculos()
 
 bool Fase::carregarProjeteis()
 {
-    std::ifstream arquivo("projeteis.txt");
+    ifstream arquivo("projeteis.txt");
 
     if (!arquivo.is_open())
         return false;
 
-    std::string tipo;
+    string tipo;
     bool sucesso = true;
 
     while (sucesso && arquivo >> tipo)

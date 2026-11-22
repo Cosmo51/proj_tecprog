@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std;
+
 Jogo::Jogo() : noMenu(true), faseAtual(1),
                pausado(false), modoTeste(false)
 {
@@ -71,8 +73,7 @@ void Jogo::executar()
 
         GG.limpar();
 
-        pJog1.mover();
-        pJog1.saiuDoChao();
+        pJog1.executar();
 
         if (faseAtual == 1)
         {
@@ -91,9 +92,9 @@ void Jogo::executar()
 
         if (faseAtual == 1 && fase1.getVenceu())
         {
-            std::cout << "FASE 1 CONCLUIDA!" << std::endl;
-            std::cout << "Pontuacao: "
-                      << pJog1.getPontos() << std::endl;
+            cout << "FASE 1 CONCLUIDA!" << endl;
+            cout << "Pontuacao: "
+                      << pJog1.getPontos() << endl;
 
             faseAtual = 2;
             pJog1.prepararNovaFase();
@@ -146,11 +147,11 @@ void Jogo::pausar(bool pausa)
     if (pausado)
     {
         menu.setTipoMenu(2);
-        std::cout << "JOGO PAUSADO!" << std::endl;
+        cout << "JOGO PAUSADO!" << endl;
     }
     else
     {
-        std::cout << "JOGO RETOMADO!" << std::endl;
+        cout << "JOGO RETOMADO!" << endl;
     }
 }
 
@@ -184,12 +185,12 @@ void Jogo::finalizarJogo(bool venceu)
         menu.setTipoMenu(3);
 }
 
-void Jogo::setNomeJogador(const std::string& nome)
+void Jogo::setNomeJogador(const string& nome)
 {
     nomeJogador = nome;
 }
 
-const std::string& Jogo::getNomeJogador() const
+const string& Jogo::getNomeJogador() const
 {
     return nomeJogador;
 }
@@ -206,45 +207,45 @@ void Jogo::setModoTeste(bool teste)
 
 void Jogo::salvarJogo()
 {
-    if (modoTeste)
+    if (!modoTeste)
     {
-        std::cout << "Nao e possivel salvar partidas de teste!"
-                  << std::endl;
-        return;
+        ofstream arquivo("jogo.txt");
+
+        if (arquivo.is_open())
+        {
+            arquivo << faseAtual << endl;
+            arquivo << nomeJogador << endl;
+            arquivo.close();
+
+            pJog1.salvar();
+
+            if (faseAtual == 1)
+                fase1.salvar();
+            else
+                fase2.salvar();
+
+            cout << "Jogo salvo!" << endl;
+        }
+        else
+        {
+            cout << "Erro ao salvar jogo!" << endl;
+        }
     }
-
-    std::ofstream arquivo("jogo.txt");
-
-    if (!arquivo.is_open())
-    {
-        std::cout << "Erro ao salvar jogo!" << std::endl;
-        return;
-    }
-
-    arquivo << faseAtual << std::endl;
-    arquivo << nomeJogador << std::endl;
-
-    arquivo.close();
-
-    pJog1.salvar();
-
-    if (faseAtual == 1)
-        fase1.salvar();
     else
-        fase2.salvar();
-
-    std::cout << "Jogo salvo!" << std::endl;
+    {
+        cout << "Nao e possivel salvar partidas de teste!" << endl;
+    }
 }
 
 void Jogo::carregarJogo()
 {
-    std::ifstream arquivo("jogo.txt");
+    ifstream arquivo("jogo.txt");
 
     int faseSalva;
-    std::string nomeSalvo;
+    string nomeSalvo;
 
     if (arquivo >> faseSalva &&
-        std::getline(arquivo >> std::ws, nomeSalvo) &&
+        getline(arquivo >> ws, nomeSalvo) &&
         (faseSalva == 1 || faseSalva == 2) &&
         pJog1.carregar())
     {
@@ -270,16 +271,16 @@ void Jogo::carregarJogo()
 
             pausar(false);
 
-            std::cout << "Jogo carregado!" << std::endl;
+            cout << "Jogo carregado!" << endl;
         }
         else
         {
-            std::cout << "Erro ao carregar fase!" << std::endl;
+            cout << "Erro ao carregar fase!" << endl;
         }
     }
     else
     {
-        std::cout << "Erro ao carregar jogo!" << std::endl;
+        cout << "Erro ao carregar jogo!" << endl;
     }
 
     arquivo.close();

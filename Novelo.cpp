@@ -1,5 +1,7 @@
 #include "Entidades.h"
 
+using namespace std;
+
 using namespace Entidades;
 
 Novelo::Novelo()
@@ -28,7 +30,7 @@ void Novelo::executar()
 
 void Novelo::salvar()
 {
-    std::ofstream arquivo("projeteis.txt", std::ios::app);
+    ofstream arquivo("projeteis.txt", ios::app);
 
     if (arquivo.is_open())
     {
@@ -36,13 +38,13 @@ void Novelo::salvar()
                 << getPosicao().x << " "
                 << getPosicao().y << " "
                 << velocidadeX << " "
-                << velocidadeY << std::endl;
+                << velocidadeY << endl;
 
         arquivo.close();
     }
 }
 
-bool Novelo::carregar(std::ifstream& arquivo)
+bool Novelo::carregar(ifstream& arquivo)
 {
     float posX, posY;
     float velX, velY;

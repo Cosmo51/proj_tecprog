@@ -1,7 +1,8 @@
 #include "Fases.h"
-#include <cstdlib>
-#include <ctime>
+#include <stdlib.h>
 #include<fstream>
+
+using namespace std;
 
 using namespace Fases;
 
@@ -31,10 +32,10 @@ void FasePrimeira::executar()
     GC.tratarColisoesJogsInimgs();
 
     // Descarta os ponteiros das galinhas ANTES de apagar os objetos.
-    std::vector<Galinha*>::iterator it = galinhas.begin();
+    vector<Galinha*>::iterator it = galinhas.begin();
     while (it != galinhas.end())
     {
-        if (*it == nullptr || !(*it)->getAtivo())
+        if (*it == NULL || !(*it)->getAtivo())
             it = galinhas.erase(it);
         else
             it++;
@@ -46,7 +47,7 @@ void FasePrimeira::executar()
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
-    if (pJogador != nullptr && GC.verificarColisao(pJogador, queijo))
+    if (pJogador != NULL && GC.verificarColisao(pJogador, queijo))
     {
         venceu = true;
     }
@@ -71,7 +72,7 @@ void FasePrimeira::criarInimFaceis()
     for (int i = 0; i < 5; i++)
     {
         if (quantidadeAranhas < maxAranhas &&
-            (i < 3 || std::rand() % 100 < 50))
+            (i < 3 || rand() % 100 < 50))
         {
             Aranha* aranha = new Aranha();
 
@@ -89,9 +90,9 @@ void FasePrimeira::criarInimFaceis()
     }
 
     // Plataforma central superior: aranha OU galinha opcional
-    if (std::rand() % 100 < 50)
+    if (rand() % 100 < 50)
     {
-        if (std::rand() % 2 == 0)
+        if (rand() % 2 == 0)
         {
             if (quantidadeAranhas < maxAranhas)
             {
@@ -113,7 +114,7 @@ void FasePrimeira::criarInimFaceis()
             g->setPosicao(610.f, 305.f);
             g->configurarPatrulha(555.f, 695.f);
 
-            if (pJogador != nullptr)
+            if (pJogador != NULL)
                 g->setJogador(pJogador);
 
             galinhas.push_back(g);
@@ -136,7 +137,7 @@ void FasePrimeira::criarInimMedios()
     for (int i = 0; i < 5; i++)
     {
         if (i < 3 || (static_cast<int>(galinhas.size()) < maxGalinhas &&
-                      std::rand() % 100 < 50))
+                      rand() % 100 < 50))
         {
             Galinha* g = new Galinha();
 
@@ -166,7 +167,7 @@ void FasePrimeira::criarObstMedios()
     for (int i = 0; i < 6; i++)
     {
         if (quantidadeLamas < maxLamas &&
-            (i < 3 || std::rand() % 100 < 50))
+            (i < 3 || rand() % 100 < 50))
         {
             Obst_Medio* lama = new Obst_Medio();
 
@@ -230,7 +231,7 @@ void FasePrimeira::criarPlataformas()
     for (int i = 0; i < 3; i++)
     {
         if (quantidadePlataformas < maxPlataformas &&
-            std::rand() % 100 < 50)
+            rand() % 100 < 50)
         {
             Plataforma* p = new Plataforma();
 
@@ -261,10 +262,10 @@ void FasePrimeira::setJogador(Jogador* pJ)
 {
     Fase::setJogador(pJ);
 
-    for (std::vector<Galinha*>::iterator it = galinhas.begin();
+    for (vector<Galinha*>::iterator it = galinhas.begin();
          it != galinhas.end(); it++)
     {
-        if (*it != nullptr)
+        if (*it != NULL)
             (*it)->setJogador(pJ);
     }
 }
@@ -276,28 +277,28 @@ void FasePrimeira::criarProjeteis()
 
 void FasePrimeira::criarOvo()
 {
-    if (pJogador == nullptr)
-        return;
-
-    for (std::vector<Galinha*>::iterator it = galinhas.begin();
-         it != galinhas.end(); it++)
+    if (pJogador != NULL)
     {
-        Galinha* g = *it;
-        if (g == nullptr || !g->getAtivo() || !g->verificarAtaque())
-            continue;
+        for (vector<Galinha*>::iterator it = galinhas.begin();
+             it != galinhas.end(); it++)
+        {
+            Galinha* g = *it;
+            if (g == NULL || !g->getAtivo() || !g->verificarAtaque())
+                continue;
 
-        Ovo* ovo = new Ovo();
-        float xGalinha = g->getPosicao().x;
-        float yGalinha = g->getPosicao().y;
-        float xJogador = pJogador->getPosicao().x;
+            Ovo* ovo = new Ovo();
+            float xGalinha = g->getPosicao().x;
+            float yGalinha = g->getPosicao().y;
+            float xJogador = pJogador->getPosicao().x;
 
-        float direcao = 1.f;
-        if (xJogador < xGalinha)
-            direcao = -1.f;
+            float direcao = 1.f;
+            if (xJogador < xGalinha)
+                direcao = -1.f;
 
-        ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f, direcao);
-        lista_ents.incluir(ovo);
-        GC.incluirProjetil(ovo);
+            ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f, direcao);
+            lista_ents.incluir(ovo);
+            GC.incluirProjetil(ovo);
+        }
     }
 }
 
@@ -308,10 +309,10 @@ bool FasePrimeira::getVenceu() const
 
 void FasePrimeira::pausar(bool pausa)
 {
-    for (std::vector<Galinha*>::iterator it = galinhas.begin();
+    for (vector<Galinha*>::iterator it = galinhas.begin();
          it != galinhas.end(); it++)
     {
-        if (*it != nullptr)
+        if (*it != NULL)
             (*it)->pausar(pausa);
     }
 }
@@ -336,7 +337,7 @@ void FasePrimeira::reiniciar()
 
 bool FasePrimeira::carregar()
 {
-    std::ifstream arquivo("inimigos.txt");
+    ifstream arquivo("inimigos.txt");
 
     if (!arquivo.is_open())
         return false;
@@ -353,7 +354,7 @@ bool FasePrimeira::carregar()
         return false;
     }
 
-    std::string tipo;
+    string tipo;
     bool sucesso = true;
 
     while (sucesso && arquivo >> tipo)
