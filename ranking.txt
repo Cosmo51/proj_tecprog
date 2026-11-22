@@ -1,5 +1,7 @@
+600|Natal
 500|leo
 250|Maria
+200|felipe
 200|leo
 100|Pedro
 100|Joao

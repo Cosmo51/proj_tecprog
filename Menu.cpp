@@ -4,12 +4,14 @@
 #include <iostream>
 #include <string>
 
-Menu::Menu() : pJogo(nullptr), opcaoSelecionada(0),
+Menu::Menu() : pJogo(nullptr),
+               opcaoSelecionada(0),
                teclaCimaAnterior(false),
                teclaBaixoAnterior(false),
                teclaEnterAnterior(false),
                tipoMenu(0),
-               nomeJogador("")
+               nomeJogador(""),
+               teclaBackspaceAnterior(false)
 {
     if (!fonte.openFromFile("arial.ttf"))
     {
@@ -79,13 +81,14 @@ if (tipoMenu == 5)
         case 4:
             quantidadeOpcoes = 3;
             break;
+
         case 6:
             quantidadeOpcoes = 1;
             break;
     }
 
     // Navegacao para cima
-    if (teclaCimaAtual && !teclaCimaAnterior)
+    if (tipoMenu != 5 && teclaCimaAtual && !teclaCimaAnterior)
     {
         opcaoSelecionada--;
 
@@ -94,7 +97,7 @@ if (tipoMenu == 5)
     }
 
     // Navegacao para baixo
-    if (teclaBaixoAtual && !teclaBaixoAnterior)
+    if (tipoMenu != 5 && teclaBaixoAtual && !teclaBaixoAnterior)
     {
         opcaoSelecionada++;
 
@@ -143,10 +146,12 @@ if (tipoMenu == 5)
                     switch (opcaoSelecionada)
                     {
                         case 0:
+                            pJogo->setModoTeste(true);
                             pJogo->iniciarJogo(1);
                             break;
 
                         case 1:
+                            pJogo->setModoTeste(true);
                             pJogo->iniciarJogo(2);
                             break;
 
@@ -212,6 +217,7 @@ if (tipoMenu == 5)
     {
         if (!nomeJogador.empty() && pJogo != nullptr)
         {
+            pJogo->setModoTeste(false);
             pJogo->setNomeJogador(nomeJogador);
             pJogo->iniciarJogo();
         }
@@ -409,16 +415,19 @@ if (tipoMenu == 5)
 
         else if (tipoMenu == 6)
         {
-        titulo.setString("RANKING");
-        titulo.setPosition({390.f, 100.f});
-        const auto& pontuacoes = pJogo->getRanking().getPontuacoes();
+            titulo.setString("RANKING");
+            titulo.setPosition({390.f, 100.f});
+            pGG->desenharTexto(titulo);
+            const std::multimap<int, std::string>& pontuacoes =
+            pJogo->getRanking().getPontuacoes();
 
             int posicao = 1;
             float altura = 170.f;
 
-            for (auto it = pontuacoes.rbegin();
-                 it != pontuacoes.rend() && posicao <= 10;
-                 ++it)
+            for (std::multimap<int, std::string>::const_reverse_iterator it =
+            pontuacoes.rbegin();
+            it != pontuacoes.rend() && posicao <= 10;
+            it++)
             {
                 sf::Text texto(fonte);
 
@@ -448,7 +457,7 @@ if (tipoMenu == 5)
             pGG->desenharTexto(voltar);
         }
 
-                    // Tela de entrada do nome
+        // Tela de entrada do nome
         else if (tipoMenu == 5)
         {
             titulo.setString("NOVO JOGO");

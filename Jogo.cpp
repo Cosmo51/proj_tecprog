@@ -1,7 +1,8 @@
 #include "Jogo.h"
 #include <iostream>
 
-Jogo::Jogo() : noMenu(true), faseAtual(1), pausado(false)
+Jogo::Jogo() : noMenu(true), faseAtual(1),
+               pausado(false), modoTeste(false)
 {
     fase1.setJogador(&pJog1);
     fase2.setJogador(&pJog1);
@@ -170,8 +171,11 @@ void Jogo::finalizarJogo(bool venceu)
     pausado = false;
     noMenu = true;
 
-    ranking.adicionarPontuacao(pJog1.getPontos(), nomeJogador);
-    ranking.salvar();
+    if (!modoTeste)
+    {
+        ranking.adicionarPontuacao(pJog1.getPontos(), nomeJogador);
+        ranking.salvar();
+    }
 
     if (venceu)
         menu.setTipoMenu(4);
@@ -192,5 +196,10 @@ const std::string& Jogo::getNomeJogador() const
 Ranking& Jogo::getRanking()
 {
     return ranking;
+}
+
+void Jogo::setModoTeste(bool teste)
+{
+    modoTeste = teste;
 }
 

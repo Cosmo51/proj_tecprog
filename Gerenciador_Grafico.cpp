@@ -27,14 +27,21 @@ bool Gerenciador_Grafico::estaAberta() const { return janela.isOpen(); }
 
 void Gerenciador_Grafico::tratarEventos()
 {
+    while (!caracteresDigitados.empty())
+    {
+        caracteresDigitados.pop();
+    }
+
     while (const std::optional evento = janela.pollEvent())
     {
         if (evento->is<sf::Event::Closed>())
             janela.close();
 
-            if (const auto* texto = evento-> getIf<sf::Event::TextEntered>()){
-                caracteresDigitados.push(texto->unicode);
-            }
+        if (const sf::Event::TextEntered* texto =
+            evento->getIf<sf::Event::TextEntered>())
+        {
+            caracteresDigitados.push(texto->unicode);
+        }
     }
 }
 

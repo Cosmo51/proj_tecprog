@@ -23,6 +23,7 @@ private:
     bool noMenu;
     int faseAtual;
     bool pausado;
+    bool modoTeste;
 
 public:
     Jogo();
@@ -37,4 +38,5 @@ public:
     void setNomeJogador(const std::string& nome);
     const std::string& getNomeJogador() const;
     Ranking& getRanking();
+    void setModoTeste(bool teste);
 };

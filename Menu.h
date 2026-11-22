@@ -24,5 +24,4 @@ public:
     void executar();
     void setJogo(Jogo* pJ);
     void setTipoMenu(int tipo);
-    const std::string& getNomeJogador() const;
 };
