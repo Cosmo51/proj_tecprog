@@ -36,7 +36,7 @@ namespace Entidades{
         Projetil();
         ~Projetil();
         virtual void executar() = 0;
-        void salvar();
+        virtual void salvar() = 0;
         bool getAtivo() const;
         void desativar();
     };

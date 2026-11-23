@@ -11,11 +11,6 @@ Projetil::~Projetil()
 
 }
 
-void Projetil::salvar()
-{
-
-}
-
 bool Projetil::getAtivo() const
 {
     return ativo;

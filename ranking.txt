@@ -5,9 +5,11 @@
 600|Natal
 500|leo
 400|teste3
+300|pedro
 250|Maria
-200|felipe
-200|leo
 200|pedrinho
-100|Pedro
+200|leo
+200|felipe
 100|Joao
+100|Pedro
+0|pedro
