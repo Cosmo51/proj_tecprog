@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Entidades.h"
+#include <fstream>
 using namespace Entidades;
 
 
@@ -64,6 +65,12 @@ public:
     void impulsionar();
     void adicionarPontos(int valor);
     int getPontos() const;
+    void prepararNovaFase();
+    void pausar(bool pausa);
+    void reiniciar();
+    bool carregar();
+    void operator--();
+    void operator+=(int pontosGanhos);
 };
 
 class Inimigo : public Personagem
@@ -73,6 +80,8 @@ protected:
     float velocidadeY;
     sf::Vector2f posicaoAnterior;
     bool ativo;
+    float limiteEsquerdo;
+    float limiteDireito;
 
 public:
     Inimigo();
@@ -90,6 +99,7 @@ public:
     sf::Vector2f getPosicaoAnterior() const;
     bool getAtivo() const;
     void desativar();
+    void configurarPatrulha(float esquerda, float direita);
 };
 
 class Aranha : public Inimigo
@@ -105,6 +115,7 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
+    bool carregar(std::ifstream& arquivo);
     void mover();
     void inverterDirecao();
 };
@@ -124,22 +135,34 @@ public:
     void danificar(Jogador* p);
     void executar();
     void salvar();
+    bool carregar(std::ifstream& arquivo);
     void mover();
     void setJogador(Jogador* p);
     bool verificarAtaque();
     void inverterDirecao();
+    void pausar(bool pausa);
 };
 
 class Gato : public Inimigo
 {
-
 private:
     short int forca;
+    float velocidadeX;
+    Jogador* pJogador;
+    sf::Clock relogioDisparo;
 
 public:
     Gato();
     ~Gato();
-    void executar();
 
+    void executar();
+    void mover();
+    void danificar(Jogador* p);
+    void inverterDirecao();
+    void salvar();
+    bool carregar(std::ifstream& arquivo);
+    void setJogador(Jogador* p);
+    bool verificarAtaque();
+    void pausar(bool pausa);
 };
 }

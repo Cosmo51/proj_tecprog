@@ -1,4 +1,8 @@
 #include "Personagens.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 using namespace Personagens;
 
@@ -6,10 +10,10 @@ Jogador::Jogador(){
 
     inicializa();
 
-    body.setSize(sf::Vector2f(25.f, 100.f));
-    body.setFillColor(sf::Color::Blue);
-    body.setPosition(sf::Vector2f(20.f, 290.f));
-    posicaoAnterior = body.getPosition();
+    definirTamanho(35.f, 45.f);
+    carregarTextura("assets/rato.png");
+    setPosicao(20.f, 695.f);
+    posicaoAnterior = getPosicao();
 }
 
 Jogador::~Jogador(){
@@ -22,14 +26,33 @@ void Jogador::colidir(Inimigo* pIn){
 
 }
 
-void Jogador::executar(){
-
-
-
+void Jogador::executar()
+{
+    mover();
+    saiuDoChao();
 }
 
-void Jogador::salvar(){
+void Jogador::salvar()
+{
+    ofstream arquivo("jogador.txt");
 
+    if (arquivo.is_open())
+    {
+        arquivo << getPosicao().x << " "
+                << getPosicao().y << endl;
+
+        arquivo << num_vidas << endl;
+        arquivo << pontos << endl;
+
+        arquivo << velX << " " << velY << endl;
+        arquivo << noChao << endl;
+
+        arquivo.close();
+    }
+    else
+    {
+        cout << "Erro ao salvar jogador!" << endl;
+    }
 }
 
 void Jogador::inicializa()
@@ -52,7 +75,7 @@ void Jogador::mover()
 {
     float gravidade = 0.01f;
 
-    posicaoAnterior = body.getPosition();
+    posicaoAnterior = getPosicao();
 
     if (invulneravel &&
         relogioDano.getElapsedTime().asSeconds() >= 0.5f)
@@ -61,43 +84,41 @@ void Jogador::mover()
     }
 
     velY += gravidade;
-    body.move(sf::Vector2f(0.f, velY));
+    moverFigura(0.f, velY);
 
     // Durante os primeiros 0.2 segundos, aplica o knockback
     if (invulneravel &&
         relogioDano.getElapsedTime().asSeconds() < 0.2f)
     {
-        body.move(sf::Vector2f(impulsoX, 0.f));
+        moverFigura(impulsoX, 0.f);
     }
     else
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+        if (teclaPressionada(sf::Keyboard::Key::A))
         {
-            body.move(sf::Vector2f(-velX, 0.f));
+            moverFigura(-velX, 0.f);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+        if (teclaPressionada(sf::Keyboard::Key::D))
         {
-            body.move(sf::Vector2f(velX, 0.f));
+            moverFigura(velX, 0.f);
         }
     }
 
     // Limite esquerdo
-    if (body.getPosition().x < 1.f)
+    if (getPosicao().x < 0.f)
     {
-        body.setPosition(sf::Vector2f(
-            1.f, body.getPosition().y));
+        setPosicao(
+            0.f, getPosicao().y);
     }
 
     // Limite direito
-    if (body.getPosition().x + body.getSize().x > 399.f)
+    if (getPosicao().x + getTamanho().x > 1000.f)
     {
-        body.setPosition(sf::Vector2f(
-            399.f - body.getSize().x,
-            body.getPosition().y));
+        setPosicao(1000.f - getTamanho().x, getPosicao().y);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+    if (teclaPressionada(sf::Keyboard::Key::Space))
     {
         pular();
     }
@@ -150,10 +171,7 @@ void Jogador::restaurarVelocidade()
 
 void Jogador::perderVida()
 {
-    if (num_vidas > 0)
-    {
-        num_vidas--;
-    }
+    operator--();
 }
 
 int Jogador::getVidas() const
@@ -163,17 +181,19 @@ int Jogador::getVidas() const
 
 void Jogador::receberDanoContato(float direcao)
 {
-    if (invulneravel)
-        return;
+    if (!invulneravel)
+    {
+        perderVida();
 
-    perderVida();
+        cout << "Vidas restantes: " << getVidas() << endl;
 
-    impulsoX = 1.5f * direcao;
-    velY = -0.9f;
-    noChao = false;
+        impulsoX = 1.5f * direcao;
+        velY = -0.9f;
+        noChao = false;
 
-    invulneravel = true;
-    relogioDano.restart();
+        invulneravel = true;
+        relogioDano.restart();
+    }
 }
 
 void Jogador::impulsionar()
@@ -182,13 +202,99 @@ void Jogador::impulsionar()
     noChao = false;
 }
 
-void Jogador::adicionarPontos(int valor){
-    pontos+=valor;
+void Jogador::adicionarPontos(int quantidade)
+{
+    operator+=(quantidade);
 }
 
 int Jogador::getPontos() const{
     return pontos;
 }
 
+void Jogador::prepararNovaFase()
+{
+    setPosicao(20.f, 695.f);
+    posicaoAnterior = getPosicao();
 
+    velX = 0.5f;
+    velY = 0.f;
+    impulsoX = 0.f;
+
+    noChao = false;
+    invulneravel = false;
+}
+
+void Jogador::pausar(bool pausa)
+{
+    if (pausa)
+        relogioDano.stop();
+    else
+        relogioDano.start();
+}
+
+void Jogador::reiniciar()
+{
+    inicializa();
+    prepararNovaFase();
+
+    num_vidas = 3;
+
+    relogioDano.restart();
+}
+
+bool Jogador::carregar()
+{
+    ifstream arquivo("jogador.txt");
+
+    if (!arquivo.is_open())
+    {
+        cout << "Erro ao carregar jogador!" << endl;
+        return false;
+    }
+
+    float posX, posY;
+    int vidasSalvas, pontosSalvos;
+    float velXSalva, velYSalva;
+    bool noChaoSalvo;
+
+    if (!(arquivo >> posX >> posY
+                  >> vidasSalvas
+                  >> pontosSalvos
+                  >> velXSalva >> velYSalva
+                  >> noChaoSalvo))
+    {
+        return false;
+    }
+
+    setPosicao(posX, posY);
+    posicaoAnterior = getPosicao();
+
+    num_vidas = vidasSalvas;
+    pontos = pontosSalvos;
+
+    velX = velXSalva;
+    velY = velYSalva;
+
+    noChao = noChaoSalvo;
+
+    impulsoX = 0.f;
+    invulneravel = false;
+
+    relogioDano.restart();
+
+    arquivo.close();
+
+    return true;
+}
+
+void Jogador::operator--()
+{
+    if (num_vidas > 0)
+        num_vidas--;
+}
+
+void Jogador::operator+=(int pontosGanhos)
+{
+    pontos += pontosGanhos;
+}
 

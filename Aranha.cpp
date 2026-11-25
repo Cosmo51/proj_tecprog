@@ -1,12 +1,16 @@
 #include "Personagens.h"
+#include <fstream>
 
+#include <stdlib.h>
+
+using namespace std;
 using namespace Personagens;
 
 Aranha::Aranha(){
 
-    body.setSize(sf::Vector2f(25.f, 100.f));
-    body.setFillColor(sf::Color::Red);
-    body.setPosition(sf::Vector2f(355.f, 290.f));
+    definirTamanho(35.f, 35.f);
+    carregarTextura("assets/aranha.png");
+    setPosicao(355.f, 290.f);
     velocidadeX = -0.2f;
     velocidadeY = 0.f;
 
@@ -18,23 +22,23 @@ Aranha::~Aranha(){
 
 void Aranha::danificar(Jogador* p)
 {
-    if (p == nullptr)
-        return;
-
-    float centroJogador = p->getBody().getPosition().x
-                        + p->getBody().getSize().x / 2.f;
-
-    float centroInimigo = body.getPosition().x
-                       + body.getSize().x / 2.f;
-
-    float direcao = -1.f;
-
-    if (centroJogador >= centroInimigo)
+    if (p != NULL)
     {
-        direcao = 1.f;
-    }
+        float centroJogador = p->getPosicao().x
+                            + p->getTamanho().x / 2.f;
 
-    p->receberDanoContato(direcao);
+        float centroInimigo = getPosicao().x
+                           + getTamanho().x / 2.f;
+
+        float direcao = -1.f;
+
+        if (centroJogador >= centroInimigo)
+        {
+            direcao = 1.f;
+        }
+
+        p->receberDanoContato(direcao);
+    }
 }
 
 void Aranha::executar(){
@@ -43,27 +47,72 @@ void Aranha::executar(){
 
 }
 
+void Aranha::salvar()
+{
+    ofstream arquivo("inimigos.txt", ios::app);
 
-void Aranha::salvar(){
+    if (arquivo.is_open())
+    {
+        arquivo << "Aranha" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << " "
+                << limiteEsquerdo << " "
+                << limiteDireito << endl;
 
+        arquivo.close();
+    }
+}
+
+bool Aranha::carregar(ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+    float esquerda, direita;
+
+    if (arquivo >> posX >> posY
+                >> velX >> velY
+                >> esquerda >> direita)
+    {
+        setPosicao(posX, posY);
+
+        posicaoAnterior = getPosicao();
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        configurarPatrulha(esquerda, direita);
+
+        return true;
+    }
+
+    return false;
 }
 
 void Aranha::mover()
 {
-    posicaoAnterior = body.getPosition();
+    posicaoAnterior = getPosicao();
 
     float gravidade = 0.01f;
 
     velocidadeY += gravidade;
-    body.move(sf::Vector2f(0.f, velocidadeY));
-    body.move(sf::Vector2f(velocidadeX, 0.f));
+    moverFigura(0.f, velocidadeY);
+    moverFigura(velocidadeX, 0.f);
 
-    if(body.getPosition().x <= 200.f){
-        velocidadeX = 0.2f;
+    // Mantem todo o corpo sobre a plataforma de patrulha.
+    if (getPosicao().x < limiteEsquerdo)
+    {
+        setPosicao(limiteEsquerdo, getPosicao().y);
+        if (velocidadeX < 0.f)
+            inverterDirecao();
     }
 
-    if(body.getPosition().x + body.getSize().x >= 399.f){
-        velocidadeX = -0.2f;
+    if (getPosicao().x + getTamanho().x > limiteDireito)
+    {
+        setPosicao(limiteDireito - getTamanho().x, getPosicao().y);
+        if (velocidadeX > 0.f)
+            inverterDirecao();
     }
 }
 

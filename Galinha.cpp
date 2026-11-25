@@ -1,15 +1,17 @@
 #include "Personagens.h"
 #include <iostream>
+#include <stdlib.h>
 
+using namespace std;
 using namespace Personagens;
 
 Galinha::Galinha(){
 
-    body.setSize(sf::Vector2f(25.f, 100.f));
-    body.setFillColor(sf::Color::Yellow);
-    body.setPosition(sf::Vector2f(300.f, 290.f));
+    definirTamanho(40.f, 45.f);
+    carregarTextura("assets/galinha.png");
+    setPosicao(300.f, 290.f);
 
-    pJogador = nullptr;
+    pJogador = NULL;
     velocidadeX = 0.2f;
 
 }
@@ -18,27 +20,68 @@ Galinha::~Galinha(){
 
 }
 
-void Galinha::salvar(){
+void Galinha::salvar()
+{
+    ofstream arquivo("inimigos.txt", ios::app);
 
+    if (arquivo.is_open())
+    {
+        arquivo << "Galinha" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << velocidadeY << " "
+                << limiteEsquerdo << " "
+                << limiteDireito << endl;
+
+        arquivo.close();
+    }
+}
+
+bool Galinha::carregar(ifstream& arquivo)
+{
+    float posX, posY;
+    float velX, velY;
+    float esquerda, direita;
+
+    if (arquivo >> posX >> posY
+                >> velX >> velY
+                >> esquerda >> direita)
+    {
+        setPosicao(posX, posY);
+
+        posicaoAnterior = getPosicao();
+
+        velocidadeX = velX;
+        velocidadeY = velY;
+
+        configurarPatrulha(esquerda, direita);
+
+        relogioDisparo.restart();
+
+        return true;
+    }
+
+    return false;
 }
 
 void Galinha::danificar(Jogador* p)
 {
-    if (p == nullptr)
-        return;
-
-    float centroJogador = p->getBody().getPosition().x + p->getBody().getSize().x / 2.f;
-
-    float centroInimigo = body.getPosition().x + body.getSize().x / 2.f;
-
-    float direcao = -1.f;
-
-    if (centroJogador >= centroInimigo)
+    if (p != NULL)
     {
-        direcao = 1.f;
-    }
+        float centroJogador = p->getPosicao().x + p->getTamanho().x / 2.f;
 
-    p->receberDanoContato(direcao);
+        float centroInimigo = getPosicao().x + getTamanho().x / 2.f;
+
+        float direcao = -1.f;
+
+        if (centroJogador >= centroInimigo)
+        {
+            direcao = 1.f;
+        }
+
+        p->receberDanoContato(direcao);
+    }
 }
 
 void Galinha::executar()
@@ -48,23 +91,28 @@ void Galinha::executar()
 
 void Galinha::mover()
 {
-    posicaoAnterior = body.getPosition();
+    posicaoAnterior = getPosicao();
 
     float gravidade = 0.01f;
 
     velocidadeY += gravidade;
 
-    body.move(sf::Vector2f(0.f, velocidadeY));
-    body.move(sf::Vector2f(velocidadeX, 0.f));
+    moverFigura(0.f, velocidadeY);
+    moverFigura(velocidadeX, 0.f);
 
-    if (body.getPosition().x <= 200.f)
+    // Mantem todo o corpo sobre a plataforma de patrulha.
+    if (getPosicao().x < limiteEsquerdo)
     {
-        velocidadeX = 0.2f;
+        setPosicao(limiteEsquerdo, getPosicao().y);
+        if (velocidadeX < 0.f)
+            inverterDirecao();
     }
 
-    if (body.getPosition().x + body.getSize().x >= 399.f)
+    if (getPosicao().x + getTamanho().x > limiteDireito)
     {
-        velocidadeX = -0.2f;
+        setPosicao(limiteDireito - getTamanho().x, getPosicao().y);
+        if (velocidadeX > 0.f)
+            inverterDirecao();
     }
 }
 
@@ -75,20 +123,20 @@ void Galinha::setJogador(Jogador* p)
 
 bool Galinha::verificarAtaque()
 {
-    if (pJogador == nullptr)
+    if (pJogador == NULL)
         return false;
 
-    sf::Vector2f posGalinha = body.getPosition();
-    sf::Vector2f posJogador = pJogador->getBody().getPosition();
+    sf::Vector2f posGalinha = getPosicao();
+    sf::Vector2f posJogador = pJogador->getPosicao();
 
     float distanciaX = posJogador.x - posGalinha.x;
 
     if (distanciaX < 0.f)
         distanciaX = -distanciaX;
 
-    if (distanciaX <= 100.f)
+    if (distanciaX <= 250.f)
     {
-        if (relogioDisparo.getElapsedTime().asSeconds() >= 2.f)
+        if (relogioDisparo.getElapsedTime().asSeconds() >= 3.f)
         {
             relogioDisparo.restart();
             return true;
@@ -101,6 +149,14 @@ bool Galinha::verificarAtaque()
 void Galinha::inverterDirecao()
 {
     velocidadeX = -velocidadeX;
+}
+
+void Galinha::pausar(bool pausa)
+{
+    if (pausa)
+        relogioDisparo.stop();
+    else
+        relogioDisparo.start();
 }
 
 

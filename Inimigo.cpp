@@ -6,6 +6,8 @@ Inimigo::Inimigo():nivel_maldade(0)
 {
     velocidadeY = 0.f;
     ativo = true;
+    limiteEsquerdo = 200.f;
+    limiteDireito = 399.f;
 }
 
 Inimigo::~Inimigo(){
@@ -39,4 +41,10 @@ bool Inimigo::getAtivo() const
 void Inimigo::desativar()
 {
     ativo = false;
+}
+
+void Inimigo::configurarPatrulha(float esquerda, float direita)
+{
+    limiteEsquerdo = esquerda;
+    limiteDireito = direita;
 }

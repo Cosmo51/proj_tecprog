@@ -4,10 +4,12 @@ using namespace Listas;
 
 ListaEntidades::ListaEntidades()
 {
+
 }
 
 ListaEntidades::~ListaEntidades()
 {
+
 }
 
 void ListaEntidades::incluir(Entidade* pE)
@@ -35,9 +37,15 @@ void ListaEntidades::desenhar()
     LEs.desenhar();
 }
 
-void ListaEntidades::setWindow(sf::RenderWindow* janela)
+void ListaEntidades::limpar()
 {
-    LEs.setWindow(janela);
+    LEs.limpar();
 }
+
+void ListaEntidades::salvar()
+{
+    LEs.salvar();
+}
+
 
 

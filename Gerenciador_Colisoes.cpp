@@ -1,10 +1,13 @@
 #include "Gerenciadores.h"
 #include <iostream>
+#include <stdlib.h>
+
+using namespace std;
 using namespace Gerenciadores;
 
 
 Gerenciador_Colisoes::Gerenciador_Colisoes():
-pJog1(nullptr)
+pJog1(NULL)
 {
 
 }
@@ -20,35 +23,35 @@ void Gerenciador_Colisoes::setJogador(Jogador* pJ)
 
 const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) const
 {
-    if (pe1 == nullptr || pe2 == nullptr)
+    if (pe1 == NULL || pe2 == NULL)
     {
         return false;
     }
 
-    sf::FloatRect limites1 = pe1->getBody().getGlobalBounds();
-    sf::FloatRect limites2 = pe2->getBody().getGlobalBounds();
+    sf::FloatRect limites1 = pe1->getLimites();
+    sf::FloatRect limites2 = pe2->getLimites();
 
     return limites1.findIntersection(limites2).has_value();
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 {
-    if (pJog1 == nullptr)
-        return;
-
-    pJog1->restaurarVelocidade();
-
-    std::list<Obstaculo*>::iterator it;
-
-    for (it = LOs.begin(); it != LOs.end(); it++)
+    if (pJog1 != NULL)
     {
-        Obstaculo* obstaculo = *it;
+        pJog1->restaurarVelocidade();
 
-        if (obstaculo != nullptr)
+        list<Obstaculo*>::iterator it;
+
+        for (it = LOs.begin(); it != LOs.end(); it++)
         {
-            if (verificarColisao(pJog1, obstaculo))
+            Obstaculo* obstaculo = *it;
+
+            if (obstaculo != NULL)
             {
-                obstaculo->obstaculizar(pJog1);
+                if (verificarColisao(pJog1, obstaculo))
+                {
+                    obstaculo->obstaculizar(pJog1);
+                }
             }
         }
     }
@@ -56,72 +59,134 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
 {
-    if (pJog1 == nullptr)
-        return;
-
-    std::vector<Inimigo*>::iterator it;
-
-    for (it = LIs.begin(); it != LIs.end(); it++)
+    if (pJog1 != NULL)
     {
-        Inimigo* inimigo = *it;
+        vector<Inimigo*>::iterator it;
 
-        if (inimigo != nullptr && inimigo->getAtivo())
+        for (it = LIs.begin(); it != LIs.end(); it++)
         {
-            if (verificarColisao(pJog1, inimigo))
+            Inimigo* inimigo = *it;
+
+            if (inimigo != NULL && inimigo->getAtivo())
             {
-                sf::FloatRect jog = pJog1->getBody().getGlobalBounds();
-                sf::FloatRect inim = inimigo->getBody().getGlobalBounds();
-
-                sf::Vector2f anteriorJ = pJog1->getPosicaoAnterior();
-                sf::Vector2f anteriorI = inimigo->getPosicaoAnterior();
-
-                float posXJogador = jog.position.x;
-                float topoJ = jog.position.y;
-
-                float esqI = inim.position.x;
-                float dirI = esqI + inim.size.x;
-                float topoI = inim.position.y;
-                float baseI = topoI + inim.size.y;
-
-                // Jogador cai sobre o inimigo
-                if (anteriorJ.y + jog.size.y <= anteriorI.y &&
-                    pJog1->getVelY() >= 0.f)
+                if (verificarColisao(pJog1, inimigo))
                 {
-                    pJog1->setPosicao(posXJogador, topoI - jog.size.y);
-                    pJog1->impulsionar();
+                    sf::FloatRect jog = pJog1->getLimites();
+                    sf::FloatRect inim = inimigo->getLimites();
 
-                    inimigo->desativar();
-                    pJog1->adicionarPontos(100);
+                    sf::Vector2f anteriorJ = pJog1->getPosicaoAnterior();
+                    sf::Vector2f anteriorI = inimigo->getPosicaoAnterior();
 
-                    std::cout << "Inimigo eliminado!" << std::endl;
-                    std::cout<<"Pontuacao: "<< pJog1->getPontos() << std::endl;
-                }
+                    float posXJogador = jog.position.x;
+                    float topoJ = jog.position.y;
 
-                // Jogador bate por baixo
-                else if (anteriorJ.y >= anteriorI.y + inim.size.y && pJog1->getVelY() < 0.f)
-                {
-                    pJog1->setPosicao(posXJogador, baseI);
-                    pJog1->pararSubida();
+                    float esqI = inim.position.x;
+                    float dirI = esqI + inim.size.x;
+                    float topoI = inim.position.y;
+                    float baseI = topoI + inim.size.y;
 
-                    inimigo->danificar(pJog1);
-                }
-
-                // Colisao lateral
-                else
-                {
-                    float centroJ = posXJogador + jog.size.x / 2.f;
-                    float centroI = esqI + inim.size.x / 2.f;
-
-                    if (centroJ < centroI)
+                    // Jogador cai sobre o inimigo
+                    if (anteriorJ.y + jog.size.y <= anteriorI.y &&
+                        pJog1->getVelY() >= 0.f)
                     {
-                        pJog1->setPosicao(esqI - jog.size.x, topoJ);
+                        pJog1->setPosicao(posXJogador, topoI - jog.size.y);
+                        pJog1->impulsionar();
+
+                        inimigo->desativar();
+                        pJog1->adicionarPontos(100);
+
+                        cout << "Inimigo eliminado!" << endl;
+                        cout<<"Pontuacao: "<< pJog1->getPontos() << endl;
+                    }
+
+                    // Jogador bate por baixo
+                    else if (anteriorJ.y >= anteriorI.y + inim.size.y && pJog1->getVelY() < 0.f)
+                    {
+                        pJog1->setPosicao(posXJogador, baseI);
+                        pJog1->pararSubida();
+
+                        inimigo->danificar(pJog1);
+                    }
+
+                    // Colisao lateral
+                    else
+                    {
+                        float centroJ = posXJogador + jog.size.x / 2.f;
+                        float centroI = esqI + inim.size.x / 2.f;
+
+                        if (centroJ < centroI)
+                        {
+                            pJog1->setPosicao(esqI - jog.size.x, topoJ);
+                        }
+                        else
+                        {
+                            pJog1->setPosicao(dirI, topoJ);
+                        }
+
+                        inimigo->danificar(pJog1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Gerenciador_Colisoes::tratarColisoesInimgsInimgs()
+{
+    vector<Inimigo*>::iterator it1;
+    vector<Inimigo*>::iterator it2;
+
+    for (it1 = LIs.begin(); it1 != LIs.end(); it1++)
+    {
+        Inimigo* inimigo1 = *it1;
+
+        if (inimigo1 == NULL || !inimigo1->getAtivo())
+            continue;
+
+        it2 = it1;
+        it2++;
+
+        for (; it2 != LIs.end(); it2++)
+        {
+            Inimigo* inimigo2 = *it2;
+
+            if (inimigo2 == NULL || !inimigo2->getAtivo())
+                continue;
+
+            if (verificarColisao(inimigo1, inimigo2))
+            {
+                sf::FloatRect r1 = inimigo1->getLimites();
+                sf::FloatRect r2 = inimigo2->getLimites();
+
+                float centro1 = r1.position.x + r1.size.x / 2.f;
+                float centro2 = r2.position.x + r2.size.x / 2.f;
+
+                float topo1 = r1.position.y;
+                float topo2 = r2.position.y;
+
+                float base1 = topo1 + r1.size.y;
+                float base2 = topo2 + r2.size.y;
+
+                // Trata apenas encontros laterais
+                if (topo1 < base2 && base1 > topo2)
+                {
+                    if (centro1 < centro2)
+                    {
+                        inimigo2->setPosicao(
+                            r1.position.x + r1.size.x,
+                            topo2
+                        );
                     }
                     else
                     {
-                        pJog1->setPosicao(dirI, topoJ);
+                        inimigo2->setPosicao(
+                            r1.position.x - r2.size.x,
+                            topo2
+                        );
                     }
 
-                    inimigo->danificar(pJog1);
+                    inimigo1->inverterDirecao();
+                    inimigo2->inverterDirecao();
                 }
             }
         }
@@ -130,13 +195,13 @@ void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
 
 void Gerenciador_Colisoes::removerInimigosInativos(ListaEntidades& lista)
 {
-    std::vector<Inimigo*>::iterator it = LIs.begin();
+    vector<Inimigo*>::iterator it = LIs.begin();
 
     while (it != LIs.end())
     {
         Inimigo* inimigo = *it;
 
-        if (inimigo == nullptr)
+        if (inimigo == NULL)
         {
             it = LIs.erase(it);
         }
@@ -155,27 +220,27 @@ void Gerenciador_Colisoes::removerInimigosInativos(ListaEntidades& lista)
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 {
-    if (pJog1 == nullptr)
-        return;
-
-    std::set<Projetil*>::iterator it;
-
-    for (it = LPs.begin(); it != LPs.end(); it++)
+    if (pJog1 != NULL)
     {
-        Projetil* projetil = *it;
+        set<Projetil*>::iterator it;
 
-        if (projetil != nullptr)
+        for (it = LPs.begin(); it != LPs.end(); it++)
         {
-            if (projetil->getAtivo())
-            {
-                if (verificarColisao(pJog1, projetil))
-                {
-                    pJog1->perderVida();
-                    projetil->desativar();
+            Projetil* projetil = *it;
 
-                    std::cout << "Vidas restantes: "
-                              << pJog1->getVidas()
-                              << std::endl;
+            if (projetil != NULL)
+            {
+                if (projetil->getAtivo())
+                {
+                    if (verificarColisao(pJog1, projetil))
+                    {
+                        pJog1->perderVida();
+                        projetil->desativar();
+
+                        cout << "Vidas restantes: "
+                                  << pJog1->getVidas()
+                                  << endl;
+                    }
                 }
             }
         }
@@ -184,25 +249,25 @@ void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 
 void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
 {
-    std::set<Projetil*>::iterator it = LPs.begin();
+    set<Projetil*>::iterator it = LPs.begin();
 
     while (it != LPs.end())
     {
         Projetil* projetil = *it;
 
-        if (projetil == nullptr)
+        if (projetil == NULL)
         {
             it = LPs.erase(it);
         }
         else
         {
-            sf::FloatRect limites = projetil->getBody().getGlobalBounds();
+            sf::FloatRect limites = projetil->getLimites();
 
             // Desativar quando sair da tela
             if (limites.position.x + limites.size.x < 0.f ||
-                limites.position.x > 400.f ||
+                limites.position.x > 1000.f ||
                 limites.position.y + limites.size.y < 0.f ||
-                limites.position.y > 400.f)
+                limites.position.y > 750.f)
             {
                 projetil->desativar();
             }
@@ -225,20 +290,20 @@ void Gerenciador_Colisoes::removerProjeteisInativos(ListaEntidades& lista)
 
 void Gerenciador_Colisoes::tratarColisoesProjeteisObstacs()
 {
-    std::set<Projetil*>::iterator itProj;
-    std::list<Obstaculo*>::iterator itObst;
+    set<Projetil*>::iterator itProj;
+    list<Obstaculo*>::iterator itObst;
 
     for (itProj = LPs.begin(); itProj != LPs.end(); itProj++)
     {
         Projetil* projetil = *itProj;
 
-        if (projetil != nullptr && projetil->getAtivo())
+        if (projetil != NULL && projetil->getAtivo())
         {
             for (itObst = LOs.begin(); itObst != LOs.end(); itObst++)
             {
                 Plataforma* plataforma = dynamic_cast<Plataforma*>(*itObst);
 
-                if (plataforma != nullptr)
+                if (plataforma != NULL)
                 {
                     if (verificarColisao(projetil, plataforma))
                     {
@@ -253,20 +318,20 @@ void Gerenciador_Colisoes::tratarColisoesProjeteisObstacs()
 
 void Gerenciador_Colisoes::tratarColisoesInimgsObstacs()
 {
-    std::vector<Inimigo*>::iterator itIn;
-    std::list<Obstaculo*>::iterator itOb;
+    vector<Inimigo*>::iterator itIn;
+    list<Obstaculo*>::iterator itOb;
 
     for (itIn = LIs.begin(); itIn != LIs.end(); itIn++)
     {
         Inimigo* inimigo = *itIn;
 
-        if (inimigo != nullptr)
+        if (inimigo != NULL)
         {
             for (itOb = LOs.begin(); itOb != LOs.end(); itOb++)
             {
                 Plataforma* plataforma = dynamic_cast<Plataforma*>(*itOb);
 
-                if (plataforma != nullptr)
+                if (plataforma != NULL)
                 {
                     if (verificarColisao(inimigo, plataforma))
                     {
@@ -280,7 +345,7 @@ void Gerenciador_Colisoes::tratarColisoesInimgsObstacs()
 
 void Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
 {
-    if (pi != nullptr)
+    if (pi != NULL)
     {
         LIs.push_back(pi);
     }
@@ -288,7 +353,7 @@ void Gerenciador_Colisoes::incluirInimigo(Inimigo* pi)
 
 void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
 {
-    if (po != nullptr)
+    if (po != NULL)
     {
         LOs.push_back(po);
     }
@@ -296,7 +361,7 @@ void Gerenciador_Colisoes::incluirObstaculo(Obstaculo* po)
 
 void Gerenciador_Colisoes::incluirProjetil(Projetil* pj)
 {
-    if (pj != nullptr)
+    if (pj != NULL)
     {
         LPs.insert(pj);
     }
@@ -305,4 +370,11 @@ void Gerenciador_Colisoes::incluirProjetil(Projetil* pj)
 void Gerenciador_Colisoes::executar()
 {
 
+}
+
+void Gerenciador_Colisoes::limpar()
+{
+    LIs.clear();
+    LOs.clear();
+    LPs.clear();
 }

@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include "Entidades.h"
 #include "Personagens.h"
+#include <fstream>
 
 using namespace Entidades;
 using namespace Personagens;
@@ -22,6 +23,7 @@ namespace Obstaculos
         virtual void executar() = 0;
         virtual void salvar() = 0;
         virtual void obstaculizar(Jogador* p) = 0;
+        virtual void configurar(float x, float y) = 0;
 
     };
 
@@ -36,8 +38,10 @@ namespace Obstaculos
 
         void executar();
         void salvar();
+        bool carregar(std::ifstream& arquivo);
         void obstaculizar(Jogador* p);
         void obstaculizar(Inimigo* p);
+        void configurar(float x, float y);
         void configurar(float x, float y, float largura, float altura);
     };
 
@@ -54,7 +58,9 @@ namespace Obstaculos
     void salvarDataBuffer();
     void executar();
     void obstaculizar(Jogador* p);
+    void configurar(float x, float y);
     void salvar();
+    bool carregar(std::ifstream& arquivo);
 
     };
 
@@ -69,20 +75,9 @@ namespace Obstaculos
 
     void executar();
     void obstaculizar(Jogador* p);
+    void configurar(float x, float y);
     void salvar();
-
-    };
-
-    class LimitesGeograficos : public Entidade{
-
-    public:
-        LimitesGeograficos();
-        ~LimitesGeograficos();
-
-        void executar();
-        void salvar();
-        void direita();
-        void esquerda();
+    bool carregar(std::ifstream& arquivo);
 
     };
 }

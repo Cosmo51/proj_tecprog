@@ -1,13 +1,15 @@
 #include "Entidades.h"
 
+using namespace std;
+
 using namespace Entidades;
 
 Ovo::Ovo()
 {
     velocidadeX = 0.5f;
 
-    body.setSize(sf::Vector2f(10.f, 10.f));
-    body.setFillColor(sf::Color::White);
+    definirTamanho(20.f, 20.f);
+    carregarTextura("assets/ovo.png");
 }
 
 Ovo::~Ovo()
@@ -18,17 +20,46 @@ void Ovo::executar()
 {
     if (ativo)
     {
-        body.move(sf::Vector2f(velocidadeX, 0.f));
+        moverFigura(velocidadeX, 0.f);
     }
 }
 
 void Ovo::salvar()
 {
+    ofstream arquivo("projeteis.txt", ios::app);
+
+    if (arquivo.is_open())
+    {
+        arquivo << "Ovo" << " "
+                << getPosicao().x << " "
+                << getPosicao().y << " "
+                << velocidadeX << " "
+                << endl;
+
+        arquivo.close();
+    }
+}
+
+bool Ovo::carregar(ifstream& arquivo)
+{
+    float posX, posY;
+    float velX;
+
+    if (arquivo >> posX >> posY >> velX)
+    {
+        setPosicao(posX, posY);
+
+        velocidadeX = velX;
+
+        return true;
+    }
+
+    return false;
 }
 
 void Ovo::configurar(float x, float y, float direcao)
 {
-    body.setPosition(sf::Vector2f(x, y));
+    setPosicao(x, y);
 
     velocidadeX = 0.5f * direcao;
 }

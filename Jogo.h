@@ -1,22 +1,44 @@
 #pragma once
-#include<SFML/Graphics.hpp>
+#include <string>
+#include "Gerenciadores.h"
 #include "Personagens.h"
 #include "Fases.h"
+#include "Menu.h"
+#include "Ranking.h"
 
 using namespace Personagens;
 using namespace Fases;
+using namespace Gerenciadores;
 
 class Jogo
 {
 private:
-    sf::RenderWindow window;
-
+    Gerenciador_Grafico GG;
     Jogador pJog1;
+    Ranking ranking;
+    std::string nomeJogador;
     FasePrimeira fase1;
+    FaseSegunda fase2;
+    Menu menu;
+    bool noMenu;
+    int faseAtual;
+    bool pausado;
+    bool modoTeste;
 
 public:
     Jogo();
     ~Jogo();
     void executar();
+    void iniciarJogo(int fase = 1);
+    void sair();
+    void pausar(bool pausa);
+    void voltarMenu();
+    int getPontuacao() const;
+    void finalizarJogo(bool venceu);
+    void setNomeJogador(const std::string& nome);
+    const std::string& getNomeJogador() const;
+    Ranking& getRanking();
+    void setModoTeste(bool teste);
+    void salvarJogo();
+    void carregarJogo();
 };
-

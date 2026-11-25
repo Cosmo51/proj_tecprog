@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Ente.h"
+#include<fstream>
 
 namespace Entidades{
 
@@ -9,7 +10,7 @@ namespace Entidades{
     protected:
         int x;
         int y;
-        //ostream buffer; // n„o sei como isso funciona.
+        //ostream buffer; // n√£o sei como isso funciona.
 
 
 
@@ -34,8 +35,8 @@ namespace Entidades{
     public:
         Projetil();
         ~Projetil();
-        void executar();
-        void salvar();
+        virtual void executar() = 0;
+        virtual void salvar() = 0;
         bool getAtivo() const;
         void desativar();
     };
@@ -51,7 +52,35 @@ namespace Entidades{
 
         void executar();
         void salvar();
+        bool carregar(std::ifstream& arquivo);
         void configurar(float x, float y, float direcao);
+    };
+
+    class Novelo : public Projetil
+    {
+    private:
+        float velocidadeX;
+        float velocidadeY;
+        float gravidade;
+
+    public:
+        Novelo();
+        ~Novelo();
+
+        void executar();
+        void salvar();
+        bool carregar(std::ifstream& arquivo);
+        void configurar(float x, float y, float direcao);
+    };
+
+    class Queijo : public Entidade
+    {
+    public:
+        Queijo();
+        ~Queijo();
+
+        void executar();
+        void salvar();
     };
 }
 

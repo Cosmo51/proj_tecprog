@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Entidades.h"
-
+#include <stdlib.h>
 using namespace Entidades;
 
 namespace Listas
@@ -42,16 +42,15 @@ public:
     void remover(int pos);
     void percorrer();
     void desenhar();
-    void setWindow(sf::RenderWindow* janela);
+    void salvar();
 };
-
 
 // Implementacao da classe Elemento
 
 template<class TL>
 template<class TE>
 Lista<TL>::Elemento<TE>::Elemento():
-    pProx(nullptr), pinfo(nullptr)
+    pProx(NULL), pinfo(NULL)
 {
 }
 
@@ -94,7 +93,7 @@ TE* Lista<TL>::Elemento<TE>::getInfo() const
 
 template<class TL>
 Lista<TL>::Lista():
-pPrimeiro(nullptr), pUltimo(nullptr)
+pPrimeiro(NULL), pUltimo(NULL)
 {
 }
 
@@ -107,14 +106,14 @@ Lista<TL>::~Lista()
 template<class TL>
 void Lista<TL>::incluir(TL* p)
 {
-    if (p == nullptr)
+    if (p == NULL)
         return;
 
     Elemento<TL>* novo = new Elemento<TL>;
 
     novo->incluir(p);
 
-    if (pPrimeiro == nullptr)
+    if (pPrimeiro == NULL)
     {
         pPrimeiro = novo;
     }
@@ -131,7 +130,7 @@ void Lista<TL>::limpar()
 {
     Elemento<TL>* atual = pPrimeiro;
 
-    while (atual != nullptr)
+    while (atual != NULL)
     {
         Elemento<TL>* proximo = atual->getProximo();
 
@@ -140,23 +139,23 @@ void Lista<TL>::limpar()
         atual = proximo;
     }
 
-    pPrimeiro = nullptr;
-    pUltimo = nullptr;
+    pPrimeiro = NULL;
+    pUltimo = NULL;
 }
 
 template<class TL>
 void Lista<TL>::remover(TL* p)
 {
     Elemento<TL>* atual = pPrimeiro;
-    Elemento<TL>* anterior = nullptr;
+    Elemento<TL>* anterior = NULL;
 
-    while (atual != nullptr)
+    while (atual != NULL)
     {
         if (atual->getInfo() == p)
         {
             Elemento<TL>* proximo = atual->getProximo();
 
-            if (anterior == nullptr)
+            if (anterior == NULL)
                 pPrimeiro = proximo;
             else
                 anterior->setProx(proximo);
@@ -181,23 +180,23 @@ void Lista<TL>::remover(int pos)
         return;
 
     Elemento<TL>* atual = pPrimeiro;
-    Elemento<TL>* anterior = nullptr;
+    Elemento<TL>* anterior = NULL;
 
     int indice = 0;
 
-    while (atual != nullptr && indice < pos)
+    while (atual != NULL && indice < pos)
     {
         anterior = atual;
         atual = atual->getProximo();
         indice++;
     }
 
-    if (atual == nullptr)
+    if (atual == NULL)
         return;
 
     Elemento<TL>* proximo = atual->getProximo();
 
-    if (anterior == nullptr)
+    if (anterior == NULL)
         pPrimeiro = proximo;
     else
         anterior->setProx(proximo);
@@ -214,11 +213,11 @@ void Lista<TL>::percorrer()
 {
     Elemento<TL>* atual = pPrimeiro;
 
-    while (atual != nullptr)
+    while (atual != NULL)
     {
         TL* entidade = atual->getInfo();
 
-        if (entidade != nullptr)
+        if (entidade != NULL)
             entidade->executar();
 
         atual = atual->getProximo();
@@ -230,11 +229,11 @@ void Lista<TL>::desenhar()
 {
     Elemento<TL>* atual = pPrimeiro;
 
-    while (atual != nullptr)
+    while (atual != NULL)
     {
         TL* entidade = atual->getInfo();
 
-        if (entidade != nullptr)
+        if (entidade != NULL)
             entidade->desenhar();
 
         atual = atual->getProximo();
@@ -242,24 +241,20 @@ void Lista<TL>::desenhar()
 }
 
 template<class TL>
-void Lista<TL>::setWindow(sf::RenderWindow* janela)
+void Lista<TL>::salvar()
 {
     Elemento<TL>* atual = pPrimeiro;
 
-    while (atual != nullptr)
+    while (atual != NULL)
     {
         TL* entidade = atual->getInfo();
 
-        if (entidade != nullptr)
-        {
-            entidade->setWindow(janela);
-        }
+        if (entidade != NULL)
+            entidade->salvar();
 
         atual = atual->getProximo();
     }
 }
-
-
 
 // Classe que gerencia a lista de entidades
 
@@ -277,7 +272,8 @@ public:
     void removerEntidade(int pos);
     void percorrer();
     void desenhar();
-    void setWindow(sf::RenderWindow* janela);
+    void limpar();
+    void salvar();
 };
 
 }
