@@ -8,8 +8,8 @@ Ovo::Ovo()
 {
     velocidadeX = 0.5f;
 
-    definirTamanho(10.f, 10.f);
-    definirCor(sf::Color::White);
+    definirTamanho(20.f, 20.f);
+    carregarTextura("assets/ovo.png");
 }
 
 Ovo::~Ovo()

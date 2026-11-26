@@ -11,7 +11,7 @@ Jogador::Jogador(){
     inicializa();
 
     definirTamanho(35.f, 45.f);
-    definirCor(sf::Color::Blue);
+    carregarTextura("assets/rato.png");
     setPosicao(20.f, 695.f);
     posicaoAnterior = getPosicao();
 }
@@ -22,8 +22,65 @@ Jogador::~Jogador(){
 
 
 
-void Jogador::colidir(Inimigo* pIn){
+void Jogador::colidir(Inimigo* pIn)
+{
+    if (pIn != NULL && pIn->getAtivo())
+    {
+        sf::FloatRect jog = getLimites();
+        sf::FloatRect inim = pIn->getLimites();
 
+        sf::Vector2f anteriorJ = getPosicaoAnterior();
+        sf::Vector2f anteriorI = pIn->getPosicaoAnterior();
+
+        float posXJogador = jog.position.x;
+        float topoJ = jog.position.y;
+
+        float esqI = inim.position.x;
+        float dirI = esqI + inim.size.x;
+        float topoI = inim.position.y;
+        float baseI = topoI + inim.size.y;
+
+        // Jogador cai sobre o inimigo
+        if (anteriorJ.y + jog.size.y <= anteriorI.y &&
+            getVelY() >= 0.f)
+        {
+            setPosicao(posXJogador, topoI - jog.size.y);
+            impulsionar();
+
+            pIn->desativar();
+            adicionarPontos(100);
+
+            cout << "Inimigo eliminado!" << endl;
+            cout<<"Pontuacao: "<< getPontos() << endl;
+        }
+
+        // Jogador bate por baixo
+        else if (anteriorJ.y >= anteriorI.y + inim.size.y && getVelY() < 0.f)
+        {
+            setPosicao(posXJogador, baseI);
+            pararSubida();
+
+            pIn->danificar(this);
+        }
+
+        // Colisao lateral
+        else
+        {
+            float centroJ = posXJogador + jog.size.x / 2.f;
+            float centroI = esqI + inim.size.x / 2.f;
+
+            if (centroJ < centroI)
+            {
+                setPosicao(esqI - jog.size.x, topoJ);
+            }
+            else
+            {
+                setPosicao(dirI, topoJ);
+            }
+
+            pIn->danificar(this);
+        }
+    }
 }
 
 void Jogador::executar()
@@ -179,11 +236,12 @@ int Jogador::getVidas() const
     return num_vidas;
 }
 
-void Jogador::receberDanoContato(float direcao)
+void Jogador::receberDanoContato(float direcao, int dano)
 {
     if (!invulneravel)
     {
-        perderVida();
+        for (int i = 0; i < dano; i++)
+            perderVida();
 
         cout << "Vidas restantes: " << getVidas() << endl;
 

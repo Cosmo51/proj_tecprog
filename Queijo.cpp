@@ -5,7 +5,7 @@ using namespace Entidades;
 Queijo::Queijo()
 {
     definirTamanho(30.f, 30.f);
-    definirCor(sf::Color::Yellow);
+    carregarTextura("assets/queijo.png");
 }
 
 Queijo::~Queijo()

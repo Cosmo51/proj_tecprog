@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <SFML/Graphics.hpp>
 
 namespace Gerenciadores { class Gerenciador_Grafico; }
@@ -7,7 +8,9 @@ class Ente
 {
 protected:
     int id;
+    static int contador;
     sf::RectangleShape body;
+    sf::Texture textura;
     static Gerenciadores::Gerenciador_Grafico* pGG;
 
 public:
@@ -17,6 +20,7 @@ public:
     void desenhar();
     static void setGG(Gerenciadores::Gerenciador_Grafico* pG);
     const sf::RectangleShape& getBody() const;
+    int getId() const;
     void setPosicao(float x, float y);
 
     // Metodos de acesso grafico: implementacao delegada ao Gerenciador_Grafico.
@@ -28,4 +32,5 @@ public:
     void definirTamanho(float largura, float altura);
     void definirCor(sf::Color cor);
     bool teclaPressionada(sf::Keyboard::Key tecla) const;
+    bool carregarTextura(const std::string& caminho);
 };

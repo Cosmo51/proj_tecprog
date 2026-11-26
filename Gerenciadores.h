@@ -28,6 +28,7 @@ public:
     Gerenciador_Grafico();
     ~Gerenciador_Grafico();
     void desenharEnte(Ente* pE);
+    bool carregarTextura(sf::RectangleShape& figura, sf::Texture& textura, const std::string& caminho);
     bool estaAberta() const;
     void tratarEventos();
     void limpar();

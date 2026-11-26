@@ -7,12 +7,13 @@ using namespace Personagens;
 
 Galinha::Galinha(){
 
-    definirTamanho(40.f, 45.f);
-    definirCor(sf::Color::Yellow);
+    definirTamanho(44.f, 49.f);
+    carregarTextura("assets/galinha.png");
     setPosicao(300.f, 290.f);
 
     pJogador = NULL;
-    velocidadeX = 0.2f;
+    nivel_maldade = 2;
+    velocidadeX = 0.1f * nivel_maldade;
 
 }
 
@@ -80,7 +81,7 @@ void Galinha::danificar(Jogador* p)
             direcao = 1.f;
         }
 
-        p->receberDanoContato(direcao);
+        p->receberDanoContato(direcao, forca);
     }
 }
 

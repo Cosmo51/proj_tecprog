@@ -1,25 +1,44 @@
 #include "Obstaculos.h"
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 using namespace Obstaculos;
 
-Plataforma::Plataforma():altura(0)
+Plataforma::Plataforma(int tipo) : altura(0), tipoTextura(tipo)
 {
-    definirCor(sf::Color::Green);
+    selecionarTextura(tipo);
+}
+
+void Plataforma::selecionarTextura(int tipo)
+{
+    tipoTextura = tipo;
+    if (tipo == 1)
+        carregarTextura("assets/chao.png");
+    else if (tipo == 3)
+        carregarTextura("assets/plataforma_vertical.png");
+    else
+        carregarTextura("assets/plataforma_horizontal.png");
 }
 
 Plataforma::~Plataforma(){
 
 }
 
-void Plataforma::executar(){
-
+void Plataforma::executar()
+{
+    if (pJogadorColisao != NULL && tipoTextura == 2)
+    {
+        if (rand() % 100000 == 0)
+            pJogadorColisao->perderVida();
+    }
+    pJogadorColisao = NULL;
 }
 
 
 void Plataforma::obstaculizar(Jogador* p)
 {
+    pJogadorColisao = p;
     if (p != NULL)
     {
         sf::FloatRect jogador = p->getLimites();
@@ -136,7 +155,8 @@ void Plataforma::salvar()
                 << getPosicao().x << " "
                 << getPosicao().y << " "
                 << getTamanho().x << " "
-                << getTamanho().y << endl;
+                << getTamanho().y << " "
+                << tipoTextura << endl;
 
         arquivo.close();
     }
@@ -148,8 +168,20 @@ bool Plataforma::carregar(ifstream& arquivo)
 
     if (arquivo >> posX >> posY >> largura >> altura)
     {
+        int tipo = 2;
+        string restante;
+        getline(arquivo, restante);
+        istringstream leitura(restante);
+        if (!(leitura >> tipo))
+        {
+            tipo = 2;
+            if (largura >= 1000.f && posY >= 740.f)
+                tipo = 1;
+            else if (altura > largura)
+                tipo = 3;
+        }
+        selecionarTextura(tipo);
         configurar(posX, posY, largura, altura);
-
         return true;
     }
 
@@ -167,5 +199,6 @@ void Plataforma::configurar(float x, float y, float largura, float altura)
     setPosicao(x, y);
 
     this->altura = static_cast<int>(altura);
+    body.setTextureRect(sf::IntRect({0, 0}, {static_cast<int>(largura), static_cast<int>(altura)}));
 }
 

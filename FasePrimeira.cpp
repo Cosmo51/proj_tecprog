@@ -111,7 +111,7 @@ void FasePrimeira::criarInimFaceis()
         {
             Galinha* g = new Galinha();
 
-            g->setPosicao(610.f, 305.f);
+            g->setPosicao(610.f, 301.f);
             g->configurarPatrulha(555.f, 695.f);
 
             if (pJogador != NULL)
@@ -127,11 +127,11 @@ void FasePrimeira::criarInimFaceis()
 void FasePrimeira::criarInimMedios()
 {
     const float posicoes[][4] = {
-        {175.f, 415.f, 60.f, 230.f},
-        {745.f, 425.f, 720.f, 815.f},
-        {525.f, 695.f, 0.f, 1000.f},
-        {95.f, 415.f, 60.f, 230.f},
-        {850.f, 695.f, 0.f, 1000.f}
+        {175.f, 411.f, 60.f, 230.f},
+        {745.f, 421.f, 720.f, 815.f},
+        {525.f, 691.f, 0.f, 1000.f},
+        {95.f, 411.f, 60.f, 230.f},
+        {850.f, 691.f, 0.f, 1000.f}
     };
 
     for (int i = 0; i < 5; i++)
@@ -184,7 +184,7 @@ void FasePrimeira::criarObstMedios()
 void FasePrimeira::criarPlataformas()
 {
     // Chao obrigatorio
-    Plataforma* chao = new Plataforma();
+    Plataforma* chao = new Plataforma(1);
 
     chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
@@ -202,7 +202,7 @@ void FasePrimeira::criarPlataformas()
 
     for (int i = 0; i < 6; i++)
     {
-        Plataforma* p = new Plataforma();
+        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 3 : 2);
 
         p->configurar(posicoes[i][0], posicoes[i][1],
                      posicoes[i][2], posicoes[i][3]);
@@ -212,7 +212,7 @@ void FasePrimeira::criarPlataformas()
     }
 
     // Parede vertical obrigatoria no chao
-    Plataforma* parede = new Plataforma();
+    Plataforma* parede = new Plataforma(3);
 
     parede->configurar(465.f, 610.f, 10.f, 130.f);
 
@@ -233,7 +233,7 @@ void FasePrimeira::criarPlataformas()
         if (quantidadePlataformas < maxPlataformas &&
             rand() % 100 < 50)
         {
-            Plataforma* p = new Plataforma();
+            Plataforma* p = new Plataforma(3);
 
             p->configurar(opcionais[i][0], opcionais[i][1],
                          opcionais[i][2], opcionais[i][3]);
@@ -295,7 +295,7 @@ void FasePrimeira::criarOvo()
             if (xJogador < xGalinha)
                 direcao = -1.f;
 
-            ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f, direcao);
+            ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f - 10.f, direcao);
             lista_ents.incluir(ovo);
             GC.incluirProjetil(ovo);
         }

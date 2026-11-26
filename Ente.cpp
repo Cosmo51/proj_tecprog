@@ -5,8 +5,9 @@
 using namespace Gerenciadores;
 
 Gerenciador_Grafico* Ente::pGG = NULL;
+int Ente::contador = 0;
 
-Ente::Ente() : id(0), body(sf::Vector2f(100.f, 100.f))
+Ente::Ente() : id(++contador), body(sf::Vector2f(100.f, 100.f))
 {
 
 }
@@ -25,6 +26,7 @@ void Ente::desenhar()
 }
 
 const sf::RectangleShape& Ente::getBody() const { return body; }
+int Ente::getId() const { return id; }
 
 void Ente::setPosicao(float x, float y)
 {
@@ -85,5 +87,12 @@ bool Ente::teclaPressionada(sf::Keyboard::Key tecla) const
     if (pGG != NULL)
         return pGG->teclaPressionada(tecla);
 
+    return false;
+}
+
+bool Ente::carregarTextura(const std::string& caminho)
+{
+    if (pGG != NULL)
+        return pGG->carregarTextura(body, textura, caminho);
     return false;
 }

@@ -7,7 +7,7 @@ using namespace Obstaculos;
 Obst_Medio::Obst_Medio()
 {
     definirTamanho(70.f, 8.f);
-    definirCor(sf::Color(120, 75, 35));
+    carregarTextura("assets/lama.png");
     setPosicao(250.f, 382.f);
 }
 
@@ -15,8 +15,11 @@ Obst_Medio::~Obst_Medio(){
 
 }
 
-void Obst_Medio::executar(){
-
+void Obst_Medio::executar()
+{
+    if (pJogadorColisao != NULL)
+        pJogadorColisao->diminuirVelocidade();
+    pJogadorColisao = NULL;
 }
 
 void Obst_Medio::configurar(float x, float y)
@@ -54,9 +57,6 @@ bool Obst_Medio::carregar(ifstream& arquivo)
 
 void Obst_Medio::obstaculizar(Jogador* p)
 {
-    if (p != NULL)
-    {
-        p->diminuirVelocidade();
-    }
+    pJogadorColisao = p;
 }
 
