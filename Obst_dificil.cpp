@@ -7,7 +7,7 @@ using namespace Obstaculos;
 
 Obst_Dificil::Obst_Dificil()
 {
-    armada = true;
+    danoso = true;
     danosidade = 1;
 
     definirTamanho(30.f, 10.f);
@@ -24,20 +24,32 @@ void Obst_Dificil::salvarDataBuffer(){
 
 }
 
-void Obst_Dificil::executar(){
+void Obst_Dificil::executar()
+{
+    // A danosidade representa o estado da ratoeira: 1 ativa, 0 desativada.
+    if (danoso)
+    {
+        danosidade = 1;
+    }
+    else
+    {
+        danosidade = 0;
+    }
 
+    if (pJogadorColisao != NULL && danosidade > 0)
+    {
+        pJogadorColisao->perderVida();
+        cout << "Vidas restantes: " << pJogadorColisao->getVidas() << endl;
+        danoso = false;
+        danosidade = 0;
+        definirCor(sf::Color(100, 100, 100));
+    }
+    pJogadorColisao = NULL;
 }
 
 void Obst_Dificil::obstaculizar(Jogador* p)
 {
-    if (p != NULL && armada)
-    {
-        p->perderVida();
-        cout << "Vidas restantes: " << p->getVidas() << endl;
-        armada = false;
-
-        definirCor(sf::Color(100, 100, 100));
-    }
+    pJogadorColisao = p;
 }
 
 void Obst_Dificil::configurar(float x, float y)
@@ -54,7 +66,7 @@ void Obst_Dificil::salvar()
         arquivo << "Ratoeira" << " "
                 << getPosicao().x << " "
                 << getPosicao().y << " "
-                << armada << endl;
+                << danoso << endl;
 
         arquivo.close();
     }
@@ -63,15 +75,23 @@ void Obst_Dificil::salvar()
 bool Obst_Dificil::carregar(ifstream& arquivo)
 {
     float posX, posY;
-    bool armadaSalva;
+    bool danosoSalvo;
 
-    if (arquivo >> posX >> posY >> armadaSalva)
+    if (arquivo >> posX >> posY >> danosoSalvo)
     {
         configurar(posX, posY);
+        danoso = danosoSalvo;
 
-        armada = armadaSalva;
+        if (danoso)
+        {
+            danosidade = 1;
+        }
+        else
+        {
+            danosidade = 0;
+        }
 
-        if (!armada)
+        if (!danoso)
             definirCor(sf::Color(100, 100, 100));
 
         return true;

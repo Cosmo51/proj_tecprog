@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Fases;
 
-Fase::Fase() : pJogador(NULL)
+Fase::Fase() : pJogador(NULL), pJogador2(NULL)
 {
 }
 
@@ -169,3 +169,40 @@ bool Fase::carregarProjeteis()
 
 
 
+
+void Fase::setJogador2(Jogador* pJ)
+{
+    pJogador2 = pJ;
+    GC.setJogador2(pJ);
+}
+
+Jogador* Fase::escolherAlvo(Inimigo* inimigo)
+{
+    Jogador* alvo = NULL;
+    float menorDistancia = 0.f;
+    Jogador* jogadores[2] = {pJogador, pJogador2};
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (jogadores[i] != NULL && jogadores[i]->getVidas() > 0)
+        {
+            float distancia = jogadores[i]->getPosicao().x - inimigo->getPosicao().x;
+            if (distancia < 0.f)
+                distancia = -distancia;
+            if (alvo == NULL || distancia < menorDistancia)
+            {
+                alvo = jogadores[i];
+                menorDistancia = distancia;
+            }
+        }
+    }
+    return alvo;
+}
+
+bool Fase::chegouAoQueijo(Queijo* queijo)
+{
+    return (pJogador != NULL && pJogador->getVidas() > 0 &&
+            GC.verificarColisao(pJogador, queijo)) ||
+           (pJogador2 != NULL && pJogador2->getVidas() > 0 &&
+            GC.verificarColisao(pJogador2, queijo));
+}

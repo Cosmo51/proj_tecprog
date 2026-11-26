@@ -6,14 +6,14 @@ using namespace Personagens;
 
 Gato::Gato() : pJogador(NULL)
 {
-    definirTamanho(55.f, 45.f);
+    definirTamanho(68.f, 60.f);
     carregarTextura("assets/gato.png");
 
-    velocidadeX = 0.35f;
+    nivel_maldade = 3;
+    velocidadeX = 0.12f * nivel_maldade;
     velocidadeY = 0.f;
 
-    forca = 3;
-    nivel_maldade = 3;
+    forca = 2;
 }
 
 Gato::~Gato()
@@ -68,7 +68,7 @@ void Gato::danificar(Jogador* p)
         if (centroJogador >= centroGato)
             direcao = 1.f;
 
-        p->receberDanoContato(direcao);
+        p->receberDanoContato(direcao, forca);
     }
 }
 

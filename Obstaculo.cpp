@@ -2,7 +2,8 @@
 
 using namespace Obstaculos;
 
-Obstaculo::Obstaculo(){
+Obstaculo::Obstaculo() : danoso(false), pJogadorColisao(NULL)
+{
 
 }
 

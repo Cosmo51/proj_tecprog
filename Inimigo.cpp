@@ -2,7 +2,7 @@
 
 using namespace Personagens;
 
-Inimigo::Inimigo():nivel_maldade(0)
+Inimigo::Inimigo():nivel_maldade(1), forca(1)
 {
     velocidadeY = 0.f;
     ativo = true;
@@ -12,6 +12,11 @@ Inimigo::Inimigo():nivel_maldade(0)
 
 Inimigo::~Inimigo(){
 
+}
+
+int Inimigo::getForca() const
+{
+    return forca;
 }
 
 void Inimigo::salvarDataBuffer(){

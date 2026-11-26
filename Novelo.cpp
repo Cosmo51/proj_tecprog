@@ -6,6 +6,7 @@ using namespace Entidades;
 
 Novelo::Novelo()
 {
+    dano = 2;
     velocidadeX = 0.f;
     velocidadeY = 0.f;
     gravidade = 0.01f;

@@ -24,4 +24,5 @@ public:
     void executar();
     void setJogo(Jogo* pJ);
     void setTipoMenu(int tipo);
+    void desenharPlacar(int pontos, int vidas1, int vidas2, bool dupla);
 };

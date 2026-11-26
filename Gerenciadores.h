@@ -28,6 +28,7 @@ public:
     Gerenciador_Grafico();
     ~Gerenciador_Grafico();
     void desenharEnte(Ente* pE);
+    bool carregarTextura(sf::RectangleShape& figura, sf::Texture& textura, const std::string& caminho);
     bool estaAberta() const;
     void tratarEventos();
     void limpar();
@@ -53,11 +54,13 @@ private:
     std::list<Obstaculo*> LOs;
     std::set<Projetil*> LPs;
     Jogador* pJog1;
+    Jogador* pJog2;
 
 public:
     Gerenciador_Colisoes();
     ~Gerenciador_Colisoes();
     void setJogador(Jogador* pJ);
+    void setJogador2(Jogador* pJ);
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();

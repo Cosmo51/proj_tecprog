@@ -84,6 +84,10 @@ void Menu::executar()
                 quantidadeOpcoes = 3;
                 break;
 
+            case 7:
+                quantidadeOpcoes = 3;
+                break;
+
             case 6:
                 quantidadeOpcoes = 1;
                 break;
@@ -108,6 +112,13 @@ void Menu::executar()
         }
 
         // Voltar ao menu principal com Esc
+        if (tipoMenu == 7 && teclaEscAtual)
+        {
+            setTipoMenu(0);
+            teclaEnterAnterior = teclaEnterAtual;
+            return;
+        }
+
         if (tipoMenu == 5 && teclaEscAtual)
         {
             setTipoMenu(0);
@@ -115,6 +126,19 @@ void Menu::executar()
             teclaEnterAnterior = teclaEnterAtual;
             return;
         }
+
+            // Confirmacao do nome
+        if (tipoMenu == 5 &&
+            teclaEnterAtual && !teclaEnterAnterior)
+        {
+            if (nomeJogador.find_first_not_of(' ') != string::npos && pJogo != NULL)
+            {
+                pJogo->setModoTeste(false);
+                pJogo->setNomeJogador(nomeJogador);
+                pJogo->iniciarJogo();
+            }
+        }
+
 
         // Confirmacao da opcao
         if (tipoMenu != 5 &&
@@ -130,7 +154,7 @@ void Menu::executar()
                         {
                             case 0:
                                 nomeJogador.clear();
-                                setTipoMenu(5);
+                                setTipoMenu(7);
                                 break;
 
                             case 1:
@@ -152,16 +176,30 @@ void Menu::executar()
                         }
                         break;
 
+                    // Escolha do modo de jogo
+                    case 7:
+                        if (opcaoSelecionada == 2)
+                            setTipoMenu(0);
+                        else
+                        {
+                            pJogo->setModoDupla(opcaoSelecionada == 1);
+                            nomeJogador.clear();
+                            setTipoMenu(5);
+                        }
+                        break;
+
                     // Selecao de fases
                     case 1:
                         switch (opcaoSelecionada)
                         {
                             case 0:
+                                pJogo->setModoDupla(false);
                                 pJogo->setModoTeste(true);
                                 pJogo->iniciarJogo(1);
                                 break;
 
                             case 1:
+                                pJogo->setModoDupla(false);
                                 pJogo->setModoTeste(true);
                                 pJogo->iniciarJogo(2);
                                 break;
@@ -222,18 +260,6 @@ void Menu::executar()
             }
         }
 
-            // Confirmacao do nome
-        if (tipoMenu == 5 &&
-            teclaEnterAtual && !teclaEnterAnterior)
-        {
-            if (!nomeJogador.empty() && pJogo != NULL)
-            {
-                pJogo->setModoTeste(false);
-                pJogo->setNomeJogador(nomeJogador);
-                pJogo->iniciarJogo();
-            }
-        }
-
         teclaCimaAnterior = teclaCimaAtual;
         teclaBaixoAnterior = teclaBaixoAtual;
         teclaEnterAnterior = teclaEnterAtual;
@@ -280,6 +306,28 @@ void Menu::executar()
                 else
                     texto.setFillColor(sf::Color::White);
 
+                pGG->desenharTexto(texto);
+            }
+        }
+
+        else if (tipoMenu == 7)
+        {
+            titulo.setString("MODO DE JOGO");
+            titulo.setPosition({300.f, 100.f});
+            pGG->desenharTexto(titulo);
+
+            const string opcoes[3] = {"Um jogador", "Dois jogadores", "Voltar"};
+            const float posicoes[][2] = {{400.f, 250.f}, {370.f, 325.f}, {455.f, 400.f}};
+            for (int i = 0; i < 3; i++)
+            {
+                sf::Text texto(fonte);
+                texto.setString(opcoes[i]);
+                texto.setCharacterSize(35);
+                texto.setPosition({posicoes[i][0], posicoes[i][1]});
+                if (i == opcaoSelecionada)
+                    texto.setFillColor(sf::Color::Yellow);
+                else
+                    texto.setFillColor(sf::Color::White);
                 pGG->desenharTexto(texto);
             }
         }
@@ -478,10 +526,10 @@ void Menu::executar()
 
                 sf::Text instrucao(fonte);
 
-                instrucao.setString("Digite seu nome:");
+                instrucao.setString("Digite o nome do jogador ou da dupla:");
                 instrucao.setCharacterSize(30);
                 instrucao.setFillColor(sf::Color::White);
-                instrucao.setPosition({350.f, 300.f});
+                instrucao.setPosition({240.f, 300.f});
 
                 pGG->desenharTexto(instrucao);
 
@@ -519,3 +567,19 @@ void Menu::setTipoMenu(int tipo)
 
 
 
+
+void Menu::desenharPlacar(int pontos, int vidas1, int vidas2, bool dupla)
+{
+    if (pGG != NULL)
+    {
+        sf::Text placar(fonte);
+        string texto = "Pontos: " + to_string(pontos) + " | P1: " + to_string(vidas1) + " vidas";
+        if (dupla)
+            texto += " | P2: " + to_string(vidas2) + " vidas";
+        placar.setString(texto);
+        placar.setCharacterSize(20);
+        placar.setFillColor(sf::Color::White);
+        placar.setPosition({10.f, 10.f});
+        pGG->desenharTexto(placar);
+    }
+}

@@ -11,7 +11,8 @@ Aranha::Aranha(){
     definirTamanho(35.f, 35.f);
     carregarTextura("assets/aranha.png");
     setPosicao(355.f, 290.f);
-    velocidadeX = -0.2f;
+    nivel_maldade = 2;
+    velocidadeX = -0.1f * nivel_maldade;
     velocidadeY = 0.f;
 
 }
@@ -37,7 +38,7 @@ void Aranha::danificar(Jogador* p)
             direcao = 1.f;
         }
 
-        p->receberDanoContato(direcao);
+        p->receberDanoContato(direcao, forca);
     }
 }
 

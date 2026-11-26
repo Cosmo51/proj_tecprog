@@ -46,7 +46,7 @@ void FaseSegunda::executar()
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
-    if (pJogador != NULL && GC.verificarColisao(pJogador, queijo))
+    if (chegouAoQueijo(queijo))
     {
         venceu = true;
     }
@@ -108,7 +108,7 @@ void FaseSegunda::criarInimFaceis()
     {
         Gato* gato = new Gato();
 
-        gato->setPosicao(845.f, 460.f);
+        gato->setPosicao(845.f, 445.f);
         gato->configurarPatrulha(805.f, 945.f);
 
         gatos.push_back(gato);
@@ -120,10 +120,10 @@ void FaseSegunda::criarInimFaceis()
 void FaseSegunda::criarChefoes()
 {
     const float posicoes[][4] = {
-        {385.f, 695.f, 0.f, 1000.f},
-        {175.f, 330.f, 140.f, 280.f},
-        {750.f, 160.f, 700.f, 840.f},
-        {390.f, 175.f, 330.f, 470.f}
+        {385.f, 680.f, 0.f, 1000.f},
+        {175.f, 315.f, 140.f, 280.f},
+        {750.f, 145.f, 700.f, 840.f},
+        {390.f, 160.f, 321.f, 470.f}
     };
 
     for (int i = 0; i < 4; i++)
@@ -140,8 +140,8 @@ void FaseSegunda::criarChefoes()
 
     // Gatos opcionais
     const float opcionais[][4] = {
-        {815.f, 695.f, 0.f, 1000.f},
-        {250.f, 695.f, 0.f, 1000.f}
+        {815.f, 680.f, 0.f, 1000.f},
+        {250.f, 680.f, 0.f, 1000.f}
     };
 
     for (int i = 0; i < 2; i++)
@@ -164,7 +164,7 @@ void FaseSegunda::criarChefoes()
 void FaseSegunda::criarPlataformas()
 {
     // Chao obrigatorio
-    Plataforma* chao = new Plataforma();
+    Plataforma* chao = new Plataforma(1);
 
     chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
@@ -188,7 +188,7 @@ void FaseSegunda::criarPlataformas()
 
     for (int i = 0; i < 12; i++)
     {
-        Plataforma* p = new Plataforma();
+        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 3 : 2);
 
         p->configurar(posicoes[i][0], posicoes[i][1],
                      posicoes[i][2], posicoes[i][3]);
@@ -212,7 +212,7 @@ void FaseSegunda::criarPlataformas()
         if (quantidadePlataformas < maxPlataformas &&
             rand() % 100 < 50)
         {
-            Plataforma* p = new Plataforma();
+            Plataforma* p = new Plataforma(3);
 
             p->configurar(opcionais[i][0], opcionais[i][1],
                          opcionais[i][2], opcionais[i][3]);
@@ -269,20 +269,27 @@ void FaseSegunda::criarNovelo()
         {
             Gato* g = *it;
 
-            if (g == NULL || !g->getAtivo() || !g->verificarAtaque())
+            if (g == NULL || !g->getAtivo())
+                continue;
+
+            Jogador* alvo = escolherAlvo(g);
+            g->setJogador(alvo);
+
+            if (alvo == NULL || !g->verificarAtaque())
                 continue;
 
             Novelo* novelo = new Novelo();
 
             float xGato = g->getPosicao().x;
             float yGato = g->getPosicao().y;
-            float xJogador = pJogador->getPosicao().x;
+            float xJogador = alvo->getPosicao().x;
 
             float direcao = 1.f;
             if (xJogador < xGato)
                 direcao = -1.f;
 
             novelo->configurar(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
+            novelo->setDano(g->getForca());
             lista_ents.incluir(novelo);
             GC.incluirProjetil(novelo);
         }
@@ -416,8 +423,13 @@ bool FaseSegunda::carregar()
     }
 
     queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
     lista_ents.incluir(queijo);
+
+    if (!queijo->carregar())
+    {
+        reiniciar();
+        return false;
+    }
 
     setJogador(pJogador);
 

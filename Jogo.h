@@ -15,6 +15,7 @@ class Jogo
 private:
     Gerenciador_Grafico GG;
     Jogador pJog1;
+    Jogador pJog2;
     Ranking ranking;
     std::string nomeJogador;
     FasePrimeira fase1;
@@ -24,6 +25,7 @@ private:
     int faseAtual;
     bool pausado;
     bool modoTeste;
+    bool modoDupla;
 
 public:
     Jogo();
@@ -39,6 +41,7 @@ public:
     const std::string& getNomeJogador() const;
     Ranking& getRanking();
     void setModoTeste(bool teste);
+    void setModoDupla(bool dupla);
     void salvarJogo();
     void carregarJogo();
 };

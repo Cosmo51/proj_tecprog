@@ -7,7 +7,7 @@ using namespace Gerenciadores;
 
 
 Gerenciador_Colisoes::Gerenciador_Colisoes():
-pJog1(NULL)
+pJog1(NULL), pJog2(NULL)
 {
 
 }
@@ -31,26 +31,47 @@ const bool Gerenciador_Colisoes::verificarColisao(Entidade* pe1, Entidade* pe2) 
     sf::FloatRect limites1 = pe1->getLimites();
     sf::FloatRect limites2 = pe2->getLimites();
 
+    if (dynamic_cast<Jogador*>(pe1) != NULL)
+    {
+        if (dynamic_cast<Gato*>(pe2) != NULL)
+        {
+            limites2.position.x += 15.f;
+            limites2.size.x -= 30.f;
+        }
+        else if (dynamic_cast<Galinha*>(pe2) != NULL)
+        {
+            limites2.position.x += 8.f;
+            limites2.size.x -= 16.f;
+        }
+    }
+
     return limites1.findIntersection(limites2).has_value();
 }
 
 void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 {
-    if (pJog1 != NULL)
+    Jogador* jogadores[2] = {pJog1, pJog2};
+
+    for (int i = 0; i < 2; i++)
     {
-        pJog1->restaurarVelocidade();
-
-        list<Obstaculo*>::iterator it;
-
-        for (it = LOs.begin(); it != LOs.end(); it++)
+        Jogador* pJog = jogadores[i];
+        if (pJog != NULL && pJog->getVidas() > 0)
         {
-            Obstaculo* obstaculo = *it;
+            pJog->restaurarVelocidade();
 
-            if (obstaculo != NULL)
+            list<Obstaculo*>::iterator it;
+
+            for (it = LOs.begin(); it != LOs.end() && pJog->getVidas() > 0; it++)
             {
-                if (verificarColisao(pJog1, obstaculo))
+                Obstaculo* obstaculo = *it;
+
+                if (obstaculo != NULL)
                 {
-                    obstaculo->obstaculizar(pJog1);
+                    if (verificarColisao(pJog, obstaculo))
+                    {
+                        obstaculo->obstaculizar(pJog);
+                        obstaculo->executar();
+                    }
                 }
             }
         }
@@ -59,71 +80,24 @@ void Gerenciador_Colisoes::tratarColisoesJogsObstacs()
 
 void Gerenciador_Colisoes::tratarColisoesJogsInimgs()
 {
-    if (pJog1 != NULL)
+    Jogador* jogadores[2] = {pJog1, pJog2};
+
+    for (int i = 0; i < 2; i++)
     {
-        vector<Inimigo*>::iterator it;
-
-        for (it = LIs.begin(); it != LIs.end(); it++)
+        Jogador* pJog = jogadores[i];
+        if (pJog != NULL && pJog->getVidas() > 0)
         {
-            Inimigo* inimigo = *it;
+            vector<Inimigo*>::iterator it;
 
-            if (inimigo != NULL && inimigo->getAtivo())
+            for (it = LIs.begin(); it != LIs.end() && pJog->getVidas() > 0; it++)
             {
-                if (verificarColisao(pJog1, inimigo))
+                Inimigo* inimigo = *it;
+
+                if (inimigo != NULL && inimigo->getAtivo())
                 {
-                    sf::FloatRect jog = pJog1->getLimites();
-                    sf::FloatRect inim = inimigo->getLimites();
-
-                    sf::Vector2f anteriorJ = pJog1->getPosicaoAnterior();
-                    sf::Vector2f anteriorI = inimigo->getPosicaoAnterior();
-
-                    float posXJogador = jog.position.x;
-                    float topoJ = jog.position.y;
-
-                    float esqI = inim.position.x;
-                    float dirI = esqI + inim.size.x;
-                    float topoI = inim.position.y;
-                    float baseI = topoI + inim.size.y;
-
-                    // Jogador cai sobre o inimigo
-                    if (anteriorJ.y + jog.size.y <= anteriorI.y &&
-                        pJog1->getVelY() >= 0.f)
+                    if (verificarColisao(pJog, inimigo))
                     {
-                        pJog1->setPosicao(posXJogador, topoI - jog.size.y);
-                        pJog1->impulsionar();
-
-                        inimigo->desativar();
-                        pJog1->adicionarPontos(100);
-
-                        cout << "Inimigo eliminado!" << endl;
-                        cout<<"Pontuacao: "<< pJog1->getPontos() << endl;
-                    }
-
-                    // Jogador bate por baixo
-                    else if (anteriorJ.y >= anteriorI.y + inim.size.y && pJog1->getVelY() < 0.f)
-                    {
-                        pJog1->setPosicao(posXJogador, baseI);
-                        pJog1->pararSubida();
-
-                        inimigo->danificar(pJog1);
-                    }
-
-                    // Colisao lateral
-                    else
-                    {
-                        float centroJ = posXJogador + jog.size.x / 2.f;
-                        float centroI = esqI + inim.size.x / 2.f;
-
-                        if (centroJ < centroI)
-                        {
-                            pJog1->setPosicao(esqI - jog.size.x, topoJ);
-                        }
-                        else
-                        {
-                            pJog1->setPosicao(dirI, topoJ);
-                        }
-
-                        inimigo->danificar(pJog1);
+                        pJog->colidir(inimigo);
                     }
                 }
             }
@@ -220,26 +194,34 @@ void Gerenciador_Colisoes::removerInimigosInativos(ListaEntidades& lista)
 
 void Gerenciador_Colisoes::tratarColisoesJogsProjeteis()
 {
-    if (pJog1 != NULL)
+    Jogador* jogadores[2] = {pJog1, pJog2};
+
+    for (int i = 0; i < 2; i++)
     {
-        set<Projetil*>::iterator it;
-
-        for (it = LPs.begin(); it != LPs.end(); it++)
+        Jogador* pJog = jogadores[i];
+        if (pJog != NULL && pJog->getVidas() > 0)
         {
-            Projetil* projetil = *it;
+            set<Projetil*>::iterator it;
 
-            if (projetil != NULL)
+            for (it = LPs.begin(); it != LPs.end() && pJog->getVidas() > 0; it++)
             {
-                if (projetil->getAtivo())
-                {
-                    if (verificarColisao(pJog1, projetil))
-                    {
-                        pJog1->perderVida();
-                        projetil->desativar();
+                Projetil* projetil = *it;
 
-                        cout << "Vidas restantes: "
-                                  << pJog1->getVidas()
-                                  << endl;
+                if (projetil != NULL)
+                {
+                    if (projetil->getAtivo())
+                    {
+                        if (verificarColisao(pJog, projetil))
+                        {
+                            // O dano dos projeteis respeita a mesma invulnerabilidade
+                            // temporaria usada na colisao com os inimigos.
+                            float direcao = 1.f;
+                            if (projetil->getPosicao().x >= pJog->getPosicao().x)
+                                direcao = -1.f;
+
+                            pJog->receberDanoContato(direcao, projetil->getDano());
+                            projetil->desativar();
+                        }
                     }
                 }
             }
@@ -377,4 +359,9 @@ void Gerenciador_Colisoes::limpar()
     LIs.clear();
     LOs.clear();
     LPs.clear();
+}
+
+void Gerenciador_Colisoes::setJogador2(Jogador* pJ)
+{
+    pJog2 = pJ;
 }

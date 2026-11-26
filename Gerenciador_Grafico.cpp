@@ -27,6 +27,18 @@ void Gerenciador_Grafico::desenharEnte(Ente* pE)
         janela.draw(pE->getBody());
 }
 
+bool Gerenciador_Grafico::carregarTextura(sf::RectangleShape& figura, sf::Texture& textura, const std::string& caminho)
+{
+    if (textura.loadFromFile(caminho))
+    {
+        textura.setRepeated(true);
+        figura.setTexture(&textura);
+        figura.setFillColor(sf::Color::White);
+        return true;
+    }
+    return false;
+}
+
 bool Gerenciador_Grafico::estaAberta() const { return janela.isOpen(); }
 
 void Gerenciador_Grafico::tratarEventos()

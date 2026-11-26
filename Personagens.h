@@ -31,6 +31,7 @@ class Jogador : public Personagem
 {
 
 private:
+    int numeroJogador;
     float velX;
     float velY;
     bool noChao;
@@ -44,7 +45,7 @@ protected:
     int pontos;
 
 public:
-    Jogador();
+    Jogador(int numero = 1);
     ~Jogador();
 
     void colidir(Inimigo* pIn);
@@ -61,7 +62,7 @@ public:
     void restaurarVelocidade();
     void perderVida();
     int getVidas() const;
-    void receberDanoContato(float direcao);
+    void receberDanoContato(float direcao, int dano = 1);
     void impulsionar();
     void adicionarPontos(int valor);
     int getPontos() const;
@@ -77,6 +78,7 @@ class Inimigo : public Personagem
 {
 protected:
     int nivel_maldade;
+    short int forca;
     float velocidadeY;
     sf::Vector2f posicaoAnterior;
     bool ativo;
@@ -100,6 +102,7 @@ public:
     bool getAtivo() const;
     void desativar();
     void configurarPatrulha(float esquerda, float direita);
+    int getForca() const;
 };
 
 class Aranha : public Inimigo
@@ -146,7 +149,6 @@ public:
 class Gato : public Inimigo
 {
 private:
-    short int forca;
     float velocidadeX;
     Jogador* pJogador;
     sf::Clock relogioDisparo;

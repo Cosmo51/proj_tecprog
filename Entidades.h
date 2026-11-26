@@ -10,7 +10,7 @@ namespace Entidades{
     protected:
         int x;
         int y;
-        //ostream buffer; // não sei como isso funciona.
+        //ostream buffer;
 
 
 
@@ -31,6 +31,7 @@ namespace Entidades{
     {
     protected:
         bool ativo;
+        int dano;
 
     public:
         Projetil();
@@ -39,6 +40,8 @@ namespace Entidades{
         virtual void salvar() = 0;
         bool getAtivo() const;
         void desativar();
+        int getDano() const;
+        void setDano(int quantidade);
     };
 
     class Ovo : public Projetil
@@ -75,12 +78,15 @@ namespace Entidades{
 
     class Queijo : public Entidade
     {
+    private:
+        sf::Clock relogioBrilho;
     public:
         Queijo();
         ~Queijo();
 
         void executar();
         void salvar();
+        bool carregar();
     };
 }
 

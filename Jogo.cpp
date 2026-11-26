@@ -4,8 +4,8 @@
 
 using namespace std;
 
-Jogo::Jogo() : noMenu(true), faseAtual(1),
-               pausado(false), modoTeste(false)
+Jogo::Jogo() : pJog1(1), pJog2(2), noMenu(true), faseAtual(1),
+               pausado(false), modoTeste(false), modoDupla(false)
 {
     fase1.setJogador(&pJog1);
     fase2.setJogador(&pJog1);
@@ -73,7 +73,10 @@ void Jogo::executar()
 
         GG.limpar();
 
-        pJog1.executar();
+        if (pJog1.getVidas() > 0)
+            pJog1.executar();
+        if (modoDupla && pJog2.getVidas() > 0)
+            pJog2.executar();
 
         if (faseAtual == 1)
         {
@@ -84,7 +87,7 @@ void Jogo::executar()
             fase2.executar();
         }
 
-        if (pJog1.getVidas() <= 0)
+        if (pJog1.getVidas() <= 0 && (!modoDupla || pJog2.getVidas() <= 0))
         {
             finalizarJogo(false);
             continue;
@@ -94,10 +97,12 @@ void Jogo::executar()
         {
             cout << "FASE 1 CONCLUIDA!" << endl;
             cout << "Pontuacao: "
-                      << pJog1.getPontos() << endl;
+                      << getPontuacao() << endl;
 
             faseAtual = 2;
             pJog1.prepararNovaFase();
+            if (modoDupla)
+                pJog2.prepararNovaFase();
 
             continue;
         }
@@ -108,7 +113,11 @@ void Jogo::executar()
             continue;
         }
 
-        pJog1.desenhar();
+        if (pJog1.getVidas() > 0)
+            pJog1.desenhar();
+        if (modoDupla && pJog2.getVidas() > 0)
+            pJog2.desenhar();
+        menu.desenharPlacar(getPontuacao(), pJog1.getVidas(), pJog2.getVidas(), modoDupla);
 
         GG.mostrar();
     }
@@ -118,6 +127,7 @@ void Jogo::iniciarJogo(int fase)
 {
 
     pJog1.reiniciar();
+    pJog2.reiniciar();
 
     fase1.reiniciar();
     fase2.reiniciar();
@@ -138,6 +148,8 @@ void Jogo::pausar(bool pausa)
     pausado = pausa;
 
     pJog1.pausar(pausado);
+    if (modoDupla)
+        pJog2.pausar(pausado);
 
     if (faseAtual == 1)
         fase1.pausar(pausado);
@@ -165,6 +177,8 @@ void Jogo::voltarMenu()
 
 int Jogo::getPontuacao() const
 {
+    if (modoDupla)
+        return pJog1.getPontos() + pJog2.getPontos();
     return pJog1.getPontos();
 }
 
@@ -175,7 +189,7 @@ void Jogo::finalizarJogo(bool venceu)
 
     if (!modoTeste)
     {
-        ranking.adicionarPontuacao(pJog1.getPontos(), nomeJogador);
+        ranking.adicionarPontuacao(getPontuacao(), nomeJogador);
         ranking.salvar();
     }
 
@@ -215,9 +229,12 @@ void Jogo::salvarJogo()
         {
             arquivo << faseAtual << endl;
             arquivo << nomeJogador << endl;
+            arquivo << modoDupla << endl;
             arquivo.close();
 
             pJog1.salvar();
+            if (modoDupla)
+                pJog2.salvar();
 
             if (faseAtual == 1)
                 fase1.salvar();
@@ -243,11 +260,13 @@ void Jogo::carregarJogo()
 
     int faseSalva;
     string nomeSalvo;
+    bool duplaSalva;
 
     if (arquivo >> faseSalva &&
         getline(arquivo >> ws, nomeSalvo) &&
         (faseSalva == 1 || faseSalva == 2) &&
-        pJog1.carregar())
+        (arquivo >> duplaSalva) &&
+        pJog1.carregar() && (!duplaSalva || pJog2.carregar()))
     {
         bool sucesso;
 
@@ -260,6 +279,7 @@ void Jogo::carregarJogo()
         {
             faseAtual = faseSalva;
             nomeJogador = nomeSalvo;
+            setModoDupla(duplaSalva);
 
             if (faseAtual == 1)
                 fase2.reiniciar();
@@ -286,3 +306,18 @@ void Jogo::carregarJogo()
     arquivo.close();
 }
 
+
+void Jogo::setModoDupla(bool dupla)
+{
+    modoDupla = dupla;
+    if (modoDupla)
+    {
+        fase1.setJogador2(&pJog2);
+        fase2.setJogador2(&pJog2);
+    }
+    else
+    {
+        fase1.setJogador2(NULL);
+        fase2.setJogador2(NULL);
+    }
+}

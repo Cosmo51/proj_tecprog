@@ -14,6 +14,7 @@ namespace Obstaculos
 
     protected:
         bool danoso;
+        Jogador* pJogadorColisao;
 
     public:
         Obstaculo();
@@ -31,9 +32,11 @@ namespace Obstaculos
     {
     private:
         int altura;
+        int tipoTextura;
+        void selecionarTextura(int tipo);
 
     public:
-        Plataforma();
+        Plataforma(int tipo = 2);
         ~Plataforma();
 
         void executar();
@@ -49,7 +52,6 @@ namespace Obstaculos
 
     private:
     short int danosidade;
-    bool armada;
 
     public:
     Obst_Dificil();

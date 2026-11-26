@@ -1,13 +1,12 @@
-Plataforma 0 740 1000 10
-Plataforma 190 610 140 10
-Plataforma 60 460 170 10
-Plataforma 380 480 150 10
-Plataforma 555 350 140 10
-Plataforma 720 470 140 10
-Plataforma 870 610 120 10
-Plataforma 465 610 10 130
-Plataforma 740 610 10 130
+Plataforma 0 740 1000 10 1
+Plataforma 190 610 140 10 2
+Plataforma 60 460 170 10 2
+Plataforma 380 480 150 10 2
+Plataforma 555 350 140 10 2
+Plataforma 720 470 140 10 2
+Plataforma 870 610 120 10 2
+Plataforma 465 610 10 130 3
+Plataforma 740 610 10 130 3
 Lama 90 732
 Lama 410 472
 Lama 885 732
-Lama 760 732
