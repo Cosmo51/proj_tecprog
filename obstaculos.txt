@@ -6,8 +6,10 @@ Plataforma 555 350 140 10 2
 Plataforma 720 470 140 10 2
 Plataforma 870 610 120 10 2
 Plataforma 465 610 10 130 3
+Plataforma 740 610 10 130 3
+Plataforma 850 245 10 225 3
 Lama 90 732
 Lama 410 472
 Lama 885 732
-Lama 555 732
 Lama 85 452
+Lama 760 732

@@ -156,6 +156,11 @@ void Jogador::mover()
         invulneravel = false;
     }
 
+    if (teclaPressionada(salto))
+    {
+        pular();
+    }
+
     velY += gravidade;
     moverFigura(0.f, velY);
 
@@ -181,19 +186,13 @@ void Jogador::mover()
     // Limite esquerdo
     if (getPosicao().x < 0.f)
     {
-        setPosicao(
-            0.f, getPosicao().y);
+        setPosicao(0.f, getPosicao().y);
     }
 
     // Limite direito
     if (getPosicao().x + getTamanho().x > 1000.f)
     {
         setPosicao(1000.f - getTamanho().x, getPosicao().y);
-    }
-
-    if (teclaPressionada(salto))
-    {
-        pular();
     }
 }
 

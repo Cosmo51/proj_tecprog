@@ -1,39 +1,40 @@
 1800|teste6
-1300|leo 4
 1300|teste6
+1300|leo 4
+1000|Pedro
+1000|Pedro
 1000|kauan
-1000|Pedro
-1000|Pedro
-900|teste
-900|pedrinho
 900|dupla
-800|lari
+900|pedrinho
+900|teste
+800|fefo
 800|pedro
-600|lari
-600|kauan
-600|Natal
+800|lari
 600|joao
-500|leo
+600|Natal
+600|kauan
+600|lari
 500|joao
-400|lari
+500|leo
+400|joao
+400|joao
 400|teste3
-400|joao
-400|joao
-300|lari
+400|lari
 300|pedro
+300|lari
 250|Maria
-200|lari
-200|pedrinho
-200|leo
-200|felipe
 200|leo 3
-100|lari
-100|lari
-100|kauan
-100|kauan
-100|leo 6
-100|Joao
-100|Pedro
+200|felipe
+200|leo
+200|pedrinho
+200|lari
 100|leo 5
-0|lari
+100|Pedro
+100|Joao
+100|leo 6
+100|kauan
+100|kauan
+100|lari
+100|lari
 0|pedro
+0|lari
