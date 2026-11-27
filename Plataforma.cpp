@@ -13,33 +13,18 @@ Plataforma::Plataforma(int tipo) : altura(0), tipoTextura(tipo)
 void Plataforma::selecionarTextura(int tipo)
 {
     tipoTextura = tipo;
-
-    switch (tipo)
-    {
-        case 1:
-            carregarTextura("assets/chao.png");
-            break;
-
-        case 2:
-            carregarTextura("assets/plataforma_horizontal.png");
-            break;
-
-        case 3:
-            carregarTextura("assets/plataforma_vertical.png");
-            break;
-
-        case 4:
-            carregarTextura("assets/chao_fase2.png");
-            break;
-
-        case 5:
-            carregarTextura("assets/plataforma_horizontal_fase2.png");
-            break;
-
-        case 6:
-            carregarTextura("assets/plataforma_vertical_fase2.png");
-            break;
-    }
+    if (tipo == 1)
+        carregarTextura("assets/chao.png");
+    else if (tipo == 3)
+        carregarTextura("assets/plataforma_vertical.png");
+    else if (tipo == 4)
+        carregarTextura("assets/chao_fase2.png");
+    else if (tipo == 5)
+        carregarTextura("assets/plataforma_horizontal_fase2.png");
+    else if (tipo == 6)
+        carregarTextura("assets/plataforma_vertical_fase2.png");
+    else
+        carregarTextura("assets/plataforma_horizontal.png");
 }
 
 Plataforma::~Plataforma(){
@@ -207,11 +192,6 @@ bool Plataforma::carregar(ifstream& arquivo)
     }
 
     return false;
-}
-
-void Plataforma::configurar(float x, float y)
-{
-    setPosicao(x, y);
 }
 
 void Plataforma::configurar(float x, float y, float largura, float altura)

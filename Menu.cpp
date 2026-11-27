@@ -245,7 +245,7 @@ void Menu::executar()
                         switch (opcaoSelecionada)
                         {
                             case 0:
-                                pJogo->iniciarJogo();
+                                pJogo->reiniciarJogo();
                                 break;
 
                             case 1:

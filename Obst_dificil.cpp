@@ -5,14 +5,13 @@
 using namespace std;
 using namespace Obstaculos;
 
-Obst_Dificil::Obst_Dificil()
+Obst_Dificil::Obst_Dificil(float x, float y) : Obstaculo(x, y)
 {
     danoso = true;
     danosidade = 1;
 
     definirTamanho(30.f, 10.f);
     carregarTextura("assets/ratoeira.png");
-    setPosicao(190.f, 380.f);
 }
 
 
@@ -52,11 +51,6 @@ void Obst_Dificil::obstaculizar(Jogador* p)
     pJogadorColisao = p;
 }
 
-void Obst_Dificil::configurar(float x, float y)
-{
-    setPosicao(x, y);
-}
-
 void Obst_Dificil::salvar()
 {
     ofstream arquivo("obstaculos.txt", ios::app);
@@ -79,7 +73,7 @@ bool Obst_Dificil::carregar(ifstream& arquivo)
 
     if (arquivo >> posX >> posY >> danosoSalvo)
     {
-        configurar(posX, posY);
+        setPosicao(posX, posY);
         danoso = danosoSalvo;
 
         if (danoso)

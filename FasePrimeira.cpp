@@ -15,8 +15,7 @@ FasePrimeira::FasePrimeira() : venceu(false), maxAranhas(5), maxGalinhas(5), max
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(925.f, 580.f);
+    queijo = new Queijo(925.f, 580.f);
     lista_ents.incluir(queijo);
 }
 
@@ -47,6 +46,7 @@ void FasePrimeira::executar()
     GC.removerInimigosInativos(lista_ents);
 
     GC.tratarColisoesJogsObstacs();
+    GC.tratarColisoesJogsJogs();
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
@@ -78,9 +78,7 @@ void FasePrimeira::criarInimFaceis()
         if (quantidadeAranhas < maxAranhas &&
             (i < 3 || rand() % 100 < 50))
         {
-            Aranha* aranha = new Aranha();
-
-            aranha->setPosicao(posicoes[i][0], posicoes[i][1]);
+            Aranha* aranha = new Aranha(posicoes[i][0], posicoes[i][1]);
             aranha->configurarPatrulha(
                 posicoes[i][2],
                 posicoes[i][3]
@@ -100,9 +98,7 @@ void FasePrimeira::criarInimFaceis()
         {
             if (quantidadeAranhas < maxAranhas)
             {
-                Aranha* aranha = new Aranha();
-
-                aranha->setPosicao(610.f, 315.f);
+                Aranha* aranha = new Aranha(610.f, 315.f);
                 aranha->configurarPatrulha(555.f, 695.f);
 
                 lista_ents.incluir(aranha);
@@ -113,9 +109,7 @@ void FasePrimeira::criarInimFaceis()
         }
         else if (static_cast<int>(galinhas.size()) < maxGalinhas)
         {
-            Galinha* g = new Galinha();
-
-            g->setPosicao(610.f, 301.f);
+            Galinha* g = new Galinha(610.f, 301.f);
             g->configurarPatrulha(555.f, 695.f);
 
             if (pJogador != NULL)
@@ -143,9 +137,7 @@ void FasePrimeira::criarInimMedios()
         if (i < 3 || (static_cast<int>(galinhas.size()) < maxGalinhas &&
                       rand() % 100 < 50))
         {
-            Galinha* g = new Galinha();
-
-            g->setPosicao(posicoes[i][0], posicoes[i][1]);
+            Galinha* g = new Galinha(posicoes[i][0], posicoes[i][1]);
             g->configurarPatrulha(posicoes[i][2], posicoes[i][3]);
 
             galinhas.push_back(g);
@@ -173,9 +165,7 @@ void FasePrimeira::criarObstMedios()
         if (quantidadeLamas < maxLamas &&
             (i < 3 || rand() % 100 < 50))
         {
-            Obst_Medio* lama = new Obst_Medio();
-
-            lama->configurar(posicoes[i][0], posicoes[i][1]);
+            Obst_Medio* lama = new Obst_Medio(posicoes[i][0], posicoes[i][1]);
 
             lista_ents.incluir(lama);
             GC.incluirObstaculo(lama);
@@ -296,7 +286,6 @@ void FasePrimeira::criarOvo()
             if (alvo == NULL || !g->verificarAtaque())
                 continue;
 
-            Ovo* ovo = new Ovo();
             float xGalinha = g->getPosicao().x;
             float yGalinha = g->getPosicao().y;
             float xJogador = alvo->getPosicao().x;
@@ -305,7 +294,7 @@ void FasePrimeira::criarOvo()
             if (xJogador < xGalinha)
                 direcao = -1.f;
 
-            ovo->configurar(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f - 10.f, direcao);
+            Ovo* ovo = new Ovo(xGalinha + g->getTamanho().x / 2.f, yGalinha + g->getTamanho().y / 2.f - 10.f, direcao);
             lista_ents.incluir(ovo);
             GC.incluirProjetil(ovo);
         }
@@ -338,8 +327,7 @@ void FasePrimeira::reiniciar()
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(925.f, 580.f);
+    queijo = new Queijo(925.f, 580.f);
     lista_ents.incluir(queijo);
 
     setJogador(pJogador);

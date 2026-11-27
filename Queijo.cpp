@@ -3,7 +3,7 @@
 using namespace Entidades;
 using namespace std;
 
-Queijo::Queijo()
+Queijo::Queijo(float x, float y) : Entidade(x, y)
 {
     definirTamanho(30.f, 30.f);
     carregarTextura("assets/queijo.png");

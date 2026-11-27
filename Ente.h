@@ -7,6 +7,8 @@ namespace Gerenciadores { class Gerenciador_Grafico; }
 class Ente
 {
 protected:
+    float x;
+    float y;
     int id;
     static int contador;
     sf::RectangleShape body;
@@ -14,7 +16,7 @@ protected:
     static Gerenciadores::Gerenciador_Grafico* pGG;
 
 public:
-    Ente();
+    Ente(float x = 0.f, float y = 0.f);
     virtual ~Ente();
     virtual void executar() = 0;
     void desenhar();

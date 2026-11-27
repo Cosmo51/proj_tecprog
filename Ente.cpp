@@ -7,9 +7,9 @@ using namespace Gerenciadores;
 Gerenciador_Grafico* Ente::pGG = NULL;
 int Ente::contador = 0;
 
-Ente::Ente() : id(++contador), body(sf::Vector2f(100.f, 100.f))
+Ente::Ente(float x, float y) : x(x), y(y), id(++contador), body(sf::Vector2f(100.f, 100.f))
 {
-
+    setPosicao(x, y);
 }
 
 Ente::~Ente()
@@ -30,16 +30,17 @@ int Ente::getId() const { return id; }
 
 void Ente::setPosicao(float x, float y)
 {
+    this->x = x;
+    this->y = y;
     if (pGG != NULL)
         pGG->posicionarFigura(body, x, y);
+    else
+        body.setPosition(sf::Vector2f(x, y));
 }
 
 sf::Vector2f Ente::getPosicao() const
 {
-    if (pGG != NULL)
-        return pGG->obterPosicao(body);
-
-    return body.getPosition();
+    return sf::Vector2f(x, y);
 }
 
 sf::Vector2f Ente::getTamanho() const
@@ -60,14 +61,22 @@ sf::FloatRect Ente::getLimites() const
 
 void Ente::moverFigura(float x, float y)
 {
+    this->x += x;
+    this->y += y;
     if (pGG != NULL)
-        pGG->moverFigura(body, x, y);
+        pGG->posicionarFigura(body, this->x, this->y);
+    else
+        body.setPosition(sf::Vector2f(this->x, this->y));
 }
 
 void Ente::definirFigura(float x, float y, float largura, float altura, sf::Color cor)
 {
+    this->x = x;
+    this->y = y;
     if (pGG != NULL)
         pGG->configurarFigura(body, x, y, largura, altura, cor);
+    else
+        body.setPosition(sf::Vector2f(x, y));
 }
 
 void Ente::definirTamanho(float largura, float altura)

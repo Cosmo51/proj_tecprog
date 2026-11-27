@@ -15,7 +15,7 @@ protected:
     int num_vidas;
 
 public:
-    Personagem();
+    Personagem(float x = 0.f, float y = 0.f);
     virtual ~Personagem();
 
     void salvarDataBuffer();
@@ -45,7 +45,7 @@ protected:
     int pontos;
 
 public:
-    Jogador(int numero = 1);
+    Jogador(float x = 20.f, float y = 695.f, int numero = 1);
     ~Jogador();
 
     void colidir(Inimigo* pIn);
@@ -72,6 +72,7 @@ public:
     bool carregar();
     void operator--();
     void operator+=(int pontosGanhos);
+    void colidir(Jogador* p);
 };
 
 class Inimigo : public Personagem
@@ -86,7 +87,7 @@ protected:
     float limiteDireito;
 
 public:
-    Inimigo();
+    Inimigo(float x = 0.f, float y = 0.f);
     virtual ~Inimigo();
 
     void salvarDataBuffer();
@@ -112,7 +113,7 @@ private:
     float velocidadeX;
 
 public:
-    Aranha();
+    Aranha(float x = 355.f, float y = 290.f);
     ~Aranha();
 
     void danificar(Jogador* p);
@@ -133,7 +134,7 @@ private:
     sf::Clock relogioDisparo;
 
 public:
-    Galinha();
+    Galinha(float x = 300.f, float y = 290.f);
     ~Galinha();
     void danificar(Jogador* p);
     void executar();
@@ -154,7 +155,7 @@ private:
     sf::Clock relogioDisparo;
 
 public:
-    Gato();
+    Gato(float x = 0.f, float y = 0.f);
     ~Gato();
 
     void executar();

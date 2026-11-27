@@ -26,6 +26,7 @@ private:
     bool pausado;
     bool modoTeste;
     bool modoDupla;
+    int faseInicial;
 
 public:
     Jogo();
@@ -44,4 +45,5 @@ public:
     void setModoDupla(bool dupla);
     void salvarJogo();
     void carregarJogo();
+    void reiniciarJogo();
 };

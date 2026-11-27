@@ -4,7 +4,7 @@
 using namespace std;
 using namespace Personagens;
 
-Gato::Gato() : pJogador(NULL)
+Gato::Gato(float x, float y) : Inimigo(x, y), pJogador(NULL)
 {
     definirTamanho(68.f, 60.f);
     carregarTextura("assets/gato.png");

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Jogo::Jogo() : pJog1(1), pJog2(2), noMenu(true), faseAtual(1),
+Jogo::Jogo() : pJog1(20.f, 695.f, 1), pJog2(60.f, 695.f, 2), noMenu(true), faseAtual(1),
                pausado(false), modoTeste(false), modoDupla(false)
 {
     fase1.setJogador(&pJog1);
@@ -75,6 +75,7 @@ void Jogo::executar()
 
         if (pJog1.getVidas() > 0)
             pJog1.executar();
+
         if (modoDupla && pJog2.getVidas() > 0)
             pJog2.executar();
 
@@ -133,6 +134,7 @@ void Jogo::iniciarJogo(int fase)
     fase2.reiniciar();
 
     faseAtual = fase;
+    faseInicial = fase;
 
     pausado = false;
     noMenu = false;
@@ -306,7 +308,6 @@ void Jogo::carregarJogo()
     arquivo.close();
 }
 
-
 void Jogo::setModoDupla(bool dupla)
 {
     modoDupla = dupla;
@@ -320,4 +321,12 @@ void Jogo::setModoDupla(bool dupla)
         fase1.setJogador2(NULL);
         fase2.setJogador2(NULL);
     }
+}
+
+void Jogo::reiniciarJogo()
+{
+    if (modoTeste)
+        iniciarJogo(faseInicial);
+    else
+        iniciarJogo(1);
 }

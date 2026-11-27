@@ -9,14 +9,13 @@ using namespace Fases;
 FaseSegunda::FaseSegunda() : venceu(false), maxGatos(6), maxPlataformas(16), maxAranhas(5), maxRatoeiras(5)
 {
 
-    caminhoCenario = "assets/fundo_fase2.png";
+   caminhoCenario = "assets/fundo_fase2.png";
     criarCenario();
 
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
+    queijo = new Queijo(915.f, 70.f);
     lista_ents.incluir(queijo);
 }
 
@@ -47,6 +46,7 @@ void FaseSegunda::executar()
     GC.removerInimigosInativos(lista_ents);
 
     GC.tratarColisoesJogsObstacs();
+    GC.tratarColisoesJogsJogs();
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
@@ -78,9 +78,7 @@ void FaseSegunda::criarInimFaceis()
         if (quantidadeAranhas < maxAranhas &&
             (i < 3 || rand() % 100 < 50))
         {
-            Aranha* aranha = new Aranha();
-
-            aranha->setPosicao(posicoes[i][0], posicoes[i][1]);
+            Aranha* aranha = new Aranha(posicoes[i][0], posicoes[i][1]);
             aranha->configurarPatrulha(
                 posicoes[i][2],
                 posicoes[i][3]
@@ -98,9 +96,7 @@ void FaseSegunda::criarInimFaceis()
     {
         if (quantidadeAranhas < maxAranhas)
         {
-            Aranha* aranha = new Aranha();
-
-            aranha->setPosicao(855.f, 470.f);
+            Aranha* aranha = new Aranha(855.f, 470.f);
             aranha->configurarPatrulha(805.f, 945.f);
 
             lista_ents.incluir(aranha);
@@ -111,9 +107,7 @@ void FaseSegunda::criarInimFaceis()
     }
     else if (static_cast<int>(gatos.size()) < maxGatos)
     {
-        Gato* gato = new Gato();
-
-        gato->setPosicao(845.f, 445.f);
+        Gato* gato = new Gato(845.f, 445.f);
         gato->configurarPatrulha(805.f, 945.f);
 
         gatos.push_back(gato);
@@ -133,9 +127,7 @@ void FaseSegunda::criarChefoes()
 
     for (int i = 0; i < 4; i++)
     {
-        Gato* gato = new Gato();
-
-        gato->setPosicao(posicoes[i][0], posicoes[i][1]);
+        Gato* gato = new Gato(posicoes[i][0], posicoes[i][1]);
         gato->configurarPatrulha(posicoes[i][2], posicoes[i][3]);
 
         gatos.push_back(gato);
@@ -154,9 +146,7 @@ void FaseSegunda::criarChefoes()
         if (static_cast<int>(gatos.size()) < maxGatos &&
             rand() % 100 < 50)
         {
-            Gato* gato = new Gato();
-
-            gato->setPosicao(opcionais[i][0], opcionais[i][1]);
+            Gato* gato = new Gato(opcionais[i][0], opcionais[i][1]);
             gato->configurarPatrulha(opcionais[i][2], opcionais[i][3]);
 
             gatos.push_back(gato);
@@ -248,9 +238,7 @@ void FaseSegunda::criarObstDificeis()
         if (quantidadeRatoeiras < maxRatoeiras &&
             (i < 3 || rand() % 100 < 50))
         {
-            Obst_Dificil* ratoeira = new Obst_Dificil();
-
-            ratoeira->configurar(posicoes[i][0], posicoes[i][1]);
+            Obst_Dificil* ratoeira = new Obst_Dificil(posicoes[i][0], posicoes[i][1]);
 
             lista_ents.incluir(ratoeira);
             GC.incluirObstaculo(ratoeira);
@@ -283,8 +271,6 @@ void FaseSegunda::criarNovelo()
             if (alvo == NULL || !g->verificarAtaque())
                 continue;
 
-            Novelo* novelo = new Novelo();
-
             float xGato = g->getPosicao().x;
             float yGato = g->getPosicao().y;
             float xJogador = alvo->getPosicao().x;
@@ -293,7 +279,7 @@ void FaseSegunda::criarNovelo()
             if (xJogador < xGato)
                 direcao = -1.f;
 
-            novelo->configurar(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
+            Novelo* novelo = new Novelo(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
             novelo->setDano(g->getForca());
             lista_ents.incluir(novelo);
             GC.incluirProjetil(novelo);
@@ -351,8 +337,7 @@ void FaseSegunda::reiniciar()
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
+    queijo = new Queijo(915.f, 70.f);
     lista_ents.incluir(queijo);
 
     setJogador(pJogador);

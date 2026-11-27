@@ -365,3 +365,17 @@ void Gerenciador_Colisoes::setJogador2(Jogador* pJ)
 {
     pJog2 = pJ;
 }
+
+void Gerenciador_Colisoes::tratarColisoesJogsJogs()
+{
+    if(pJog1 != NULL && pJog2 != NULL)
+    {
+        if(pJog1->getVidas() > 0 && pJog2->getVidas() > 0)
+        {
+            if(verificarColisao(pJog1, pJog2))
+            {
+                pJog1->colidir(pJog2);
+            }
+        }
+    }
+}

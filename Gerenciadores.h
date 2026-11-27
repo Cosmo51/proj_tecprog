@@ -75,6 +75,7 @@ public:
     void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.
     void executar();
     void limpar();
+    void tratarColisoesJogsJogs();
 };
 
 }

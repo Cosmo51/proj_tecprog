@@ -6,7 +6,7 @@ using namespace std;
 
 using namespace Personagens;
 
-Jogador::Jogador(int numero) : numeroJogador(numero)
+Jogador::Jogador(float x, float y, int numero) : Personagem(x, y), numeroJogador(numero)
 {
 
     inicializa();
@@ -15,10 +15,6 @@ Jogador::Jogador(int numero) : numeroJogador(numero)
     carregarTextura("assets/rato.png");
     if (numeroJogador == 2)
         definirCor(sf::Color(180, 130, 85));
-    if (numeroJogador == 1)
-        setPosicao(20.f, 695.f);
-    else
-        setPosicao(60.f, 695.f);
     posicaoAnterior = getPosicao();
 }
 
@@ -380,5 +376,35 @@ void Jogador::operator--()
 void Jogador::operator+=(int pontosGanhos)
 {
     pontos += pontosGanhos;
+}
+
+void Jogador::colidir(Jogador* p)
+{
+    if (p != NULL)
+    {
+        // Este jogador esta sobre o outro
+        if (getPosicaoAnterior().y + getTamanho().y <= p->getPosicaoAnterior().y + 0.1f)
+        {
+            setPosicao(getPosicao().x, p->getPosicao().y - getTamanho().y);
+
+            pararQueda();
+        }
+
+        // O outro jogador esta sobre este
+        else if (p->getPosicaoAnterior().y + p->getTamanho().y <= getPosicaoAnterior().y + 0.1f)
+        {
+            p->setPosicao(p->getPosicao().x, getPosicao().y - p->getTamanho().y);
+
+            p->pararQueda();
+        }
+
+        // Colisao lateral
+        else
+        {
+            setPosicao(getPosicaoAnterior().x, getPosicao().y);
+
+            p->setPosicao(p->getPosicaoAnterior().x, p->getPosicao().y);
+        }
+    }
 }
 

@@ -5,11 +5,10 @@
 using namespace std;
 using namespace Personagens;
 
-Galinha::Galinha(){
+Galinha::Galinha(float x, float y) : Inimigo(x, y){
 
     definirTamanho(44.f, 49.f);
     carregarTextura("assets/galinha.png");
-    setPosicao(300.f, 290.f);
 
     pJogador = NULL;
     nivel_maldade = 2;
