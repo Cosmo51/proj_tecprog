@@ -8,6 +8,9 @@ using namespace Fases;
 
 FasePrimeira::FasePrimeira() : venceu(false), maxAranhas(5), maxGalinhas(5), maxLamas(5), maxPlataformas(10)
 {
+    caminhoCenario = "assets/fundo_fase1.png";
+    criarCenario();
+
     // Cria os apoios antes de posicionar os inimigos sobre eles.
     criarObstaculo();
     criarInimgos();
@@ -54,6 +57,7 @@ void FasePrimeira::executar()
 
     GC.removerProjeteisInativos(lista_ents);
 
+    desenhar();
     lista_ents.desenhar();
 }
 

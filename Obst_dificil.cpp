@@ -11,7 +11,7 @@ Obst_Dificil::Obst_Dificil()
     danosidade = 1;
 
     definirTamanho(30.f, 10.f);
-    definirCor(sf::Color::Red);
+    carregarTextura("assets/ratoeira.png");
     setPosicao(190.f, 380.f);
 }
 

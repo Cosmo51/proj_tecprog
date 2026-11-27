@@ -12,7 +12,7 @@ Novelo::Novelo()
     gravidade = 0.01f;
 
     definirTamanho(15.f, 15.f);
-    definirCor(sf::Color::Cyan);
+    carregarTextura("assets/novelo.png");
 }
 
 Novelo::~Novelo()

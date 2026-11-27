@@ -141,7 +141,7 @@ void Jogador::mover()
 {
     sf::Keyboard::Key esquerda = sf::Keyboard::Key::A;
     sf::Keyboard::Key direita = sf::Keyboard::Key::D;
-    sf::Keyboard::Key salto = sf::Keyboard::Key::Space;
+    sf::Keyboard::Key salto = sf::Keyboard::Key::W;
 
     if (numeroJogador == 2)
     {

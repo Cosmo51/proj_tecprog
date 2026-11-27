@@ -4,6 +4,7 @@
 #include "Listas.h"
 #include "Gerenciadores.h"
 #include <vector>
+#include <string>
 
 using namespace Listas;
 using namespace Gerenciadores;
@@ -41,6 +42,7 @@ protected:
     bool chegouAoQueijo(Queijo* queijo);
     bool carregarObstaculos();
     bool carregarProjeteis();
+    std::string caminhoCenario;
 };
 
 class FasePrimeira : public Fase

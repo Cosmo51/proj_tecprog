@@ -19,6 +19,9 @@ Menu::Menu() : pJogo(NULL),
     {
         cout << "Erro ao carregar a fonte!" << endl;
     }
+
+    definirFigura(0.f, 0.f, 1000.f, 750.f, sf::Color::White);
+    carregarTextura("assets/fundo_menu.png");
 }
 
 Menu::~Menu()
@@ -28,6 +31,8 @@ Menu::~Menu()
 
 void Menu::executar()
 {
+    desenhar();
+
     if (pGG != NULL)
     {
         bool teclaCimaAtual = pGG->teclaPressionada(sf::Keyboard::Key::Up);

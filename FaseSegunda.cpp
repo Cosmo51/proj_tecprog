@@ -8,6 +8,10 @@ using namespace Fases;
 
 FaseSegunda::FaseSegunda() : venceu(false), maxGatos(6), maxPlataformas(16), maxAranhas(5), maxRatoeiras(5)
 {
+
+   caminhoCenario = "assets/fundo_fase2.png";
+    criarCenario();
+
     criarObstaculo();
     criarInimgos();
 
@@ -53,6 +57,7 @@ void FaseSegunda::executar()
 
     GC.removerProjeteisInativos(lista_ents);
 
+    desenhar();
     lista_ents.desenhar();
 }
 

@@ -18,8 +18,11 @@ void Fase::executar(){
 
 }
 
-void Fase::criarCenario(){
+void Fase::criarCenario()
+{
+    definirFigura(0.f, 0.f, 1000.f, 750.f, sf::Color::White);
 
+    carregarTextura(caminhoCenario);
 }
 
 void Fase::setJogador(Jogador* pJ)
