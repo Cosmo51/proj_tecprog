@@ -206,7 +206,7 @@ void FasePrimeira::criarPlataformas()
 
     for (int i = 0; i < 6; i++)
     {
-        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 3 : 2);
+        Plataforma* p = new Plataforma(2);
 
         p->configurar(posicoes[i][0], posicoes[i][1],
                      posicoes[i][2], posicoes[i][3]);

@@ -9,7 +9,7 @@ using namespace Fases;
 FaseSegunda::FaseSegunda() : venceu(false), maxGatos(6), maxPlataformas(16), maxAranhas(5), maxRatoeiras(5)
 {
 
-   caminhoCenario = "assets/fundo_fase2.png";
+    caminhoCenario = "assets/fundo_fase2.png";
     criarCenario();
 
     criarObstaculo();
@@ -169,7 +169,7 @@ void FaseSegunda::criarChefoes()
 void FaseSegunda::criarPlataformas()
 {
     // Chao obrigatorio
-    Plataforma* chao = new Plataforma(1);
+    Plataforma* chao = new Plataforma(4);
 
     chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
@@ -193,7 +193,7 @@ void FaseSegunda::criarPlataformas()
 
     for (int i = 0; i < 12; i++)
     {
-        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 3 : 2);
+        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 6 : 5);
 
         p->configurar(posicoes[i][0], posicoes[i][1],
                      posicoes[i][2], posicoes[i][3]);
@@ -217,7 +217,7 @@ void FaseSegunda::criarPlataformas()
         if (quantidadePlataformas < maxPlataformas &&
             rand() % 100 < 50)
         {
-            Plataforma* p = new Plataforma(3);
+            Plataforma* p = new Plataforma(6);
 
             p->configurar(opcionais[i][0], opcionais[i][1],
                          opcionais[i][2], opcionais[i][3]);

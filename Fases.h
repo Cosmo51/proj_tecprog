@@ -19,6 +19,7 @@ protected:
     Gerenciador_Colisoes GC;
     Jogador* pJogador;
     Jogador* pJogador2;
+    std::string caminhoCenario;
 
 public:
     Fase();
@@ -42,7 +43,6 @@ protected:
     bool chegouAoQueijo(Queijo* queijo);
     bool carregarObstaculos();
     bool carregarProjeteis();
-    std::string caminhoCenario;
 };
 
 class FasePrimeira : public Fase
