@@ -4,11 +4,10 @@
 using namespace std;
 using namespace Obstaculos;
 
-Obst_Medio::Obst_Medio()
+Obst_Medio::Obst_Medio(float x, float y) : Obstaculo(x, y)
 {
     definirTamanho(70.f, 8.f);
     carregarTextura("assets/lama.png");
-    setPosicao(250.f, 382.f);
 }
 
 Obst_Medio::~Obst_Medio(){
@@ -20,11 +19,6 @@ void Obst_Medio::executar()
     if (pJogadorColisao != NULL)
         pJogadorColisao->diminuirVelocidade();
     pJogadorColisao = NULL;
-}
-
-void Obst_Medio::configurar(float x, float y)
-{
-    setPosicao(x, y);
 }
 
 void Obst_Medio::salvar()
@@ -47,7 +41,7 @@ bool Obst_Medio::carregar(ifstream& arquivo)
 
     if (arquivo >> posX >> posY)
     {
-        configurar(posX, posY);
+        setPosicao(posX, posY);
 
         return true;
     }

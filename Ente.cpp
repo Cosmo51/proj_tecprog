@@ -36,9 +36,6 @@ void Ente::setPosicao(float x, float y)
 
 sf::Vector2f Ente::getPosicao() const
 {
-    if (pGG != NULL)
-        return pGG->obterPosicao(body);
-
     return body.getPosition();
 }
 
@@ -60,8 +57,9 @@ sf::FloatRect Ente::getLimites() const
 
 void Ente::moverFigura(float x, float y)
 {
-    if (pGG != NULL)
-        pGG->moverFigura(body, x, y);
+    sf::Vector2f pos = getPosicao();
+
+    setPosicao(pos.x + x, pos.y + y);
 }
 
 void Ente::definirFigura(float x, float y, float largura, float altura, sf::Color cor)

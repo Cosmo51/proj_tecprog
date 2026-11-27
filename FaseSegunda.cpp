@@ -8,11 +8,14 @@ using namespace Fases;
 
 FaseSegunda::FaseSegunda() : venceu(false), maxGatos(6), maxPlataformas(16), maxAranhas(5), maxRatoeiras(5)
 {
+
+   caminhoCenario = "assets/fundo_fase2.png";
+    criarCenario();
+
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
+    queijo = new Queijo(915.f, 70.f);
     lista_ents.incluir(queijo);
 }
 
@@ -43,16 +46,18 @@ void FaseSegunda::executar()
     GC.removerInimigosInativos(lista_ents);
 
     GC.tratarColisoesJogsObstacs();
+    GC.tratarColisoesJogsJogs();
     GC.tratarColisoesProjeteisObstacs();
     GC.tratarColisoesJogsProjeteis();
 
-    if (pJogador != NULL && GC.verificarColisao(pJogador, queijo))
+    if (chegouAoQueijo(queijo))
     {
         venceu = true;
     }
 
     GC.removerProjeteisInativos(lista_ents);
 
+    desenhar();
     lista_ents.desenhar();
 }
 
@@ -73,9 +78,7 @@ void FaseSegunda::criarInimFaceis()
         if (quantidadeAranhas < maxAranhas &&
             (i < 3 || rand() % 100 < 50))
         {
-            Aranha* aranha = new Aranha();
-
-            aranha->setPosicao(posicoes[i][0], posicoes[i][1]);
+            Aranha* aranha = new Aranha(posicoes[i][0], posicoes[i][1]);
             aranha->configurarPatrulha(
                 posicoes[i][2],
                 posicoes[i][3]
@@ -93,9 +96,7 @@ void FaseSegunda::criarInimFaceis()
     {
         if (quantidadeAranhas < maxAranhas)
         {
-            Aranha* aranha = new Aranha();
-
-            aranha->setPosicao(855.f, 470.f);
+            Aranha* aranha = new Aranha(855.f, 470.f);
             aranha->configurarPatrulha(805.f, 945.f);
 
             lista_ents.incluir(aranha);
@@ -106,9 +107,7 @@ void FaseSegunda::criarInimFaceis()
     }
     else if (static_cast<int>(gatos.size()) < maxGatos)
     {
-        Gato* gato = new Gato();
-
-        gato->setPosicao(845.f, 445.f);
+        Gato* gato = new Gato(845.f, 445.f);
         gato->configurarPatrulha(805.f, 945.f);
 
         gatos.push_back(gato);
@@ -128,9 +127,7 @@ void FaseSegunda::criarChefoes()
 
     for (int i = 0; i < 4; i++)
     {
-        Gato* gato = new Gato();
-
-        gato->setPosicao(posicoes[i][0], posicoes[i][1]);
+        Gato* gato = new Gato(posicoes[i][0], posicoes[i][1]);
         gato->configurarPatrulha(posicoes[i][2], posicoes[i][3]);
 
         gatos.push_back(gato);
@@ -149,9 +146,7 @@ void FaseSegunda::criarChefoes()
         if (static_cast<int>(gatos.size()) < maxGatos &&
             rand() % 100 < 50)
         {
-            Gato* gato = new Gato();
-
-            gato->setPosicao(opcionais[i][0], opcionais[i][1]);
+            Gato* gato = new Gato(opcionais[i][0], opcionais[i][1]);
             gato->configurarPatrulha(opcionais[i][2], opcionais[i][3]);
 
             gatos.push_back(gato);
@@ -164,7 +159,7 @@ void FaseSegunda::criarChefoes()
 void FaseSegunda::criarPlataformas()
 {
     // Chao obrigatorio
-    Plataforma* chao = new Plataforma(1);
+    Plataforma* chao = new Plataforma(4);
 
     chao->configurar(0.f, 740.f, 1000.f, 10.f);
 
@@ -188,7 +183,7 @@ void FaseSegunda::criarPlataformas()
 
     for (int i = 0; i < 12; i++)
     {
-        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 3 : 2);
+        Plataforma* p = new Plataforma(posicoes[i][3] > posicoes[i][2] ? 6 : 5);
 
         p->configurar(posicoes[i][0], posicoes[i][1],
                      posicoes[i][2], posicoes[i][3]);
@@ -212,7 +207,7 @@ void FaseSegunda::criarPlataformas()
         if (quantidadePlataformas < maxPlataformas &&
             rand() % 100 < 50)
         {
-            Plataforma* p = new Plataforma(3);
+            Plataforma* p = new Plataforma(6);
 
             p->configurar(opcionais[i][0], opcionais[i][1],
                          opcionais[i][2], opcionais[i][3]);
@@ -243,9 +238,7 @@ void FaseSegunda::criarObstDificeis()
         if (quantidadeRatoeiras < maxRatoeiras &&
             (i < 3 || rand() % 100 < 50))
         {
-            Obst_Dificil* ratoeira = new Obst_Dificil();
-
-            ratoeira->configurar(posicoes[i][0], posicoes[i][1]);
+            Obst_Dificil* ratoeira = new Obst_Dificil(posicoes[i][0], posicoes[i][1]);
 
             lista_ents.incluir(ratoeira);
             GC.incluirObstaculo(ratoeira);
@@ -269,20 +262,24 @@ void FaseSegunda::criarNovelo()
         {
             Gato* g = *it;
 
-            if (g == NULL || !g->getAtivo() || !g->verificarAtaque())
+            if (g == NULL || !g->getAtivo())
                 continue;
 
-            Novelo* novelo = new Novelo();
+            Jogador* alvo = escolherAlvo(g);
+            g->setJogador(alvo);
+
+            if (alvo == NULL || !g->verificarAtaque())
+                continue;
 
             float xGato = g->getPosicao().x;
             float yGato = g->getPosicao().y;
-            float xJogador = pJogador->getPosicao().x;
+            float xJogador = alvo->getPosicao().x;
 
             float direcao = 1.f;
             if (xJogador < xGato)
                 direcao = -1.f;
 
-            novelo->configurar(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
+            Novelo* novelo = new Novelo(xGato + g->getTamanho().x / 2.f, yGato + g->getTamanho().y / 2.f, direcao);
             novelo->setDano(g->getForca());
             lista_ents.incluir(novelo);
             GC.incluirProjetil(novelo);
@@ -340,8 +337,7 @@ void FaseSegunda::reiniciar()
     criarObstaculo();
     criarInimgos();
 
-    queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
+    queijo = new Queijo(915.f, 70.f);
     lista_ents.incluir(queijo);
 
     setJogador(pJogador);
@@ -417,8 +413,13 @@ bool FaseSegunda::carregar()
     }
 
     queijo = new Queijo();
-    queijo->setPosicao(915.f, 70.f);
     lista_ents.incluir(queijo);
+
+    if (!queijo->carregar())
+    {
+        reiniciar();
+        return false;
+    }
 
     setJogador(pJogador);
 

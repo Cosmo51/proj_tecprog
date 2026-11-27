@@ -4,7 +4,9 @@
 1000|kauan
 1000|Pedro
 1000|Pedro
+900|teste
 900|pedrinho
+900|dupla
 800|lari
 800|pedro
 600|lari

@@ -1,9 +1,10 @@
 #include "Entidades.h"
 using namespace Entidades;
 
-Entidade::Entidade():x(0), y(0)
+Entidade::Entidade(float x, float y) :
+Ente(), x(x), y(y)
 {
-
+    setPosicao(x, y);
 }
 
 Entidade::~Entidade()

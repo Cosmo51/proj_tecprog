@@ -4,6 +4,7 @@
 #include "Listas.h"
 #include "Gerenciadores.h"
 #include <vector>
+#include <string>
 
 using namespace Listas;
 using namespace Gerenciadores;
@@ -17,6 +18,8 @@ protected:
     ListaEntidades lista_ents;
     Gerenciador_Colisoes GC;
     Jogador* pJogador;
+    Jogador* pJogador2;
+    std::string caminhoCenario;
 
 public:
     Fase();
@@ -24,6 +27,7 @@ public:
 
     virtual void executar();
     void setJogador(Jogador* pJ);
+    void setJogador2(Jogador* pJ);
     virtual void pausar(bool pausa) = 0;
     virtual void reiniciar() = 0;
     void salvar();
@@ -35,6 +39,8 @@ protected:
     virtual void criarInimgos() = 0;
     virtual void criarObstaculo() = 0;
     void criarCenario();
+    Jogador* escolherAlvo(Inimigo* inimigo);
+    bool chegouAoQueijo(Queijo* queijo);
     bool carregarObstaculos();
     bool carregarProjeteis();
 };

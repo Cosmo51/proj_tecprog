@@ -6,13 +6,15 @@ using namespace std;
 
 using namespace Personagens;
 
-Jogador::Jogador(){
+Jogador::Jogador(float x, float y, int numero) : Personagem(x, y), numeroJogador(numero)
+{
 
     inicializa();
 
     definirTamanho(35.f, 45.f);
     carregarTextura("assets/rato.png");
-    setPosicao(20.f, 695.f);
+    if (numeroJogador == 2)
+        definirCor(sf::Color(180, 130, 85));
     posicaoAnterior = getPosicao();
 }
 
@@ -91,7 +93,10 @@ void Jogador::executar()
 
 void Jogador::salvar()
 {
-    ofstream arquivo("jogador.txt");
+    const char* caminho = "jogador.txt";
+    if (numeroJogador == 2)
+        caminho = "jogador2.txt";
+    ofstream arquivo(caminho);
 
     if (arquivo.is_open())
     {
@@ -130,6 +135,17 @@ void Jogador::saiuDoChao(){
 
 void Jogador::mover()
 {
+    sf::Keyboard::Key esquerda = sf::Keyboard::Key::A;
+    sf::Keyboard::Key direita = sf::Keyboard::Key::D;
+    sf::Keyboard::Key salto = sf::Keyboard::Key::W;
+
+    if (numeroJogador == 2)
+    {
+        esquerda = sf::Keyboard::Key::Left;
+        direita = sf::Keyboard::Key::Right;
+        salto = sf::Keyboard::Key::Up;
+    }
+
     float gravidade = 0.01f;
 
     posicaoAnterior = getPosicao();
@@ -151,12 +167,12 @@ void Jogador::mover()
     }
     else
     {
-        if (teclaPressionada(sf::Keyboard::Key::A))
+        if (teclaPressionada(esquerda))
         {
             moverFigura(-velX, 0.f);
         }
 
-        if (teclaPressionada(sf::Keyboard::Key::D))
+        if (teclaPressionada(direita))
         {
             moverFigura(velX, 0.f);
         }
@@ -175,7 +191,7 @@ void Jogador::mover()
         setPosicao(1000.f - getTamanho().x, getPosicao().y);
     }
 
-    if (teclaPressionada(sf::Keyboard::Key::Space))
+    if (teclaPressionada(salto))
     {
         pular();
     }
@@ -271,7 +287,10 @@ int Jogador::getPontos() const{
 
 void Jogador::prepararNovaFase()
 {
-    setPosicao(20.f, 695.f);
+    if (numeroJogador == 1)
+        setPosicao(20.f, 695.f);
+    else
+        setPosicao(60.f, 695.f);
     posicaoAnterior = getPosicao();
 
     velX = 0.5f;
@@ -302,7 +321,10 @@ void Jogador::reiniciar()
 
 bool Jogador::carregar()
 {
-    ifstream arquivo("jogador.txt");
+    const char* caminho = "jogador.txt";
+    if (numeroJogador == 2)
+        caminho = "jogador2.txt";
+    ifstream arquivo(caminho);
 
     if (!arquivo.is_open())
     {
@@ -354,5 +376,35 @@ void Jogador::operator--()
 void Jogador::operator+=(int pontosGanhos)
 {
     pontos += pontosGanhos;
+}
+
+void Jogador::colidir(Jogador* p)
+{
+    if (p != NULL)
+    {
+        // Este jogador esta sobre o outro
+        if (getPosicaoAnterior().y + getTamanho().y <= p->getPosicaoAnterior().y + 0.1f)
+        {
+            setPosicao(getPosicao().x, p->getPosicao().y - getTamanho().y);
+
+            pararQueda();
+        }
+
+        // O outro jogador esta sobre este
+        else if (p->getPosicaoAnterior().y + p->getTamanho().y <= getPosicaoAnterior().y + 0.1f)
+        {
+            p->setPosicao(p->getPosicao().x, getPosicao().y - p->getTamanho().y);
+
+            p->pararQueda();
+        }
+
+        // Colisao lateral
+        else
+        {
+            setPosicao(getPosicaoAnterior().x, getPosicao().y);
+
+            p->setPosicao(p->getPosicaoAnterior().x, p->getPosicao().y);
+        }
+    }
 }
 

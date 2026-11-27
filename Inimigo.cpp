@@ -2,7 +2,7 @@
 
 using namespace Personagens;
 
-Inimigo::Inimigo():nivel_maldade(1), forca(1)
+Inimigo::Inimigo(float x, float y) : Personagem(x, y), nivel_maldade(1), forca(1)
 {
     velocidadeY = 0.f;
     ativo = true;

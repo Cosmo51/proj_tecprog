@@ -54,11 +54,13 @@ private:
     std::list<Obstaculo*> LOs;
     std::set<Projetil*> LPs;
     Jogador* pJog1;
+    Jogador* pJog2;
 
 public:
     Gerenciador_Colisoes();
     ~Gerenciador_Colisoes();
     void setJogador(Jogador* pJ);
+    void setJogador2(Jogador* pJ);
     const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
     void tratarColisoesJogsObstacs();
     void tratarColisoesJogsInimgs();
@@ -73,6 +75,7 @@ public:
     void incluirProjetil(Projetil* pj); // novamente ele não colocou tipo.
     void executar();
     void limpar();
+    void tratarColisoesJogsJogs();
 };
 
 }

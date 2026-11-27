@@ -17,14 +17,14 @@ namespace Obstaculos
         Jogador* pJogadorColisao;
 
     public:
-        Obstaculo();
+        Obstaculo(float x = 0.f, float y = 0.f);
         ~Obstaculo();
 
         void salvarDataBuffer();
         virtual void executar() = 0;
         virtual void salvar() = 0;
         virtual void obstaculizar(Jogador* p) = 0;
-        virtual void configurar(float x, float y) = 0;
+
 
     };
 
@@ -44,7 +44,7 @@ namespace Obstaculos
         bool carregar(std::ifstream& arquivo);
         void obstaculizar(Jogador* p);
         void obstaculizar(Inimigo* p);
-        void configurar(float x, float y);
+
         void configurar(float x, float y, float largura, float altura);
     };
 
@@ -54,13 +54,13 @@ namespace Obstaculos
     short int danosidade;
 
     public:
-    Obst_Dificil();
+    Obst_Dificil(float x = 190.f, float y = 380.f);
     ~Obst_Dificil();
 
     void salvarDataBuffer();
     void executar();
     void obstaculizar(Jogador* p);
-    void configurar(float x, float y);
+
     void salvar();
     bool carregar(std::ifstream& arquivo);
 
@@ -72,12 +72,12 @@ namespace Obstaculos
     float largura;
 
     public:
-    Obst_Medio();
+    Obst_Medio(float x = 250.f, float y = 382.f);
     ~Obst_Medio();
 
     void executar();
     void obstaculizar(Jogador* p);
-    void configurar(float x, float y);
+
     void salvar();
     bool carregar(std::ifstream& arquivo);
 

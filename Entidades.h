@@ -8,14 +8,12 @@ namespace Entidades{
     class Entidade : public Ente
     {
     protected:
-        int x;
-        int y;
+        float x;
+        float y;
         //ostream buffer;
 
-
-
     public:
-        Entidade();
+        Entidade(float x = 0.f, float y = 0.f);
         virtual ~Entidade();
 
     protected:
@@ -34,7 +32,7 @@ namespace Entidades{
         int dano;
 
     public:
-        Projetil();
+        Projetil(float x = 0.f, float y = 0.f);
         ~Projetil();
         virtual void executar() = 0;
         virtual void salvar() = 0;
@@ -50,13 +48,12 @@ namespace Entidades{
         float velocidadeX;
 
     public:
-        Ovo();
+        Ovo(float x = 0.f, float y = 0.f, float direcao = 1.f);
         ~Ovo();
 
         void executar();
         void salvar();
         bool carregar(std::ifstream& arquivo);
-        void configurar(float x, float y, float direcao);
     };
 
     class Novelo : public Projetil
@@ -67,23 +64,25 @@ namespace Entidades{
         float gravidade;
 
     public:
-        Novelo();
+        Novelo(float x = 0.f, float y = 0.f, float direcao = 1.f);
         ~Novelo();
 
         void executar();
         void salvar();
         bool carregar(std::ifstream& arquivo);
-        void configurar(float x, float y, float direcao);
     };
 
     class Queijo : public Entidade
     {
+    private:
+        sf::Clock relogioBrilho;
     public:
-        Queijo();
+        Queijo(float x = 0.f, float y = 0.f);
         ~Queijo();
 
         void executar();
         void salvar();
+        bool carregar();
     };
 }
 

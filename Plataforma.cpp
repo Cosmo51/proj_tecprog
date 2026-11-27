@@ -17,6 +17,12 @@ void Plataforma::selecionarTextura(int tipo)
         carregarTextura("assets/chao.png");
     else if (tipo == 3)
         carregarTextura("assets/plataforma_vertical.png");
+    else if (tipo == 4)
+        carregarTextura("assets/chao_fase2.png");
+    else if (tipo == 5)
+        carregarTextura("assets/plataforma_horizontal_fase2.png");
+    else if (tipo == 6)
+        carregarTextura("assets/plataforma_vertical_fase2.png");
     else
         carregarTextura("assets/plataforma_horizontal.png");
 }
@@ -27,7 +33,7 @@ Plataforma::~Plataforma(){
 
 void Plataforma::executar()
 {
-    if (pJogadorColisao != NULL && tipoTextura == 2)
+    if (pJogadorColisao != NULL && (tipoTextura == 2 || tipoTextura == 5))
     {
         if (rand() % 100000 == 0)
             pJogadorColisao->perderVida();
@@ -186,11 +192,6 @@ bool Plataforma::carregar(ifstream& arquivo)
     }
 
     return false;
-}
-
-void Plataforma::configurar(float x, float y)
-{
-    setPosicao(x, y);
 }
 
 void Plataforma::configurar(float x, float y, float largura, float altura)

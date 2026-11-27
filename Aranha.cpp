@@ -6,11 +6,10 @@
 using namespace std;
 using namespace Personagens;
 
-Aranha::Aranha(){
+Aranha::Aranha(float x, float y) : Inimigo(x, y){
 
     definirTamanho(35.f, 35.f);
     carregarTextura("assets/aranha.png");
-    setPosicao(355.f, 290.f);
     nivel_maldade = 2;
     velocidadeX = -0.1f * nivel_maldade;
     velocidadeY = 0.f;

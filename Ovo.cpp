@@ -4,9 +4,9 @@ using namespace std;
 
 using namespace Entidades;
 
-Ovo::Ovo()
+Ovo::Ovo(float x, float y, float direcao) : Projetil(x, y)
 {
-    velocidadeX = 0.5f;
+    velocidadeX = 0.5f * direcao;
 
     definirTamanho(20.f, 20.f);
     carregarTextura("assets/ovo.png");
@@ -57,10 +57,4 @@ bool Ovo::carregar(ifstream& arquivo)
     return false;
 }
 
-void Ovo::configurar(float x, float y, float direcao)
-{
-    setPosicao(x, y);
-
-    velocidadeX = 0.5f * direcao;
-}
 

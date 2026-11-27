@@ -1,7 +1,7 @@
 #include "Entidades.h"
 using namespace Entidades;
 
-Projetil::Projetil()
+Projetil::Projetil(float x, float y) : Entidade(x, y)
 {
     ativo = true;
     dano = 1;
